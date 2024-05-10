@@ -1,77 +1,51 @@
 "use client";
 import Image from "next/image";
-import React from "react";
-import { H3, Paragraph } from "./common";
+import React, { useEffect, useState } from "react";
+import { Container, H3, Paragraph } from "./common";
 import dynamic from "next/dynamic";
-import "react-owl-carousel3"
-
-const OwlCarousel = dynamic(import("react-owl-carousel3"));
-
-const options = {
-    loop: true,
-    nav: false,
-    dots: true,
-    autoplayHoverPause: true,
-    autoplay: true,
-    mouseDrag: false,
-    touchDrag: false,
-    navText: [
-        "<i className='flaticon-left-chevron'></i>",
-        "<i className='flaticon-right-chevron'></i>",
-    ],
-    responsive: {
-        0: {
-            items: 1,
-        },
-        768: {
-            items: 2,
-        },
-        1200: {
-            items: 3,
-        },
-        1550: {
-            items: 4,
-        },
-    },
-};
+import "react-owl-carousel3";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const CreatorItem = ({ data }: any) => {
-  const [display, setDisplay] = useState(false);
-
-  useEffect(() => {
-      setDisplay(true);
-  }, []);
   return (
-    {display ?}
-    <div
-      className="hover:bg-[#ffffff66] transition 
-      duration-300 h-[520px]
-     ease-in-out bg-[#ffffff1a] 
-     overflow-hidden rounded-lg shadow-xl  "
-    >
-      <Paragraph
-        className=" text-center  overflow-y-auto 
-       h-[200px] m-8  mb-[100px]"
+    <Container>
+      <div
+        className=" hover:bg-[#2c282866] w-[240px]   h-[520px]
+   
+     overflow-hidden rounded-lg   "
       >
-        {data.coment}
-      </Paragraph>
-      <div className="pb-8 pl-8 pr-8   flex flex-col justify-center items-center mt-[-60px]">
-        <div className="w-[100px] relative z-10 h-[100px] mb-3">
-          <Image
-            width={100}
-            height={100}
-            src={data.image}
-            className="object-cover object-center rounded-[60%]  w-full h-full"
-            alt={data.username}
-          />
-        </div>
-        <H3 className="font-bold text-xl text-center mb-4">{data.username}</H3>
-        <div className="  items-center">
-          <h6 className="text-[blue]">{data.project}</h6>
-          <h6 className="text-[blue]"> {data.country}</h6>
+        <Paragraph
+          className=" text-center  overflow-y-auto 
+       h-[200px] m-3  mb-[100px]"
+        >
+          {data.coment}
+        </Paragraph>
+        <div className="pb-8 pl-8 pr-8   flex flex-col justify-center items-center mt-[-60px]">
+          <div className="w-[100px] relative z-10 h-[100px] mb-3">
+            <Image
+              width={100}
+              height={100}
+              src={data.image}
+              className="object-cover object-center rounded-[60%]  w-full h-full"
+              alt={data.username}
+            />
+          </div>
+          <H3 className="font-bold text-xl text-center mb-4">
+            {data.username}
+          </H3>
+          <div className="  items-center">
+            <h6 className="text-[blue] flex  justify-center ">
+              {data.project}
+            </h6>
+            <h6 className=" flex  justify-center text-[blue]">
+              {" "}
+              {data.country}
+            </h6>
+          </div>
         </div>
       </div>
-    </div>
+    </Container>
 
     /*  <div className="feedback-area ptb-100 bg-color client-feeback">
       <div className="container">
@@ -178,7 +152,8 @@ const CreatorItem = ({ data }: any) => {
       ) : (
         ""
       )}
-    </div> 
+      </div> 
+      
     */
   );
 };

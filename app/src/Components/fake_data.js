@@ -139,20 +139,7 @@ export const list_top_creator = [
     country: "Chicago IL",
     project: "Apple Inc.",
   },
-  {
-    id: 4,
-    username: "Jagdeesh Rapolu    ",
-    image: "/static/images/client-image/Jagdeesh.jpeg",
-    coment: `I had the pleasure of working with Raj for a year for one of the
-    Complex UI Technology modernization Project. Raj is very detail
-    oriented and has In depth knowledge on Various UI technologies.
-    Raj's contributed to architectural discussions and always helped
-    Sr. Developers with through Tech modernization concepts. He holds
-    himself at a high standard and is very accountable and ensures
-    delivery timelines meets as per customer expectation.`,
-    country: "Chicago IL",
-    project: "Apple Inc.",
-  },
+  ,
   {
     id: 5,
     username: "Vikram    ",

@@ -19,33 +19,58 @@ import {
   HeadingName,
   Paragraph,
 } from "../common";
-;
+const settings = {
+  dots: true,
+  infinite: true,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 2000,
+  arrows: false,
+};
+const responsiveSettings = [
+  {
+    breakpoint: 500,
+    settings: {
+      ...settings,
+      slidesToShow: 1, // Show 1 slide when screen width is <= 500px
+    },
+  },
+  {
+    breakpoint: 900,
+    settings: {
+      ...settings,
+      slidesToShow: 2, // Show 2 slides when screen width is <= 900px
+    },
+  },
+  {
+    breakpoint: 1004,
+    settings: {
+      ...settings,
+      slidesToShow: 3, // Show 3 slides when screen width is <= 1004px
+    },
+  },
+];
+import Slider from "react-slick";
+const ClientReviews = () => {
   return (
     <Container>
-      <HeadingName>
-        <div className={"mb-44 max-w-[1320px] mx-auto px-5 md:px-10"}>
-          <div className="text-center mb-8">
-            <H2 className="font-bold text-3xl mb-2">Testimonials</H2>
-            <Reveal keyframes={fadeInDownShorter2} duration={800} delay={100}>
-              <H3 className="text-center mb-8">
-                Some Lovely Feedback From Our Clients
-              </H3>
-            </Reveal>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {list_top_creator.map((item, i) => (
-              <Reveal
-                key={i}
-                keyframes={fadeInRight}
-                duration={500}
-                delay={100 * (i + 1)}
-              >
-                <CreatorItem data={item} />
-              </Reveal>
-            ))}
-          </div>
+      <div className={" mb-44 w-full px-5 md:px-10"}>
+        <div className="text-center mb-8">
+          <H2 className="font-bold text-3xl mb-2">Testimonials</H2>
+          <Reveal keyframes={fadeInDownShorter2} duration={800} delay={100}>
+            <H3 className="text-center mb-8">
+              Some Lovely Feedback From Our Clients
+            </H3>
+          </Reveal>
         </div>
-      </HeadingName>
+
+        <Slider {...settings} responsive={responsiveSettings}>
+          {list_top_creator.map((item, i) => (
+            <CreatorItem data={item} />
+          ))}
+        </Slider>
+      </div>
     </Container>
   );
 };
