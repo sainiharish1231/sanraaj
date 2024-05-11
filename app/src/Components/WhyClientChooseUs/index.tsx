@@ -12,7 +12,6 @@ import {
   H2,
   H3,
 } from "../common";
-
 import ModularApproach from "../../../../public/static/images/Modular-Approach";
 import Transform from "../../../../public/static/images/Transfrom";
 import TestDrivenDevelopment from "../../../../public/static/images/testDrivenDevelopment";

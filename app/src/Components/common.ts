@@ -26,7 +26,7 @@ export const ContentContainer = styled.div`
   padding-bottom: 40px;
   margin-bottom: 40px;
   width: 90%;
-  & :nth-child(odd) {
+  &:nth-child(odd) {
     flex-direction: row-reverse;
     padding-bottom: 25px;
     margin-bottom: 25px;

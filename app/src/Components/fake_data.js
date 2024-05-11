@@ -105,7 +105,7 @@ export const list_top_creator = [
     id: 1,
     username: "Neetesh Kumar",
     image: "/static/images/client-image/Neetesh.jpeg",
-    coment: `I had the pleasure of working with Raj for a year for one of the
+    comment: `I had the pleasure of working with Raj for a year for one of the
     Complex UI Technology modernization Project. Raj is very detail
     oriented and has In depth knowledge on Various UI technologies.
     Raj's contributed to architectural discussions and always helped
@@ -120,7 +120,7 @@ export const list_top_creator = [
     id: 2,
     username: "Praful Kumar Enni",
     image: "/static/images/client-image/Praful.jpeg",
-    coment: `Great experience working with San Raj software solution. Experienced and skilled staff members.
+    comment: `Great experience working with San Raj software solution. Experienced and skilled staff members.
      Quick turn around time on issue. Looking forward to working with your team again.`,
     country: "Chicago IL",
     project: "Option clearing corp.",
@@ -129,7 +129,7 @@ export const list_top_creator = [
     id: 3,
     username: "Jagdeesh Rapolu    ",
     image: "/static/images/client-image/Jagdeesh.jpeg",
-    coment: `I had the pleasure of working with Raj for a year for one of the
+    comment: `I had the pleasure of working with Raj for a year for one of the
     Complex UI Technology modernization Project. Raj is very detail
     oriented and has In depth knowledge on Various UI technologies.
     Raj's contributed to architectural discussions and always helped
@@ -139,12 +139,11 @@ export const list_top_creator = [
     country: "Chicago IL",
     project: "Apple Inc.",
   },
-  ,
   {
     id: 5,
     username: "Vikram    ",
     image: "/static/images/client-image/Vikram.jpeg",
-    coment: `I rarely come across real talents who stand out like Raj.I had
+    comment: `I rarely come across real talents who stand out like Raj.I had
     the pleasure of working with him for 2 years for contributing in
     my projects.Raj’s ability to handle multiple projects was unlike
     any I have seen before and made dramatic increse in the

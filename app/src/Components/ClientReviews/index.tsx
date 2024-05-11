@@ -54,8 +54,8 @@ const responsiveSettings = [
 import Slider from "react-slick";
 const ClientReviews = () => {
   return (
-    <Container>
-      <div className={" mb-44 w-full px-5 md:px-10"}>
+    <Container className="">
+      <div className={"   mb-44 w-full px-5 md:px-10"}>
         <div className="text-center mb-8">
           <H2 className="font-bold text-3xl mb-2">Testimonials</H2>
           <Reveal keyframes={fadeInDownShorter2} duration={800} delay={100}>
