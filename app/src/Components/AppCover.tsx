@@ -22,12 +22,14 @@ const AppCoverContainer = styled.div`
   svg.cover-logo {
     height: 80%;
     width: auto;
+
     overflow: hidden;
   }
 
   @media screen and (max-width: 425px) {
     svg.cover-logo {
       height: auto;
+
       width: 100%;
     }
   }
@@ -48,7 +50,7 @@ const AppCover: React.FunctionComponent<Props> = ({ mounted = false }) => {
     if (mounted) {
       setTimeout(() => {
         setshouldRemove(true);
-      }, 4000);
+      }, 2000);
     }
   }, [mounted]);
 
@@ -58,7 +60,7 @@ const AppCover: React.FunctionComponent<Props> = ({ mounted = false }) => {
 
   return (
     <AppCoverContainer className={mounted ? "hidden" : ""}>
-      <Logo className="cover-logo" />
+      <Logo className="cover-logo  !p-[20%] sm:!p-[10%]" />
       <H1>San Raj Software Solutions</H1>
     </AppCoverContainer>
   );

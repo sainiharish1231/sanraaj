@@ -38,7 +38,7 @@ color:"red"
 `;
 
 export const TopText = styled.div`
-  font-size: 110px;
+  font-size: 40px;
   font-family: Arial, Helvetica, sans-serif;
   color: #ffffff;
   margin-bottom: 10px;

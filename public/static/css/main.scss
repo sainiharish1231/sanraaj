@@ -60,7 +60,13 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+}
+.details-heading1 {
+  @media screen and (max-width: 500px) {
+    width: 355px !important;
+  }
 }
 .dark {
   .details-heading {

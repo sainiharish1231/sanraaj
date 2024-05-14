@@ -8,7 +8,6 @@ import { ReduxNextPageContext, IPrivacy } from "../src/Interfaces";
 import { ContentContainer, H2 } from "../src/Styled/Privacy";
 import DetailsLayout from "../src/Components/Layout/DetailsLayout";
 import { Container, Paragraph } from "../src/Components/common";
-import { List, Ul, LiHeading, Items } from "../src/Styled/footer";
 
 export const Privacy = () => {
     return (
@@ -17,11 +16,12 @@ export const Privacy = () => {
                 <ContentContainer>
                     <H2 className="details-heading">Privacy Policy</H2>
                     <Paragraph>
-                        At Times News, accessible from Play Store, one of our
-                        main priorities is the privacy of our visitors. This
-                        Privacy Policy document contains types of information
-                        that is collected and recorded by Times News and how we
-                        use it.
+                        At San Raj Software Solutions, accessible from
+                        www.sanraaj.com, one of our main priorities is the
+                        privacy of our visitors. This Privacy Policy document
+                        contains types of information that is collected and
+                        recorded by San Raj Software Solutions and how we use
+                        it.
                     </Paragraph>
                     <Paragraph>
                         If you have additional questions or require more
@@ -30,16 +30,16 @@ export const Privacy = () => {
                     </Paragraph>
                     <Paragraph>
                         This Privacy Policy applies only to our online
-                        activities and is valid for visitors to our app with
+                        activities and is valid for visitors to our website with
                         regards to the information that they shared and/or
-                        collect in Times News. This policy is not applicable to
-                        any information collected offline or via channels other
-                        than this app.
+                        collect in San Raj Software Solutions. This policy is
+                        not applicable to any information collected offline or
+                        via channels other than this website.
                     </Paragraph>
 
                     <H2 className="details-heading">Consent</H2>
                     <Paragraph>
-                        By using our app, you hereby consent to our Privacy
+                        By using our website, you hereby consent to our Privacy
                         Policy and agree to its terms.
                     </Paragraph>
 
@@ -78,24 +78,24 @@ export const Privacy = () => {
 
                     <H2 className="details-heading">Log Files</H2>
                     <Paragraph>
-                        Times News follows a standard procedure of using log
-                        files. These files log visitors when they visit app. All
-                        hosting companies do this and a part of hosting
-                        services' analytics. The information collected by log
-                        files include internet protocol (IP) addresses, browser
-                        type, Internet Service Provider (ISP), date and time
-                        stamp, referring/exit pages, and possibly the number of
-                        clicks. These are not linked to any information that is
-                        personally identifiable. The purpose of the information
-                        is for analyzing trends, administering the app, tracking
-                        users' movement on the app, and gathering demographic
-                        information.
+                        San Raj Software Solutions follows a standard procedure
+                        of using log files. These files log visitors when they
+                        visit websites. All hosting companies do this and a part
+                        of hosting services' analytics. The information
+                        collected by log files include internet protocol (IP)
+                        addresses, browser type, Internet Service Provider
+                        (ISP), date and time stamp, referring/exit pages, and
+                        possibly the number of clicks. These are not linked to
+                        any information that is personally identifiable. The
+                        purpose of the information is for analyzing trends,
+                        administering the site, tracking users' movement on the
+                        website, and gathering demographic information.
                     </Paragraph>
 
                     <H2 className="details-heading">Links</H2>
                     <Paragraph>
-                        When you click on links on our app, they may direct you
-                        away from our site. We are not responsible for the
+                        When you click on links on our website, they may direct
+                        you away from our site. We are not responsible for the
                         privacy practices of other sites and encourage you to
                         read their privacy statements.
                     </Paragraph>
@@ -108,16 +108,22 @@ export const Privacy = () => {
                         disclosed, altered or destroyed.
                     </Paragraph>
 
+                    <H2 className="details-heading">Cookies</H2>
+                    <Paragraph>
+                        We use cookies to maintain session of your user. It is
+                        not used to personally identify you on other websites.
+                    </Paragraph>
+
                     <H2 className="details-heading">
                         Third Party Privacy Policies
                     </H2>
                     <Paragraph>
-                        Times News's Privacy Policy does not apply to other
-                        advertisers ,websites or app. Thus, we are advising you
-                        to consult the respective Privacy Policies of these
-                        third-party ad servers for more detailed information. It
-                        may include their practices and instructions about how
-                        to opt-out of certain options.
+                        San Raj Software Solutions's Privacy Policy does not
+                        apply to other advertisers or websites. Thus, we are
+                        advising you to consult the respective Privacy Policies
+                        of these third-party ad servers for more detailed
+                        information. It may include their practices and
+                        instructions about how to opt-out of certain options.
                     </Paragraph>
 
                     <H2 className="details-heading">
@@ -127,21 +133,35 @@ export const Privacy = () => {
                         We reserve the right to modify this privacy policy at
                         any time, so please review it frequently. Changes and
                         clarifications will take effect immediately upon their
-                        posting on the app. If we make material changes to this
-                        policy, we will notify you here that it has been
+                        posting on the website. If we make material changes to
+                        this policy, we will notify you here that it has been
                         updated, so that you are aware of what information we
                         collect, how we use it, and under what circumstances, if
                         any, we use and/or disclose it.
                     </Paragraph>
+                    <Paragraph>
+                        You can choose to disable cookies through your
+                        individual browser options. To know more detailed
+                        information about cookie management with specific web
+                        browsers, it can be found at the browser's respective
+                        websites.
+                    </Paragraph>
 
                     <H2 className="details-heading">Children's Information</H2>
                     <Paragraph>
-                        Times News does not knowingly collect any Personal
-                        Identifiable Information from children under the age of
-                        13. If you think that your child provided this kind of
-                        information on our app, we strongly encourage you to
-                        contact us immediately and we will do our best efforts
-                        to promptly remove such information from our records.
+                        Another part of our priority is adding protection for
+                        children while using the internet. We encourage parents
+                        and guardians to observe, participate in, and/or monitor
+                        and guide their online activity.
+                    </Paragraph>
+                    <Paragraph>
+                        San Raj Software Solutions does not knowingly collect
+                        any Personal Identifiable Information from children
+                        under the age of 13. If you think that your child
+                        provided this kind of information on our website, we
+                        strongly encourage you to contact us immediately and we
+                        will do our best efforts to promptly remove such
+                        information from our records.
                     </Paragraph>
 
                     <H2 className="details-heading">

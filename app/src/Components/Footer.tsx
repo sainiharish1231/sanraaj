@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -29,7 +28,7 @@ import {
     PostHeading,
     PostText,
     ContactLinks,
-} from "../../Styled/footer";
+} from "../Styled/footer";
 
 interface iconDetails {
     mediaIcon: IconDefinition;
@@ -72,7 +71,7 @@ const Footer = () => {
                 },
                 {
                     subHeading: "Blog",
-                    href: "/Blog",
+                    href: "#",
                 },
                 {
                     subHeading: "Privacy Policy",
@@ -80,7 +79,41 @@ const Footer = () => {
                 },
             ],
         },
-
+        // {
+        //   heading: "OUR PRODUCTS",
+        //   content: [
+        //             {subHeading: "SnapHRM", desc: "HR Management solution that delivers"},
+        //             {subHeading: "Worksuite", desc: "A complete Project management software"},
+        //             {subHeading: "Recruit", desc: "Manages the recruitment process"},
+        //             {subHeading: "Appointo", desc: "Manage the bookings/appointments"}
+        //           ]
+        // },
+        // {
+        //   heading: "OUR Posts",
+        //   content: [
+        //     {
+        //       date: {date:"30", month:"APR"},
+        //       detail: {
+        //   subHeading: "Project Management Features and Functionality",
+        //   desc: "To manage a company efficiently you need a software for project and data management."
+        // }
+        //     },
+        //     {
+        //       date: {date:"25", month:"MAY"},
+        //       detail: {
+        //   subHeading: "Making Diwali Special at an NGO",
+        //   desc: "The aim of a businesses must not only be to earn profits, but also to give back to the society."
+        // }
+        //     },
+        //     {
+        //       date: {date:"07", month:"OCT"},
+        //       detail: {
+        //   subHeading: "SanRaj goes to Mumbai",
+        //   desc: "Have you ever wondered what is it like to be in the most star-studded capital of India? Let me pen down my experience."
+        // }
+        //     }
+        //   ]
+        // },
         {
             heading: "Contact us",
             content: [
@@ -121,41 +154,7 @@ const Footer = () => {
             ],
         },
     ];
-    // {
-    //   heading: "OUR PRODUCTS",
-    //   content: [
-    //             {subHeading: "SnapHRM", desc: "HR Management solution that delivers"},
-    //             {subHeading: "Worksuite", desc: "A complete Project management software"},
-    //             {subHeading: "Recruit", desc: "Manages the recruitment process"},
-    //             {subHeading: "Appointo", desc: "Manage the bookings/appointments"}
-    //           ]
-    // },
-    // {
-    //   heading: "OUR Posts",
-    //   content: [
-    //     {
-    //       date: {date:"30", month:"APR"},
-    //       detail: {
-    //   subHeading: "Project Management Features and Functionality",
-    //   desc: "To manage a company efficiently you need a software for project and data management."
-    // }
-    //     },
-    //     {
-    //       date: {date:"25", month:"MAY"},
-    //       detail: {
-    //   subHeading: "Making Diwali Special at an NGO",
-    //   desc: "The aim of a businesses must not only be to earn profits, but also to give back to the society."
-    // }
-    //     },
-    //     {
-    //       date: {date:"07", month:"OCT"},
-    //       detail: {
-    //   subHeading: "SanRaj goes to Mumbai",
-    //   desc: "Have you ever wondered what is it like to be in the most star-studded capital of India? Let me pen down my experience."
-    // }
-    //     }
-    //   ]
-    // },
+
     return (
         <>
             <Section>
