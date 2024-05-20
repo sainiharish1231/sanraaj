@@ -29,7 +29,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export const Career = () => {
+const Career = () => {
     const NawalgarhHREF = "https://en.wikipedia.org/wiki/Nawalgarh,_Rajasthan";
     const Icons = [
         {

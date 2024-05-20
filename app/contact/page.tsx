@@ -9,7 +9,7 @@ import { H3, H2, Paragraph, Container } from "../src/Components/common";
 import { Locationdata } from "../src/Components/fake_data";
 import Image from "next/image";
 
-export const Contact = () => {
+const Contact = () => {
     return (
         <>
             <DetailsLayout title="  Contact Us">

@@ -21,7 +21,7 @@ import { H2 } from "../src/Styled/Process";
 import DetailsLayout from "../src/Components/Layout/DetailsLayout";
 // #endregion Interface Imports
 
-export const Services = () => {
+const Services = () => {
     return (
         <DetailsLayout title="Our Services">
             <Container>

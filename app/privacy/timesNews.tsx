@@ -1,4 +1,4 @@
-"use client";
+/* "use client";
 import React from "react";
 import { NextPage } from "next";
 
@@ -10,7 +10,7 @@ import DetailsLayout from "../src/Components/Layout/DetailsLayout";
 import { Container, Paragraph } from "../src/Components/common";
 import { List, Ul, LiHeading, Items } from "../src/Styled/footer";
 
-export const Privacy = () => {
+const Privacy = () => {
     return (
         <DetailsLayout title="Privacy Policy">
             <Container>
@@ -160,3 +160,4 @@ export const Privacy = () => {
 };
 
 export default Privacy;
+ */

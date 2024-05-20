@@ -5,7 +5,7 @@ import { H2 } from "../src/Components/common";
 import { ContentContainer } from "../src/Styled/Overview";
 import DetailsLayout from "../src/Components/Layout/DetailsLayout";
 
-export const Overview = () => {
+const Overview = () => {
     return (
         <DetailsLayout title="Overview">
             <Container>

@@ -23,7 +23,7 @@ import DetailsLayout from "../src/Components/Layout/DetailsLayout";
 
 // #endregion Interface Imports
 
-export const Process = () => (
+const Process = () => (
     <DetailsLayout title="Process">
         <Container>
             <ContentContainer id="agile-development">

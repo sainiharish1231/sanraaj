@@ -8,8 +8,7 @@ import { ReduxNextPageContext, IPrivacy } from "../src/Interfaces";
 import { ContentContainer, H2 } from "../src/Styled/Privacy";
 import DetailsLayout from "../src/Components/Layout/DetailsLayout";
 import { Container, Paragraph } from "../src/Components/common";
-
-export const Privacy = () => {
+const Privacy = () => {
     return (
         <DetailsLayout title="Privacy Policy">
             <Container>

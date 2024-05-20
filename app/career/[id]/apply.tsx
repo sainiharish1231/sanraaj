@@ -65,7 +65,7 @@ const jobs: Jobs = {
     },
 };
 
-export const ApplyNow = () => {
+const ApplyNow = () => {
     const router = useRouter();
     const [job, setJob] = useState<Job>();
     const [loading, setLoading] = useState<boolean>(true);

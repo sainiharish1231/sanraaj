@@ -194,7 +194,7 @@ const jobs: Jobs = {
     },
 };
 
-export const ApplyNow = () => {
+const ApplyNow = () => {
     const params = useParams();
     const [job, setJob] = useState<Job>();
     const [loading, setLoading] = useState<boolean>(true);
