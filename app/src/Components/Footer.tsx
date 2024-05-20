@@ -71,7 +71,7 @@ const Footer = () => {
                 },
                 {
                     subHeading: "Blog",
-                    href: "#",
+                    href: "/blog",
                 },
                 {
                     subHeading: "Privacy Policy",

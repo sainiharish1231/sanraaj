@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
 
 import DetailsLayout from "@/app/src/Components/Layout/DetailsLayout";
 import { Container, Paragraph } from "@/app/src/Components/common";
@@ -15,7 +16,6 @@ import {
     SpanLink,
 } from "@/app/src/Styled/apply-now";
 import Loader, { LoadingContainer } from "@/app/src/Components/Loader";
-import { useRouter } from "next/navigation";
 
 interface Job {
     ctc: string | number;
@@ -194,18 +194,22 @@ const jobs: Jobs = {
     },
 };
 
-export const ApplyNow = ({}) => {
-    const router = useRouter();
+export const ApplyNow = () => {
+    const params = useParams();
     const [job, setJob] = useState<Job>();
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-            setJob(jobs[1]);
-        }, 3000);
-    }, []);
+        const id = params.id as string;
+        if (id) {
+            setTimeout(() => {
+                if (id in jobs) {
+                    setJob(jobs[id]);
+                }
+                setLoading(false);
+            }, 3000);
+        }
+    }, [params.id]);
 
     if (loading) {
         return (
@@ -220,7 +224,11 @@ export const ApplyNow = ({}) => {
     if (!job) {
         return (
             <DetailsLayout title="Careers">
-                <span>Not found</span>
+                <Container>
+                    <Paragraph>
+                        Sorry, we couldn't find the job you're looking for.
+                    </Paragraph>
+                </Container>
             </DetailsLayout>
         );
     }
@@ -228,62 +236,60 @@ export const ApplyNow = ({}) => {
     if (job.status === "closed") {
         return (
             <DetailsLayout title="Careers">
-                <span>Sorry this job is closed </span>
+                <Container>
+                    <Paragraph>Sorry, this job is closed.</Paragraph>
+                </Container>
             </DetailsLayout>
-        );
+        ); /*  */
     }
 
     return (
-        <DetailsLayout title={`Careers - ${job?.title}`}>
-            <Row>
-                <Column>
-                    <SpanTitle>CTC</SpanTitle>
-                    <SpanLink>{job?.ctc}</SpanLink>
-                </Column>
-                <Column>
-                    <SpanTitle>Role</SpanTitle>
-                    <SpanLink>{job?.role}</SpanLink>
-                </Column>
-                <Column>
-                    <SpanTitle>Location</SpanTitle>
-                    <SpanLink>{job?.location}</SpanLink>
-                </Column>
-                <Column>
-                    <SpanTitle>Experience</SpanTitle>
-                    <SpanLink>{job?.experience}</SpanLink>
-                </Column>
-                <Column>
-                    <SpanTitle>
-                        <Button>Apply</Button>
-                    </SpanTitle>
-                </Column>
-            </Row>
+        <DetailsLayout title={job.title}>
             <Container>
                 <ContentContainer>
-                    <H3 className="details-heading">Introduction</H3>
-                    <Paragraph>{job?.introduction}</Paragraph>
-                </ContentContainer>
-
-                <ContentContainer>
-                    <H3 className="details-heading">Responsibilities</H3>
-                    <Paragraph>
-                        <UL>
-                            {job?.responsibilities?.map((resp, i) => (
-                                <List key={i}>{resp}</List>
-                            ))}
-                        </UL>
-                    </Paragraph>
-                </ContentContainer>
-
-                <ContentContainer>
-                    <H3 className="details-heading">Skill Set</H3>
-                    <Paragraph>
-                        <UL>
-                            {job?.skills?.map((resp, i) => (
-                                <List key={i}>{resp}</List>
-                            ))}
-                        </UL>
-                    </Paragraph>
+                    <Row>
+                        <Column>
+                            <H3>{job.title}</H3>
+                            <Paragraph>
+                                <SpanTitle>CTC:</SpanTitle> {job.ctc}
+                            </Paragraph>
+                            <Paragraph>
+                                <SpanTitle>Location:</SpanTitle> {job.location}
+                            </Paragraph>
+                            <Paragraph>
+                                <SpanTitle>Experience:</SpanTitle>{" "}
+                                {job.experience}
+                            </Paragraph>
+                            <Paragraph>
+                                <SpanTitle>Introduction:</SpanTitle>{" "}
+                                {job.introduction}
+                            </Paragraph>
+                        </Column>
+                    </Row>
+                    <Row>
+                        <Column>
+                            <H3>Responsibilities</H3>
+                            <UL>
+                                {job.responsibilities.map(
+                                    (responsibility, index) => (
+                                        <List key={index}>
+                                            {responsibility}
+                                        </List>
+                                    )
+                                )}
+                            </UL>
+                        </Column>
+                    </Row>
+                    <Row>
+                        <Column>
+                            <H3>Skills</H3>
+                            <UL>
+                                {job.skills.map((skill, index) => (
+                                    <List key={index}>{skill}</List>
+                                ))}
+                            </UL>
+                        </Column>
+                    </Row>
                     <Button>Apply Now</Button>
                 </ContentContainer>
             </Container>

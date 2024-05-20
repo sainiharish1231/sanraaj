@@ -27,5 +27,19 @@ export const DetailsLayout: React.FunctionComponent<IDetailsLayout> = ({
         </Layout>
     );
 };
+export const BlogLayout: React.FunctionComponent<IDetailsLayout> = ({
+    children,
+    title,
+}) => {
+    return (
+        <Layout>
+            <Container className="!p-0">
+                <Banner title={title} />
+                <Main className="">{children}</Main>
+                <SocialMediaLinks />
+            </Container>
+        </Layout>
+    );
+};
 
 export default DetailsLayout;

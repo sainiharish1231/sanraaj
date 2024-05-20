@@ -27,7 +27,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/src/Components/fake_data.js",
-    "app/src/Components/CreatorItem.js"
+    "app/src/Components/CreatorItem.js",
+    "app/appa/page.js"
   ],
   "exclude": ["node_modules"]
 }
