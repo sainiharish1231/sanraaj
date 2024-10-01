@@ -28,8 +28,8 @@ const Overview: React.FC<OverviewProps> = ({ section1, section2 }) => {
                 src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw4fHxjb21wdXRlcnxlbnwwfDB8fHwxNjkxODE2NjY3fDA&ixlib=rb-4.0.3&q=80&w=1080"
                 alt="Product screenshot"
                 className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem]  md:-ml-6 lg:-ml-0"
-                width={2032}
-                height={1042}
+                width={232}
+                height={142}
               />
             </div>
             <div className="lg:pr-8 lg:pt-4 order-2 lg:order-1">
