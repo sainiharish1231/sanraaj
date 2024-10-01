@@ -25,7 +25,7 @@ const Overview: React.FC<OverviewProps> = ({ section1, section2 }) => {
           <div className="mx-auto grid max-w-3xl order-1 grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-start lg:gap-0">
             <div className="order-1 pl-9  lg:order-2">
               <Image
-                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw4fHxjb21wdXRlcnxlbnwwfDB8fHwxNjkxODE2NjY3fDA&ixlib=rb-4.0.3&q=80&w=1080"
+                src="/overview.jpeg"
                 alt="Product screenshot"
                 className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem]  md:-ml-6 lg:-ml-0"
                 width={500}
