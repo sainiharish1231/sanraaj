@@ -26,9 +26,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/src/Components/fake_data.js",
-    "app/src/Components/CreatorItem.js",
-    "app/appa/page.js"
+    "public/Logo.js",
+    "public/AnimatedLogo.js"
   ],
   "exclude": ["node_modules"]
 }

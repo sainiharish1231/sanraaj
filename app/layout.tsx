@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
-import { Content, Inter } from "next/font/google";
 import "./globals.css";
+import "./_svg.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Header from "./Component/Header";
+import Footer from "./Component/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+import { useTheme } from "styled-components";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "San Raj Software Solutions",
   description:
-    "San Raj is a Software Development company providing technical solutions to business/individuals to transform their full of emotion ventures in to a digital reality.",
+    "San Raj is a Software Development company providing technical solutions to business/individuals to transform their full of emotion ventures into a digital reality.",
   keywords: ` "San",
   "Raj",
   "San Raj",
@@ -26,7 +27,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className=" font-semibold  bg-[#101118] dark:bg-[#101118] text-[#ffff]  text-justify">
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
