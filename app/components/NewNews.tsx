@@ -168,85 +168,84 @@ const NewNews = ({ news, topNews, breakingNews }: NewNewsProps) => {
           <div className="w-full p-6 mx-auto  ">
             <div className="grid grid-cols-1 pt-3 md:grid-cols-1 gap-8">
               {filteredItems.map((item: any, index: any) => {
-                if (item.isPublishNews) {
-                  const isSaved = savedNews.includes(item.id);
-                  return (
-                    <div key={index} className="rounded-lg">
-                      <div className="relative overflow-hidden">
-                        <Image
-                          height={400}
-                          width={400}
-                          className="object-cover rounded-lg w-full h-[250px] sm:h-[300px] transform transition-transform duration-300 "
-                          src={item.image_url}
-                          alt="Product"
-                        />
-                        <div className="mt-2">
-                          <Link
-                            className="!no-underline mb-4"
-                            href={`/${item.slug_key}`}
-                          >
-                            <div className="transition duration-150 w-full text-inherit ease-in-out">
-                              <h2 className="text-2xl font-bold mb-2   text-justify whitespace-pre-wrap hover:underline overflow-wrap word-break">
-                                {item.title.slice(0, 1).toUpperCase()}
-                                {item.title.slice(1, item.length)}
-                              </h2>
-                            </div>
-                          </Link>
-                          <div className="transition font-normal text-justify text-md  whitespace-pre-wrap duration-150 ease-in-out text-[rgba(var(--color-typo-default), var(--tw-text-opacity))] box-border text-xl">
-                            {item.description}
+                const isSaved = savedNews.includes(item.id);
+                return (
+                  <div key={index} className="rounded-lg">
+                    <div className="relative overflow-hidden">
+                      <Image
+                        height={400}
+                        width={400}
+                        className="object-cover rounded-lg w-full h-[250px] sm:h-[300px] transform transition-transform duration-300 "
+                        src={item.image_url}
+                        alt="Product"
+                      />
+                      <div className="mt-2">
+                        <Link
+                          className="!no-underline mb-4"
+                          href={`/${item.slug_key}`}
+                        >
+                          <div className="transition duration-150 w-full text-inherit ease-in-out">
+                            <h2 className="text-2xl font-bold mb-2   text-justify whitespace-pre-wrap hover:underline overflow-wrap word-break">
+                              {item.title.slice(0, 1).toUpperCase()}
+                              {item.title.slice(1, item.length)}
+                            </h2>
                           </div>
-                          <div className="flex justify-between  items-center ">
-                            <div>
-                              <ul className="flex flex-wrap text-xs font-medium mt-4">
-                                <li className="mb-2">
-                                  <span className="inline-flex text-center text-[#ffffff] py-1 px-3 rounded-full bg-[#9333ea]">
-                                    #{item.category}
-                                  </span>{" "}
-                                  {/*  <span className="inline-flex text-center text-[#ffffff] py-1 px-2 rounded-full bg-red-600">
+                        </Link>
+                        <div className="transition font-normal text-justify text-md  whitespace-pre-wrap duration-150 ease-in-out text-[rgba(var(--color-typo-default), var(--tw-text-opacity))] box-border text-xl">
+                          {item.description}
+                        </div>
+                        <div className="flex justify-between  items-center ">
+                          <div>
+                            <ul className="flex flex-wrap text-xs font-medium mt-4">
+                              <li className="mb-2">
+                                <span className="inline-flex text-center text-[#ffffff] py-1 px-3 rounded-full bg-[#9333ea]">
+                                  #{item.category}
+                                </span>{" "}
+                                {/*  <span className="inline-flex text-center text-[#ffffff] py-1 px-2 rounded-full bg-red-600">
                                 #{item.slug_key}
                               </span> */}
-                                </li>
-                              </ul>
-                            </div>
-                            <div
-                              onClick={() => handleSavedNews(item.id, isSaved)}
-                              className="  cursor-pointer"
-                            >
-                              {isSaved ? (
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="h-6 w-6"
-                                  fill="currentColor"
-                                  viewBox="0 0 24 24"
-                                  stroke="currentColor"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2.3}
-                                    d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
-                                  />
-                                </svg>
-                              ) : (
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="h-6 w-6"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  stroke="currentColor"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2.3}
-                                    d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
-                                  />
-                                </svg>
-                              )}
-                            </div>
+                              </li>
+                            </ul>
                           </div>
+                          <div
+                            onClick={() => handleSavedNews(item.id, isSaved)}
+                            className="  cursor-pointer"
+                          >
+                            {isSaved ? (
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-6 w-6"
+                                fill="currentColor"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2.3}
+                                  d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                                />
+                              </svg>
+                            ) : (
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-6 w-6"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2.3}
+                                  d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                                />
+                              </svg>
+                            )}
+                          </div>
+                        </div>
 
-                          {/* <Link
+                        {/* <Link
                               className="flex !no-underline align-middle items-center"
                               href={""}
                             >
@@ -267,11 +266,10 @@ const NewNews = ({ news, topNews, breakingNews }: NewNewsProps) => {
                                 <p className="ml-2">{item.uploadTime}</p>
                               </div>
                             </Link> */}
-                        </div>
                       </div>
                     </div>
-                  );
-                }
+                  </div>
+                );
               })}
             </div>
           </div>
