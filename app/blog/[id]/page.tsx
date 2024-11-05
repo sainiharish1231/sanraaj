@@ -112,23 +112,31 @@ const ApplyNow: React.FC = () => {
                     </svg>
                   </h3>
 
-                  <img
+                  <Image
+                    height={5000}
+                    width={5000}
                     className="inline-block object-cover w-8 h-8  border-2 border-white rounded-full shadow-sm cursor-pointer"
                     src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                     alt=""
                   />
-                  <img
+                  <Image
+                    height={5000}
+                    width={5000}
                     className="inline-block object-cover w-8 h-8 -ml-2  border-2 border-white rounded-full shadow-sm cursor-pointer"
                     src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                     alt=""
                   />
-                  <img
+                  <Image
+                    height={5000}
+                    width={5000}
                     className="inline-block object-cover w-8 h-8 -ml-2  border-2 border-white rounded-full shadow-sm cursor-pointer"
                     src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
                     alt=""
                   />
-                  <img
-                    className="inline-block object-cover w-8 h-8 -ml-2  border-2 border-white rounded-full shadow-sm cursor-pointer"
+                  <Image
+                    height={5000}
+                    width={5000}
+                    className=" ds inline-block object-cover w-8 h-8 -ml-2  border-2 border-white rounded-full shadow-sm cursor-pointer"
                     src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
                     alt=""
                   />
@@ -211,7 +219,7 @@ const ApplyNow: React.FC = () => {
                overflow-hidden text-gray-600
                 focus-within:text-gray-400"
               >
-                <img
+                <Image
                   className="w-10 h-10 object-cover rounded-full shadow mr-2 cursor-pointer"
                   alt="User avatar"
                   src="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200"
