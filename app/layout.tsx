@@ -5,7 +5,9 @@ import "slick-carousel/slick/slick-theme.css";
 import Header from "./Component/Header";
 import Footer from "./Component/Footer";
 
-import { useTheme } from "styled-components";
+import ThemeSwitch from "./Component/ThemeSwitch";
+import { ThemeProvider } from "next-themes";
+import { Providers } from "./providers";
 
 export const metadata = {
   title: "San Raj Software Solutions",
@@ -27,10 +29,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className=" font-semibold  bg-[#101118] dark:bg-[#101118] text-[#ffff]  text-justify">
-        <Header />
-        {children}
-        <Footer />
+      <body className="font-pregular  bg-[#ffff] dark:bg-[#101118] dark:text-[#ffff] dark:text-white  text-justify">
+        <Providers>
+          <Header />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

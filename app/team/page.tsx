@@ -18,8 +18,10 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
 }
 export default function TeamPage() {
   return (
-    <div className="p-6 bg-[#101118] mb-10">
-      <h1 className="text-3xl font-bold text-center mb-6">Meet Our Team</h1>
+    <div className="p-6 bg-white dark:bg-black mb-10">
+      <h1 className="text-3xl  dark:text-white text-black font-bold text-center mb-6">
+        Meet Our Team
+      </h1>
       <Team />
     </div>
   );

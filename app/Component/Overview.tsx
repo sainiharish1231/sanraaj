@@ -19,7 +19,7 @@ interface OverviewProps {
 
 const Overview: React.FC<OverviewProps> = ({ section1, section2 }) => {
   return (
-    <div className="cursor-pointer gap-6  mb-10  flex flex-col bg-[#101118] justify-center items-center leading-normal">
+    <div className="cursor-pointer gap-6  mb-10  flex flex-col bg-white dark:bg-[#101118] justify-center items-center leading-normal">
       <section className="overflow-hidden py-8 sm:py-16">
         <div className="mx-auto max-w-screen-2xl px-6  lg:px-8">
           <div className="mx-auto grid max-w-3xl order-1 grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-start lg:gap-0">
@@ -28,25 +28,25 @@ const Overview: React.FC<OverviewProps> = ({ section1, section2 }) => {
                 src="/overview.jpeg"
                 alt="Product screenshot"
                 className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem]  md:-ml-6 lg:-ml-0"
-                width={500}
-                height={500}
+                width={2032}
+                height={1042}
               />
             </div>
             <div className="lg:pr-8 lg:pt-4 order-2 lg:order-1">
               <div className="lg:max-w-lg">
-                <h2 className="lg:text-lg mb-4 lg:mb-0 font-semibold  text-indigo-600 justify-center flex lg:block text-3xl ">
+                <h2 className="lg:text-lg mb-4 lg:mb-0 font-semibold  text-purple-600 justify-center flex lg:block text-3xl ">
                   Overview
                 </h2>
-                <p className="mt-2 flex justify-center lg:block text-3xl font-bold tracking-tight text-gray-400 sm:text-4xl">
+                <p className="mt-2 flex justify-center lg:block text-3xl font-bold tracking-tight text-black dark:text-white sm:text-4xl">
                   San Raj Software Solutions
                 </p>
-                <dl className="mt-3 space-y-10 text-lg text-gray-600 ">
+                <dl className="mt-3 space-y-10 text-lg text-black dark:text-white ">
                   {section1.map((item, index) => (
                     <div key={index} className="relative ">
-                      <dt className="inline font-semibold text-gray-400">
+                      <dt className="inline font-semibold text-black dark:text-white">
                         {item.title}
                       </dt>
-                      <p className="inline text-xl text-gray-300">
+                      <p className="inline text-xl text-black  dark:text-white">
                         {item.description}
                       </p>
                     </div>
@@ -86,7 +86,7 @@ const Overview: React.FC<OverviewProps> = ({ section1, section2 }) => {
                       index % 2 === 0
                         ? "lg:-ml-36 "
                         : "lg:right-0 lg:mr-[-250px]"
-                    } w-full rounded-xl shadow-2xl ring-1 ring-black ring-opacity-5 lg:absolute  lg:h-full lg:w-auto lg:max-w-none`}
+                    } w-full rounded-xl shadow-2xl ring-1 ring-black text-black dark:text-white ring-opacity-5 lg:absolute  lg:h-full lg:w-auto lg:max-w-none`}
                     src={feature.imageUrl}
                     alt={feature.title}
                   />
@@ -101,15 +101,15 @@ const Overview: React.FC<OverviewProps> = ({ section1, section2 }) => {
               >
                 <div>
                   <div>
-                    <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#7910f2]">
+                    <span className="flex h-12 w-12 items-center  text-black dark:text-white justify-center rounded-xl bg-[#7910f2]">
                       {feature.icon}
                     </span>
                   </div>
                   <div className="mt-6">
-                    <h2 className="text-3xl font-bold tracking-tight text-white">
+                    <h2 className="text-3xl font-bold tracking-tight text-black dark:text-white ">
                       {feature.title}
                     </h2>
-                    <p className="mt-4 text-lg text-gray-300">
+                    <p className="mt-4 text-lg text-black dark:text-white">
                       {feature.description}
                     </p>
                   </div>

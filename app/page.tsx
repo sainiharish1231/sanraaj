@@ -29,27 +29,26 @@ const content = {
     {
       title: "Support Multi Platforms",
       content:
-        "Our expertise in the latest cloud technologies like AWS enables your applications to scale easily and support multiple platforms. You don't have to worry about increasing traffic on your site anymore.",
+        "Our expertise in latest cloud technologies like AWS enables your applications to scale easily and support multiple platforms. You don't have to worry about increasing traffic on your site anymore.",
       logo: <AnimatedLogo />,
-      additionalContent: "Increasing traffic on your site anymore.",
       isRight: true,
     },
     {
       title: "Scalable Apps",
-      content:
-        "Our expertise in the latest cloud technologies enables your applications to scale easily. You don't have to worry about increasing traffic on your site anymore.",
+      content: `Our expertise in latest cloud technologies enables your applications to scale easily. You don't have to worry about increasing traffic on your site anymore.`,
       logo: <Scalable className={"h-[320px] max-w-[320px] "} />,
+     
     },
     {
       title: "Modular Approach",
-      content:
-        "We follow modern application architecture right from the beginning. That is why our applications are easier to maintain, easy to test, and less prone to bugs, saving you both time and cost.",
+      content: `We follow modern application architecture right from the beginning. That is why our applications are easier to maintain, easy to test and less prone to bugs, saving you both time and cost.`,
       logo: <Modular className={"h-[320px] max-w-[320px] "} />,
+     
     },
     {
       title: "Test Driven Development",
       content:
-        "Testing is an integral part of modern applications and so is our development process. Using the latest testing tools and continuous integration, we enable you to be sure that your applications function as expected - always.",
+        `Testing is an integral part of modern applications and so is of our development process. Using latest testing tools and continuous integration, we enable you to be sure that your applications function as expected - always.`,
       logo: <Driven className={"h-[320px] max-w-[320px] "} />,
     },
   ],

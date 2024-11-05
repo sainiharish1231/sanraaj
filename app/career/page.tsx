@@ -99,7 +99,10 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
 }
 const career = () => {
   return (
-    <div className="bg-[#101118]" title="Careers">
+    <div
+      className="text-black dark:text-white bg-white dark:bg-black"
+      title="Careers"
+    >
       <Career
         sanRajBackgroundContent={sanRajBackgroundContent}
         features={features}

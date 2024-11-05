@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -267,9 +267,9 @@ h3 {
 }
 .roadmap-content {
   border: 1px solid rgba(43 44 56 / 46%);
-  background: var(--tg-secondary-color);
+  background: #2a104269;
   border-radius: 15px;
-  padding: 75px 50px 65px;
+  padding: 55px 40px 55px;
 }
 .roadmap-content .title {
   display: flex;
@@ -287,7 +287,7 @@ h3 {
   position: relative;
   justify-content: center;
   align-items: center;
-  background: rgba(255 255 255 / 11%);
+  background: #7910f2;
   flex: 0 0 auto;
   transform: translateY(3px);
 }
@@ -301,7 +301,7 @@ h3 {
   bottom: 24px;
   width: 2px;
   height: 180px;
-  background: #37373f;
+  background: #3b3b3d;
 }
 .roadmap-content p {
   margin-bottom: 0;

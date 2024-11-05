@@ -27,13 +27,13 @@ export default function Career({
   sanRajBackgroundContent,
 }: CareerProps) {
   return (
-    <div className="mb-20  p-6  text-center">
-      <div className="flex ff  justify-center flex-col items-center">
-        <h2 className="">
+    <div className="mb-20 bg-white dark:bg-black p-6  text-center">
+      <div className="flex   justify-center flex-col items-center">
+        <h2 className="text-black dark:text-white">
           Are you passionate to Learn and Grow{" "}
           <span className=" rotate-90 text-red-400">❓</span> Join us !
         </h2>
-        <p className="mx-2  my-8 text-xl ">
+        <p className="mx-2  my-8 text-black dark:text-white text-xl ">
           Working at San Raj means Learning everyday. We do what we love and
           love what we do. We are young, and we are growing. Do you want to be a
           part of this journey? Come and join us! 😊 😊 😊 ...
@@ -44,7 +44,7 @@ export default function Career({
           style={{ backgroundImage: "url('/bg.svg')" }}
           className="p-4 sm:p-8"
         >
-          <div className="flex flex-col lg:flex-row gap-5 justify-between items-center ">
+          <div className="flex flex-col lg:flex-row gap-5  justify-between items-center ">
             <div className="text-xl sm:text-3xl">
               Discover Your Career Path with Sanraj
             </div>
@@ -136,7 +136,7 @@ export default function Career({
                   </div>
                 </div>
                 <div className="flex  justify-center items-center lg:py-2">
-                  <h2 className="text-xl font-semibold mb-2 transition-colors duration-300 hover:text-blue-500">
+                  <h2 className="text-xl font-semibold mb-2 transition-colors duration-300 text-black dark:text-white hover:text-blue-500">
                     {feature.title}
                   </h2>
                   <p className="mt-2  text-gray-300">
@@ -149,14 +149,14 @@ export default function Career({
         </div>
       </div>
       <div className="p-6  rounded-xl">
-        <h2 className="details-heading mb-2">
+        <h2 className="details-heading mb-2 text-black dark:text-white">
           {sanRajBackgroundContent.heading}
         </h2>
         <div className="details-content">
           {sanRajBackgroundContent.paragraphs.map((paragraph, index) => (
             <p
               key={index}
-              className="text-lg  font-semibold mb-2 transition-colors duration-300"
+              className="text-lg  text-black dark:text-white font-semibold mb-2 transition-colors duration-300"
             >
               {paragraph.text}
             </p>

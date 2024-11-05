@@ -174,7 +174,7 @@ export default function Technologies() {
             <h3>
               <Nextlogo
                 className={
-                  "h-[130px] w-[130px p-4  fill-white hover:fill-blue-600 cursor-pointer"
+                  "h-[130px] w-[130px p-4   hover:fill-blue-600 cursor-pointer"
                 }
               />
             </h3>
@@ -192,7 +192,7 @@ export default function Technologies() {
             <h3>
               <Google
                 className={
-                  "h-[130px] w-[110px] pt-6 fill-white hover:fill-blue-600 cursor-pointer"
+                  "h-[130px] w-[110px] pt-6 dark:fill-white fill-black hover:fill-blue-600 cursor-pointer"
                 }
               />
             </h3>
@@ -201,7 +201,7 @@ export default function Technologies() {
             <h3>
               <Android
                 className={
-                  "h-[230px] w-[140px] pb-[100px]   fill-[#ffffff] hover:fill-blue-600 cursor-pointer"
+                  "h-[230px] w-[140px] pb-[100px]   dark:fill-white fill-black hover:fill-blue-600 cursor-pointer"
                 }
               />
             </h3>
@@ -219,7 +219,7 @@ export default function Technologies() {
             <h3>
               <OpenAI
                 className={
-                  "h-[130px] w-[130px]  fill-white hover:fill-blue-600 cursor-pointer"
+                  "h-[130px] w-[130px]  dark:fill-white fill-black hover:fill-blue-600 cursor-pointer"
                 }
               />
             </h3>
@@ -237,7 +237,7 @@ export default function Technologies() {
             <h3>
               <Iconscout
                 className={
-                  "h-[130px] w-[130px]  fill-white hover:fill-[#404f77] cursor-pointer"
+                  "h-[130px] w-[130px]  dark:fill-white fill-black hover:fill-[#404f77] cursor-pointer"
                 }
               />
             </h3>
@@ -264,7 +264,7 @@ export default function Technologies() {
             <h3>
               <GitLab
                 className={
-                  "h-[130px] w-[130px]  fill-[#8c929d] hover:fill-white cursor-pointer"
+                  "h-[130px] w-[130px]  fill-[#8c929d] hover:fill-black dark:hover:fill-white cursor-pointer"
                 }
               />
             </h3>
@@ -273,7 +273,7 @@ export default function Technologies() {
             <h3>
               <NodeJs
                 className={
-                  "h-[130px] w-[130px]  fill-[#404137] hover:fill-white cursor-pointer"
+                  "h-[130px] w-[130px]  fill-[#404137] hover:fill-black dark:hover:fill-white cursor-pointer"
                 }
               />
             </h3>
@@ -291,7 +291,7 @@ export default function Technologies() {
             <h3>
               <Python
                 className={
-                  "h-[130px] w-[130px]  fill-white hover:fill-blue-600 cursor-pointer"
+                  "h-[130px] w-[130px]  dark:fill-white fill-black hover:fill-blue-600 cursor-pointer"
                 }
               />
             </h3>

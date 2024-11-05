@@ -13,13 +13,13 @@ interface Serviceprop {
 }
 export default function Services({ service }: Serviceprop) {
   return (
-    <div>
-      <div className="mx-auto  text-center">
-        <h1 className="mb-5 text-3xl font-bold  text-black dark:text-white sm:text-4xl md:text-5xl">
+    <div className="">
+      <div className="mx-auto  text-center ">
+        <h1 className="mb-5 text-3xl font-bold   text-black dark:text-white sm:text-4xl md:text-5xl">
           Our Software Development 💫Services
         </h1>
         <Reveal keyframes={fadeInUp} duration={300} delay={500}>
-          <p className="mb-12   text-xl font-medium  text-body-color dark:text-white dark:opacity-90 sm:text-lg md:text-xl">
+          <p className="mb-12   text-xl font-medium  text-body-color text-black dark:text-white dark:opacity-90 sm:text-lg md:text-xl">
             {`  We offer a range of cutting-edge software solutions designed to help
             your business thrive in a digital world. From web development to
             cloud solutions, we've got you covered.`}
@@ -33,13 +33,15 @@ export default function Services({ service }: Serviceprop) {
               key={index}
               className="service-card   rounded-lg shadow-lg p-6 text-center"
             >
-              <div className="text-5xl mb-4 transition-transform duration-300 transform hover:scale-110">
+              <div className="text-5xl text-black dark:text-white  mb-4 transition-transform duration-300 transform hover:scale-110">
                 {service.icon}
               </div>
-              <h3 className="text-2xl font-semibold mb-2 transition-colors duration-300 hover:text-blue-500">
+              <h3 className="text-2xl text-black dark:text-white font-semibold mb-2 transition-colors duration-300 hover:text-blue-500">
                 {service.title}
               </h3>
-              <p className="text-lg text-gray-300">{service.description}</p>
+              <p className="text-lg text-black dark:text-white">
+                {service.description}
+              </p>
             </div>
           ))}
         </Reveal>

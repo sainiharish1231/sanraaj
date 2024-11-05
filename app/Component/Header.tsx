@@ -3,12 +3,16 @@ import Logo from "@/public/Logo";
 import Image from "next/image";
 import Calllogo from "../../public/Calllogo";
 import { useEffect, useState } from "react";
+import ThemeSwitch from "./ThemeSwitch";
+import Link from "next/link";
+import Manu from "../../public/Menu";
 const navItems = [
   { name: "Home", href: "/" },
   { name: "Overview", href: "/overview" },
   { name: "Services", href: "/services" },
   { name: "Career", href: "/career" },
   { name: "Team", href: "/team" },
+  { name: "Blog", href: "/blog" },
 ];
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +25,7 @@ const Header: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 500) {
+      if (window.scrollY > 300) {
         setScrolled(true);
       } else {
         setScrolled(false);
@@ -38,8 +42,8 @@ const Header: React.FC = () => {
 
   return (
     <nav
-      className={`  z-[100] sticky top-0  py-3 sm:pt-10 transition-colors duration-300  ${
-        scrolled ? `  bg-[#101118]  ` : "bg-transparent  "
+      className={`  z-[100] sticky top-0  dark:bg-[#101118] bg-white  py-3 sm:pt-10 transition-colors duration-300  ${
+        scrolled ? `  dark:bg-[#101118] bg-white  ` : "bg-transparent    d"
       }    `}
     >
       {scrolled
@@ -55,9 +59,8 @@ const Header: React.FC = () => {
           />
         </svg> */
           ""}
-
       <div className="flex flex-wrap items-center px-4 justify-between  lg:px-10 mx-auto">
-        <div className="flex flex-row items-center justify-between ">
+        <div className="flex flex-row items-center -3 justify-between ">
           <div>
             <Logo className={"sm:h-[60px] sm:w-[60px]  h-[50px] w-[50px]"} />
           </div>
@@ -65,53 +68,59 @@ const Header: React.FC = () => {
             style={{
               textShadow: "0 20px 30px rgba(0, 0, 0, .3)",
             }}
-            className="text-[25px] xs:text-[30px] sm:text-[40px]  "
+            className="text-[25px] text-black dark:text-[#ffff] xs:text-[30px] sm:text-[40px]  "
           >
             SAN RAJ
           </h1>
         </div>
+
         <div className="flex items-center lg:order-2">
           <div className="hidden mt-2  mr-4 sm:inline-block">
             <span></span>
           </div>
 
-          <a
+          <Link
             href={"/contact"}
-            className={`text-[#ffff] hidden   focus:ring-4 rounded-2xl font-medium lg:rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0  focus:outline-none  lg:flex flex-row justify-center items-center gap-2  cursor-pointer  `}
+            className={`text-black dark:text-[#ffff] hidden   focus:ring-4 rounded-2xl font-medium lg:rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0  focus:outline-none  lg:flex flex-row justify-center items-center gap-2  cursor-pointer  `}
           >
             <Calllogo
-              className={`fill-white hover:text-[#7910f2]   hover:fill-[#7910f2] h-10 w-10 lg:dark:border-[#7910f2] pb-2 ${
+              className={`dark:fill-white  fill-black hover:text-[#7910f2]   hover:fill-[#7910f2] h-9 w-9 lg:dark:border-[#7910f2]  ${
                 currentPath === "/contact"
                   ? "lg:text-[#7910f2]  lg:border-b-2 lg:border-tg-primary-color"
                   : ""
               }`}
             />
-          </a>
+          </Link>
+          <div className="flex justify-center items-center bg-transparent">
+            <ThemeSwitch />
+          </div>
           <button
             data-collapse-toggle="mobile-menu-2"
             type="button"
-            className="inline-flex items-center p-2 ml-2 text-sm  rounded-lg lg:hidden "
+            className="inline-flex items-center p-2 ml-2 text-sm  text-black  rounded-lg lg:hidden "
             aria-expanded={isOpen}
-            onClick={toggleMenu}
           >
             {isOpen ? (
-              <div className={`w-8 h-8 flex justify-center items-center `}>
+              <div className={`w-8 h-8 flex  justify-center items-center `}>
                 <Image
-                  className={`h-6 w-6 transform spin-once transition-transform duration-200 ease-out`} // Fast animation on close
+                  onClick={toggleMenu}
+                  className={`h-6 w-6 transform spin-once  transition-transform duration-200 ease-out`} // Fast animation on close
                   height={5}
                   width={5}
                   src={"/close.svg"}
                   alt={"Close Sidebar"}
                 />
+                \
               </div>
             ) : (
-              <Image
-                className="h-8 w-8  transition-transform duration-500 ease-in delay-200" // Slower animation with delay on open
-                height={45}
-                width={45}
-                src={"/menu.svg"}
-                alt={"Open Sidebar"}
-              />
+              <>
+                <div
+                  onClick={toggleMenu}
+                  className="h-8 w-8    transition-transform duration-500 ease-in delay-200"
+                >
+                  <Manu className="dark:fill-white fill-[#050505] dark:text-white  text-black" />
+                </div>
+              </>
             )}
           </button>
         </div>

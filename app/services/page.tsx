@@ -112,15 +112,15 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
 const services = () => {
   return (
     <>
-      <div className="mb-10 bg-[#101118]  p-8 flex flex-col justify-center items-center">
+      <div className="mb-10 bg-white dark:bg-black  p-8 flex flex-col justify-center items-center">
         <div className=" justify-center  flex flex-col items-center mx-auto p-6">
           <Services service={service} />
         </div>
-        <div className="mt-16 py-12  text-center">
+        <div className="mt-16 py-12 text-black dark:text-white text-center">
           <h2 className="text-3xl font-bold mb-6">
             {`     Let's Build Something Great Together`}
           </h2>
-          <p className="text-lg mb-8">
+          <p className="text-lg mb-8 text-black dark:text-white">
             Get in touch with us to start your next project and see how our
             expertise can benefit your business.
           </p>

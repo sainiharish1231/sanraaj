@@ -44,7 +44,10 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
 }
 const contact = () => {
   return (
-    <div title="  Contact Us " className="mb-10 sm:mb-20">
+    <div
+      title="  Contact Us "
+      className="mb-10 sm:mb-20 bg-white dark:bg-black text-black dark:text-white"
+    >
       <div className="flex  justify-center m-[30px]">
         <div className="mb-12 lg:mb-0">
           <h2 className="flex justify-center items-center ">Contact Us</h2>
