@@ -28,7 +28,7 @@ export default function Career({
 }: CareerProps) {
   return (
     <div className="mb-20  p-6  text-center">
-      <div className="flex   justify-center flex-col items-center">
+      <div className="flex ff  justify-center flex-col items-center">
         <h2 className="">
           Are you passionate to Learn and Grow{" "}
           <span className=" rotate-90 text-red-400">❓</span> Join us !
