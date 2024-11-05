@@ -1,0 +1,7 @@
+/* Default arrow styles */
+.slick-prev:before,
+.slick-next:before {
+  color: #9333ea; /* Default color for light mode */
+}
+
+/* Dark mode arrow styles */

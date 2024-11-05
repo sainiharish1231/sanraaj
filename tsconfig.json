@@ -26,8 +26,15 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "public/Logo.js",
-    "public/AnimatedLogo.js"
+    "app/api/[Blogid]/route.ts",
+    "lib/dbconnect/dbconnect.ts",
+    "app/components/ClientReviews/fake_data.js",
+    "app/api/(auth)/register/route.ts",
+    "app/api/auth/[...nextauth]/route.ts",
+    "app/Providers.js",
+    "app/components/SignUp.tsx",
+    "app/api/auth/[...nextauth]/authOptions.ts",
+    "database/db.js"
   ],
   "exclude": ["node_modules"]
 }

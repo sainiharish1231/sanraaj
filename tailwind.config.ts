@@ -1,5 +1,4 @@
 import type { Config } from "tailwindcss";
-const defaultTheme = require("tailwindcss/defaultTheme");
 
 const flowbite = require("flowbite-react/tailwind");
 const config: Config = {
@@ -10,10 +9,6 @@ const config: Config = {
     flowbite.content(),
   ],
   theme: {
-    screens: {
-      xs: "400px",
-      ...defaultTheme.screens, // Keep the default screens along with the 'xs' screen
-    },
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -31,17 +26,10 @@ const config: Config = {
         pextrabold: ["Poppins-ExtraBold", "sans-serif"],
         pblack: ["Poppins-Black", "sans-serif"],
       },
-      fontSize: {
-        "12vw": "12vw",
-      },
-      textShadow: {
-        custom: "0 20px 30px rgba(0, 0, 0, 0.3)",
-      },
     },
   },
 
   plugins: [flowbite.plugin()],
   darkMode: "selector",
 };
-
 export default config;
