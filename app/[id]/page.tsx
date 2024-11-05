@@ -104,7 +104,7 @@ const NewsDetailsPage = async ({ params }: any) => {
         {/*  <Ads /> */}
       </div>
 
-      <div className="order-2 lg:order-3 flex lg:w-[25%] lg:sticky top-[100px] container h-auto w-auto lg:h-[80vh] bg-[100%]  flex-col overflow-y-auto no-scrollbar">
+      <div className="order-2  xl: lg:order-3 flex lg:w-[25%] lg:sticky top-[100px] container h-auto w-auto lg:h-[80vh] bg-[100%]  flex-col overflow-y-auto no-scrollbar">
         {/*   <Ads /> */}
         <Breakingnews news={breakingNews} />
       </div>
