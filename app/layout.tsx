@@ -5,7 +5,7 @@ import { Metadata } from "next";
 import { useEffect, useState } from "react";
 import NewsService from "@/services/NewsService";
 
-export const defaultMetadata: Metadata = {
+export const metadata: Metadata = {
   title:
     "sanraj.timesnews | Breaking News, Latest Headlines, San Raj Software Solutions",
   description:
@@ -62,8 +62,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [dynamicMetadata, setDynamicMetadata] =
-    useState<Metadata>(defaultMetadata);
+  const [dynamicMetadata, setDynamicMetadata] = useState<Metadata>(metadata);
 
   useEffect(() => {
     async function fetchMetadata() {
