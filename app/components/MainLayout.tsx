@@ -27,7 +27,7 @@ export default async function MainLayout({
       </head>
       <body
         className={` dark:text-[#ffff]
-     text-[#232323] z-10 `}
+     text-[#232323] z-10  group-[]:`}
       >
         <AuthProvider>
           <Toaster />
