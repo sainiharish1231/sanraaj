@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   authors: [
     { name: "San Raj Software Solutions", url: "https://sanraj.vercel.app/" },
   ],
-  generator: "San Raj CMS",
+  generator: "San Raj ",
   keywords: [
     "news",
     "breaking news",

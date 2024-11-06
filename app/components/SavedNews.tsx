@@ -55,7 +55,7 @@ const SavedNews = () => {
               >
                 {item.title}
               </Link>
-              <p className=" font-psemibold  text-gray-300 text-sm mt-1">
+              <p className=" font-psemibold   text-sm mt-1">
                 #{item.keywords[0]}
               </p>
             </div>

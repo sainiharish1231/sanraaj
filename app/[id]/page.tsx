@@ -70,6 +70,13 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
 
   return {
     title: `${singleNews.title} | San Raj`,
+    description: `${singleNews.description} | San Raj`,
+    applicationName: "sanraj.timesnews",
+    authors: [
+      { name: "San Raj Software Solutions", url: "https://sanraj.vercel.app/" },
+    ],
+    generator: "San Raj ",
+    keywords: [`${singleNews.keywords} | San Raj`],
     openGraph: {
       images: [singleNews.image],
     },
