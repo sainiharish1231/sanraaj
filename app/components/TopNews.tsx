@@ -11,7 +11,7 @@ const TopNews = ({ news: topNews }: Props) => {
   return (
     <div
       style={{ scrollbarWidth: "none" }}
-      className="p-4 h-[600px] overflow-y-scroll"
+      className="p-4 max-h-[600px] overflow-y-scroll"
     >
       {topNews.map((item: any, i: any) => (
         /*  <div

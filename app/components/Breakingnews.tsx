@@ -17,7 +17,7 @@ const Breakingnews = ({ news }: Props) => {
   return (
     <div
       style={{ scrollbarWidth: "none" }}
-      className="grid grid-cols-1 gap-y-10 gap-x-6 lg:mb-20 sm:h-[1200px]  h-[800px] overflow-hidden overflow-y-scroll  items-start p-4"
+      className="grid grid-cols-1 gap-y-10 gap-x-6 lg:mb-20 sm:max-h-[1200px]  max-h-[800px] overflow-hidden overflow-y-scroll  items-start p-4"
     >
       <div className="relative flex flex-col   items-start">
         {BreakingNews.map((item: any, i) => (

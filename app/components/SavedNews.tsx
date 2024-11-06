@@ -36,7 +36,7 @@ const SavedNews = () => {
         return (
           <div
             key={item.id}
-            className="flex lg:flex-col xl:flex-row items-start mb-6 border-b pb-4"
+            className="flex max-w-3xl lg:flex-col xl:flex-row items-start mb-6 border-b pb-4"
           >
             <div className="w-32 h-32 lg:w-[230px] xl:w-32 xl:h-32  mr-3 rounded-md shadow-sm">
               <Image
@@ -54,6 +54,13 @@ const SavedNews = () => {
                 className="text-lg font-semibold font-psemibold leading-snug hover:underline"
               >
                 {item.title}
+              </Link>{" "}
+              <Link
+                style={{ scrollbarWidth: "none" }}
+                href={`/${item.slug_key}`}
+                className=" overflow-y-scroll text-sm font-semibold font-psemibold leading-snug hover:underline"
+              >
+                {item.description}
               </Link>
               <p className=" font-psemibold   text-sm mt-1">
                 #{item.keywords[0]}
