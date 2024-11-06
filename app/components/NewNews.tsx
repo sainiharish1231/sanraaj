@@ -22,7 +22,6 @@ const NewNews = ({ news, topNews, breakingNews }: NewNewsProps) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [savedNews, setSavedNews] = useState<any>([]);
 
-  const { data: session } = useSession();
   const { data: user }: any = useSession();
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
@@ -275,7 +274,7 @@ const NewNews = ({ news, topNews, breakingNews }: NewNewsProps) => {
           </div>
         </div>
 
-        <div className="order-3 lg:order-1   flex   lg:w-[25%]     lg:sticky top-[100px]  h-auto lg:h-[80vh] bg-[100%]  flex-col overflow-y-auto w-full   no-scrollbar">
+        <div className="order-3 lg:order-1  dc  flex   lg:w-[25%]     lg:sticky top-[100px]  h-auto lg:h-[80vh] bg-[100%]  flex-col overflow-y-auto w-full   no-scrollbar">
           <TopNews news={topNews} />
           {/*  <Ads /> */}
         </div>

@@ -6,7 +6,7 @@ import ThemeSwitch from "./ThemeSwitch";
 import Navbar from "./Navbar";
 import NewsService from "@/services/NewsService";
 
-export default async function MainLayout({
+export default function MainLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -14,20 +14,11 @@ export default async function MainLayout({
   const path = usePathname();
   const isAdmin = path.startsWith("/admin");
 
-  const singleNews = (await NewsService.getData("/").catch(() => null))?.data;
-
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <title>{singleNews.title}</title>
-        <meta name="description" content={singleNews.description} />
-        <meta name="keywords" content={singleNews.keywords} />
-
-        <meta property="og:description" content={singleNews.description} />
-      </head>
       <body
         className={` dark:text-[#ffff]
-     text-[#232323] z-10  group-[]:`}
+     text-[#232323] z-10 `}
       >
         <AuthProvider>
           <Toaster />

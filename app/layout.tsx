@@ -20,7 +20,7 @@ export default async function RootLayout({
       <head>
         {newsItem && (
           <>
-            <title>{` ${newsItem.title}sanraj.timesnews | Breaking News,news `}</title>
+            <title>{` ${newsItem.title} sanraj.timesnews  | Breaking News,news `}</title>
             <meta
               name="description"
               content={`${newsItem.description},Stay updated with the latest news, breaking headlines, and current events worldwide. `}
@@ -28,7 +28,6 @@ export default async function RootLayout({
             <meta name="keywords" content={newsItem.keywords.join(", ")} />
             <meta name="robots" content="index, follow" />
 
-            {/* Open Graph Meta Tags */}
             <meta property="og:type" content="article" />
             <meta property="og:title" content={newsItem.title} />
             <meta property="og:description" content={newsItem.description} />
