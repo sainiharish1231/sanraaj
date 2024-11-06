@@ -1,53 +1,68 @@
 import "./globals.css";
+import { Metadata } from "next";
 import MainLayout from "./components/MainLayout";
-import NewsService from "@/services/NewsService";
+export const metadata: Metadata = {
+  title:
+    "sanraj.timesnews | Breaking News, Latest Headlines, San Raj Software Solutions",
+  description:
+    "Stay updated with the latest news, breaking headlines, and current events worldwide. San Raj Software Solutions brings you comprehensive coverage on various topics, from technology to global affairs.",
+  applicationName: "sanraj.timesnews",
+  authors: [
+    { name: "San Raj Software Solutions", url: "https://sanraj.vercel.app/" },
+  ],
+  generator: "San Raj CMS",
+  keywords: [
+    "news",
+    "breaking news",
+    "headlines",
+    "technology",
+    "current events ,San, Raj, San Raj, Sanraaj, San Raj Software, San Raj Software Solutions, Software Solution",
+  ],
+  referrer: "origin",
+  themeColor: "#000000",
+  colorScheme: "dark",
 
-export default async function RootLayout({
+  publisher: "San Raj Software Solutions",
+  robots: {
+    index: true,
+    follow: true,
+  },
+  alternates: {
+    canonical: "https://sanraj.vercel.app/",
+  },
+  openGraph: {
+    type: "website",
+    url: "https://sanraj.vercel.app/",
+    title: "San Raj Times News",
+    description:
+      "Get the latest headlines and in-depth news coverage from around the world.",
+    siteName: "sanraj.timesnews",
+    images: [
+      {
+        url: "/favicon.ico",
+        width: 1200,
+        height: 630,
+        alt: "San Raj Times News",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@sri_software",
+    title: "San Raj Times News",
+    description: "Breaking news and updates from around the globe.",
+    images: "https://sanraj.vercel.app//favicon.ico",
+  },
+  icons: {
+    icon: "https://sanraj.vercel.app//favicon.ico",
+    apple: "https://sanraj.vercel.app//favicon.ico",
+  },
+};
+
+export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
-  const singleNews = (await NewsService.getData("/").catch(() => null))?.data;
-
-  // Randomly select a news item from the array
-  const randomIndex = singleNews
-    ? Math.floor(Math.random() * singleNews.length)
-    : 0;
-  const newsItem = singleNews ? singleNews[randomIndex] : null;
-
-  return (
-    <>
-      <html lang="en" suppressHydrationWarning>
-        <head>
-          {newsItem && (
-            <>
-              <title>{` ${newsItem.title} sanraj.timesnews  | Breaking News,news `}</title>
-              <meta
-                name="description"
-                content={`${newsItem.description},Stay updated with the latest news, breaking headlines, and current events worldwide. `}
-              />
-              <meta name="keywords" content={newsItem.keywords.join(", ")} />
-              <meta property="og:title" content={newsItem.title} />
-              <meta property="og:description" content={newsItem.description} />
-              <meta property="og:image" content={newsItem.image_url} />
-              <meta
-                property="og:url"
-                content={`https://yourwebsite.com/news/${newsItem.slug_key}`}
-              />
-              <meta name="twitter:card" content="summary_large_image" />
-              <meta name="twitter:title" content={newsItem.title} />
-              <meta name="twitter:description" content={newsItem.description} />
-              <meta name="twitter:image" content={newsItem.image_url} />
-            </>
-          )}
-        </head>
-        <body
-          className={` dark:text-[#ffff]
-     text-[#232323] z-10 `}
-        >
-          <MainLayout>{children}</MainLayout>
-        </body>
-      </html>
-    </>
-  );
+}>) {
+  return <MainLayout>{children}</MainLayout>;
 }
