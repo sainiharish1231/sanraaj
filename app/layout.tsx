@@ -1,11 +1,15 @@
+"use client";
 import "./globals.css";
-import { Metadata } from "next";
 import MainLayout from "./components/MainLayout";
-export const metadata: Metadata = {
+import { Metadata } from "next";
+import { useEffect, useState } from "react";
+import NewsService from "@/services/NewsService";
+
+export const defaultMetadata: Metadata = {
   title:
     "sanraj.timesnews | Breaking News, Latest Headlines, San Raj Software Solutions",
   description:
-    "Stay updated with the latest news, breaking headlines, and current events worldwide. San Raj Software Solutions brings you comprehensive coverage on various topics, from technology to global affairs.",
+    "Stay updated with the latest news, breaking headlines, and current events worldwide.",
   applicationName: "sanraj.timesnews",
   authors: [
     { name: "San Raj Software Solutions", url: "https://sanraj.vercel.app/" },
@@ -16,20 +20,14 @@ export const metadata: Metadata = {
     "breaking news",
     "headlines",
     "technology",
-    "current events ,San, Raj, San Raj, Sanraaj, San Raj Software, San Raj Software Solutions, Software Solution",
+    "current events",
   ],
   referrer: "origin",
   themeColor: "#000000",
   colorScheme: "dark",
-
   publisher: "San Raj Software Solutions",
-  robots: {
-    index: true,
-    follow: true,
-  },
-  alternates: {
-    canonical: "https://sanraj.vercel.app/",
-  },
+  robots: { index: true, follow: true },
+  alternates: { canonical: "https://sanraj.vercel.app/" },
   openGraph: {
     type: "website",
     url: "https://sanraj.vercel.app/",
@@ -61,8 +59,55 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
-  return <MainLayout>{children}</MainLayout>;
+}) {
+  const [dynamicMetadata, setDynamicMetadata] =
+    useState<Metadata>(defaultMetadata);
+
+  useEffect(() => {
+    async function fetchMetadata() {
+      try {
+        const singleNews = (await NewsService.getData("/").catch(() => null))
+          ?.data;
+
+        if (!singleNews) return;
+
+        setDynamicMetadata((prevMetadata) => ({
+          ...prevMetadata,
+          title: singleNews.title || prevMetadata.title,
+          description: singleNews.description || prevMetadata.description,
+          keywords: singleNews.keywords || prevMetadata.keywords,
+          openGraph: {
+            ...prevMetadata.openGraph,
+            title: singleNews.title || prevMetadata.openGraph?.title,
+            description:
+              singleNews.description || prevMetadata.openGraph?.description,
+            url: `https://sanraj.vercel.app/${singleNews.slug_key}`,
+            images: [
+              {
+                url: singleNews.image_url || "/favicon.ico",
+                width: 1200,
+                height: 630,
+                alt: singleNews.title || "San Raj Times News",
+              },
+            ],
+          },
+          twitter: {
+            ...prevMetadata.twitter,
+            title: singleNews.title || prevMetadata.twitter?.title,
+            description:
+              singleNews.description || prevMetadata.twitter?.description,
+            images: singleNews.image_url || prevMetadata.twitter?.images,
+          },
+        }));
+      } catch (error) {
+        console.error("Failed to fetch metadata:", error);
+      }
+    }
+
+    fetchMetadata();
+  }, []);
+
+  return <MainLayout metadata={dynamicMetadata}>{children}</MainLayout>;
 }
