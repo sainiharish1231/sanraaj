@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     "breaking news",
     "headlines",
     "technology",
-    "current events ,San, Raj, San Raj, Sanraaj, San Raj Software, San Raj Software Solutions, Software Solution",
+    "current events ,San, Raj, San Raj , Sanraaj, San Raj Software, San Raj Software Solutions, Software Solution",
   ],
   referrer: "origin",
   themeColor: "#000000",
