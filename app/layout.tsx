@@ -16,36 +16,38 @@ export default async function RootLayout({
   const newsItem = singleNews ? singleNews[randomIndex] : null;
 
   return (
-    <MainLayout>
-      <head>
-        {newsItem && (
-          <>
-            <title>{` ${newsItem.title} sanraj.timesnews  | Breaking News,news `}</title>
-            <meta
-              name="description"
-              content={`${newsItem.description},Stay updated with the latest news, breaking headlines, and current events worldwide. `}
-            />
-            <meta name="keywords" content={newsItem.keywords.join(", ")} />
-            <meta name="robots" content="index, follow" />
-
-            <meta property="og:type" content="article" />
-            <meta property="og:title" content={newsItem.title} />
-            <meta property="og:description" content={newsItem.description} />
-            <meta property="og:image" content={newsItem.image_url} />
-            <meta
-              property="og:url"
-              content={`https://yourwebsite.com/news/${newsItem.slug_key}`}
-            />
-
-            {/* Twitter Card Meta Tags */}
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content={newsItem.title} />
-            <meta name="twitter:description" content={newsItem.description} />
-            <meta name="twitter:image" content={newsItem.image_url} />
-          </>
-        )}
-      </head>
-      {children}
-    </MainLayout>
+    <>
+      <html lang="en" suppressHydrationWarning>
+        <head>
+          {newsItem && (
+            <>
+              <title>{` ${newsItem.title} sanraj.timesnews  | Breaking News,news `}</title>
+              <meta
+                name="description"
+                content={`${newsItem.description},Stay updated with the latest news, breaking headlines, and current events worldwide. `}
+              />
+              <meta name="keywords" content={newsItem.keywords.join(", ")} />
+              <meta property="og:title" content={newsItem.title} />
+              <meta property="og:description" content={newsItem.description} />
+              <meta property="og:image" content={newsItem.image_url} />
+              <meta
+                property="og:url"
+                content={`https://yourwebsite.com/news/${newsItem.slug_key}`}
+              />
+              <meta name="twitter:card" content="summary_large_image" />
+              <meta name="twitter:title" content={newsItem.title} />
+              <meta name="twitter:description" content={newsItem.description} />
+              <meta name="twitter:image" content={newsItem.image_url} />
+            </>
+          )}
+        </head>
+        <body
+          className={` dark:text-[#ffff]
+     text-[#232323] z-10 `}
+        >
+          <MainLayout>{children}</MainLayout>
+        </body>
+      </html>
+    </>
   );
 }

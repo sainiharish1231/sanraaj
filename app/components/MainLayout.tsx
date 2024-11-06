@@ -4,7 +4,6 @@ import { usePathname } from "next/navigation";
 import { AuthProvider, Providers } from "../providers";
 import ThemeSwitch from "./ThemeSwitch";
 import Navbar from "./Navbar";
-import NewsService from "@/services/NewsService";
 
 export default function MainLayout({
   children,
