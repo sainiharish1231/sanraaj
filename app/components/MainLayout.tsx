@@ -2,8 +2,8 @@
 import { Toaster } from "sonner";
 import { usePathname } from "next/navigation";
 import { AuthProvider, Providers } from "../providers";
-import ThemeSwitch from "./ThemeSwitch";
-import Navbar from "./Navbar";
+import TopNav from "./TopNav";
+import BottomNav from "./BottomNav";
 
 export default function MainLayout({
   children,
@@ -23,8 +23,8 @@ export default function MainLayout({
           <Toaster />
           <div className="flex justify-center  w-full items-center ">
             <Providers>
-              <ThemeSwitch />
-              {!isAdmin && <Navbar />}
+              <TopNav />
+              {!isAdmin && <BottomNav />}
 
               {children}
             </Providers>

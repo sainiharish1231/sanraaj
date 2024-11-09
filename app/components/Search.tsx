@@ -232,8 +232,8 @@ const SearchComponent: React.FC = () => {
 
       <form onSubmit={handleFormSubmit}>
         <div
-          className="sm:flex hidden  sm:w-[93%] lg:w-full  mr-40   top-0   sm:relative   absolute m-5 left-0 bg-white dark:bg-[#121212] 
-             sm:top-0 text-[black] dark:text-[#ffffff]  border border-[#9333ea]  sm:py-2 sm-px-2 py-4 px-4 rounded-2xl"
+          className="sm:flex hidden sm:w-[93%] lg:w-full my-5 mr-40 top-0 sm:relative absolute left-0 bg-white dark:bg-[#121212] 
+             sm:top-0 text-[black] dark:text-[#ffffff] border border-[#9333ea] sm:py-2 sm-px-2 py-4 px-4 rounded-2xl"
         >
           <input
             ref={searchInputRef}

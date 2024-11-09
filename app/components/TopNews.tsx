@@ -1,5 +1,5 @@
 import React from "react";
-import { NewsItem } from "../context/Context";
+import { NewsItem } from "../../types/news";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,10 +9,7 @@ interface Props {
 
 const TopNews = ({ news: topNews }: Props) => {
   return (
-    <div
-      style={{ scrollbarWidth: "none" }}
-      className="p-4 max-h-[600px] overflow-y-scroll"
-    >
+    <div className="lg:px-4 max-h-[600px] lg:mb-20">
       {topNews.map((item: any, i: any) => (
         /*  <div
           key={i}
@@ -58,9 +55,13 @@ const TopNews = ({ news: topNews }: Props) => {
             className="flex lg:ml-0 2xl:ml-3 ml-3  
          justify-between overflow-x-scroll flex-col  h-[150] w-full   max-h-[150px] "
           >
-            <Link className="!no-underline mb-4" href={`/${item.slug_key}`}>
+            <Link
+              className="!no-underline mb-4 overflow-auto"
+              href={`/${item.slug_key}`}
+              style={{ scrollbarWidth: "none" }}
+            >
               <div className="transition  duration-150 w-full text-inherit ease-in-out">
-                <h2 className="text-lg font-normal  mb-2  text-justify font-psemibold  whitespace-pre-wrap hover:underline overflow-wrap word-break  ">
+                <h2 className="hover:underline mb-2 text-lg">
                   {item.title.slice(0, 1).toUpperCase()}
                   {item.title.slice(1, item.length)}
                 </h2>

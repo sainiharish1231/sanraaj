@@ -1,34 +1,34 @@
-// "use client"
 import React from "react";
 import Explorer from "../components/Exploer/Explorer";
 
 import Ads from "../components/Ads/Ads";
 import Breakingnews from "../components/Breakingnews";
 
-const explorer = async () => {
-  const getfeedback = async () => {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_HOST_URL}/feedback`,
-        {
-          cache: "no-store",
-          headers: {
-            Accept: "application/json",
-          },
-        }
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch data");
+const getfeedback = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_HOST_URL}/feedback`,
+      {
+        cache: "no-store",
+        headers: {
+          Accept: "application/json",
+        },
       }
-
-      const responseData = await response.json();
-      return responseData.data || null; // Return the first item of the array
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      return null;
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch data");
     }
-  };
-  const feedback = await getfeedback();
+
+    const responseData = await response.json();
+    return responseData.data || null; // Return the first item of the array
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return null;
+  }
+};
+
+const ExplorerPage = async () => {
+  // const feedback = await getfeedback();
 
   return (
     <div className="sm:mt-[60px] mt-[30px] mb-20  flex  flex-col lg:flex-row h-full w-full lg:items-start  sm:items-center justify-center   ">
@@ -48,4 +48,4 @@ const explorer = async () => {
   );
 };
 
-export default explorer;
+export default ExplorerPage;

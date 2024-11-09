@@ -174,28 +174,28 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
 
   return (
     <>
-      <div className="flex  flex-col justify-between">
-        <Image
-          className="w-full  h-[250px] sm:h-[300px] rounded-md"
-          src={item.image_url}
-          width={440}
-          height={100}
-          alt={"Blog post"}
-        />
+      <div className="flex flex-col justify-between">
+        <h1 className="mb-2 text-xl capitalize pt-4">{item.title}</h1>
 
-        <p className="font-semibold text-3xl  text-justify px-3 whitespace-pre-wrap border-b my-2">
-          {item.title.slice(0, 1).toUpperCase()}
-          {item.title.slice(1, item.length)}
-        </p>
+        <div className="w-full mb-4">
+          <Image
+            className="w-full h-[250px] sm:h-[300px] rounded-md"
+            src={item.image_url}
+            width={440}
+            height={100}
+            alt={"Blog post"}
+          />
+        </div>
+
         <div
           style={{ scrollbarWidth: "none" }}
-          className="transition font-psemibold   !text-lg  leading-[1.8]  text-justify px-3 whitespace-pre-wrap duration-150 ease-in-out text-[rgba(var(--color-typo-default), var(--tw-text-opacity))] box-bordermb-6   whitespace-pre-wrap max-h-[700px] overflow-x-scroll"
+          className="transition font-psemibold !text-lg leading-[1.8] text-justify whitespace-pre-wrap duration-150 ease-in-out text-[rgba(var(--color-typo-default), var(--tw-text-opacity))] box-bordermb-6   whitespace-pre-wrap max-h-[700px] overflow-x-scroll"
           dangerouslySetInnerHTML={{
             __html: item.article,
           }}
         ></div>
 
-        <div className="flex justify-start mb-4  p-2 border-t">
+        <div className="flex justify-start mb-4 border-t">
           <div onClick={Isopen} className="flex mt-1 pt-2 pl-5length">
             <div className="flex pr-2 text-xl">
               <svg
@@ -229,7 +229,7 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
           </div>
 
           <div className=" relative flex justify-end w-full mt-1 pt-2 pr-5 ">
-            <h1
+            <div
               onClick={() => {
                 setShareOption((prev) => !prev);
               }}
@@ -252,7 +252,7 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
                   d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
                 />
               </svg>
-            </h1>
+            </div>
             {shareOption && (
               <div className="bg-white py-2 px-1 flex items-center rounded-lg gap-2  absolute   md:-mt-14  -mt-3 md:-mr-12  mr-10">
                 <FacebookShareButton url={currentUrl}>

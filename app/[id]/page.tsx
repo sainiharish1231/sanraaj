@@ -6,59 +6,7 @@ import TopNews from "@/app/components/TopNews";
 import Custom404 from "@/app/not-found";
 import NewsService from "@/services/NewsService";
 import { Metadata } from "next";
-
-async function fetchCommentData(id: string) {
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_HOST_URL}/comment/${id}`,
-      {
-        cache: "no-store",
-        headers: {
-          Accept: "application/json",
-        },
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch data");
-    }
-    const responseData = await response.json();
-    if (!responseData.data) {
-      console.log("Response does not contain 'data'. Full response:");
-    }
-
-    return responseData.data || null; // Return the data or null if it's not present
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return null;
-  }
-}
-async function fetchLikeData(id: string) {
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_HOST_URL}/like/${id}`,
-      {
-        cache: "no-store",
-        headers: {
-          Accept: "application/json",
-        },
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch data");
-    }
-    const responseData = await response.json();
-    if (!responseData) {
-      console.log("Response does not contain 'data'. Full response:");
-    }
-
-    return responseData.data || null; // Return the data or null if it's not present
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return null;
-  }
-}
+import { fetchCommentData, fetchLikeData } from "./helpers";
 
 // Generate metadata for the blog page
 export async function generateMetadata({ params }: any): Promise<Metadata> {
@@ -69,21 +17,24 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
   if (!singleNews) return {};
 
   return {
-    title: `${singleNews.title} | San Raj`,
-    description: `${singleNews.description} | San Raj`,
-    applicationName: "sanraj.timesnews",
+    title: `${singleNews.title} | Times News`,
+    description: `${singleNews.description} | Times News`,
+    applicationName: "timesnews.sanraj",
     authors: [
-      { name: "San Raj Software Solutions", url: "https://sanraj.vercel.app/" },
+      {
+        name: "Times News | San Raj Software Solutions",
+        url: "https://sanraj.vercel.app/",
+      },
     ],
-    generator: "San Raj ",
-    keywords: [`${singleNews.keywords} | San Raj`],
+    generator: "Times News",
+    keywords: [`${singleNews.keywords} | Times News`],
     openGraph: {
       images: [singleNews.image],
     },
   };
 }
 
-// Main blog page component
+// Main news page component
 const NewsDetailsPage = async ({ params }: any) => {
   const breakingNews =
     (await NewsService.getBreakingNews().catch(() => {}))?.data || [];
@@ -102,18 +53,26 @@ const NewsDetailsPage = async ({ params }: any) => {
   const like = await fetchLikeData(singleNews.id);
 
   return (
-    <div className="mt-[70px] mb-20  flex  flex-col lg:flex-row h-full w-full lg:items-start  sm:items-center justify-center   ">
-      <div className="order-1 lg:order-2 sm:w-full flex lg:w-[50%] container h-auto w-auto bg-[100%] flex-col">
-        <FullNews item={singleNews} comments={comment} userLikedeta={like} />
-      </div>
-      <div className="order-3 lg:order-1 flex lg:w-[25%] lg:sticky top-[100px] container h-auto w-auto lg:h-[80vh] bg-[100%]  flex-col overflow-y-auto no-scrollbar">
-        <TopNews news={topNews} />
+    <div className="mt-[70px] mb-20  flex  flex-col lg:flex-row h-full w-full lg:items-start  sm:items-center justify-center px-4 md:px-6 lg:px-4">
+      <div
+        style={{ scrollbarWidth: "none" }}
+        className="order-2 lg:order-1 flex lg:w-[25%] lg:sticky top-0 lg:max-h-[calc(100vh-110px)] overflow-y-auto flex-col w-full no-scrollbar pt-4"
+      >
         {/*  <Ads /> */}
+        <h2 className="text-sm lg:px-4">Breaking News</h2>
+        <Breakingnews news={breakingNews} />
       </div>
 
-      <div className="order-2  xl: lg:order-3 flex lg:w-[25%] lg:sticky top-[100px] container h-auto w-auto lg:h-[80vh] bg-[100%]  flex-col overflow-y-auto no-scrollbar">
-        {/*   <Ads /> */}
-        <Breakingnews news={breakingNews} />
+      <div className="order-1 lg:order-2 flex sm:w-full lg:w-[50%] flex-col lg:px-4">
+        <FullNews item={singleNews} comments={comment} userLikedeta={like} />
+      </div>
+      <div
+        style={{ scrollbarWidth: "none" }}
+        className="order-3 lg:order-3 dc flex lg:w-[25%] lg:sticky top-0 lg:max-h-[calc(100vh-110px)] overflow-y-auto flex-col w-full no-scrollbar pt-4"
+      >
+        <h2 className="text-sm lg:px-4">Top News</h2>
+        <TopNews news={topNews} />
+        {/*  <Ads /> */}
       </div>
     </div>
   );

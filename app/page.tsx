@@ -11,7 +11,7 @@ const Home = async () => {
 
   if (!newNews) return redirect("/404");
   return (
-    <div className="w-full flex mt-[80px] flex-col justify-center items-center mb-20">
+    <div className="w-full mt-[60px] lg:h-[calc(100vh-145px)] lg:overflow-hidden mb-20">
       <NewNews news={newNews} topNews={topNews} breakingNews={breakingNews} />
     </div>
   );

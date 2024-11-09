@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { NewsItem } from "../context/Context";
+import { NewsItem } from "../../types/news";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -15,10 +15,7 @@ const Breakingnews = ({ news }: Props) => {
     setReadMoreId((prev) => (prev === id ? null : id));
   };
   return (
-    <div
-      style={{ scrollbarWidth: "none" }}
-      className="grid grid-cols-1 gap-y-10 gap-x-6 lg:mb-20 sm:max-h-[1200px]  max-h-[800px] overflow-hidden overflow-y-scroll  items-start p-4"
-    >
+    <div className="grid grid-cols-1 gap-y-10 gap-x-6 lg:mb-20 items-start lg:px-4">
       <div className="relative flex flex-col   items-start">
         {BreakingNews.map((item: any, i) => (
           <div
@@ -39,7 +36,7 @@ const Breakingnews = ({ news }: Props) => {
 
             <Link className="!no-underline mb-4" href={`/${item.slug_key}`}>
               <div className="transition duration-150 w-full text-inherit ease-in-out">
-                <h2 className="mb-1 font-normal text-lg   font-psemibold text-justify whitespace-pre-wrap hover:underline overflow-wrap word-break  ">
+                <h2 className="hover:underline mb-2 text-lg">
                   {item.title.slice(0, 1).toUpperCase()}
                   {item.title.slice(1, item.length)}
                 </h2>
@@ -49,7 +46,9 @@ const Breakingnews = ({ news }: Props) => {
               {readMoreId === item.id ? (
                 <>
                   <div className="prose prose-slate prose-sm ">
-                    <div>{item.description}</div>
+                    <div className="font-psemibold text-[rgba(var(--color-typo-default), transition var(--tw-text-opacity))]">
+                      {item.description}
+                    </div>
                     <button
                       onClick={() => toggleEdit(item.id)}
                       className="group inline-flex items-center h-9 mb-10 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 mt-6 mr-2 "

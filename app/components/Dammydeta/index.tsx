@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "../../public/ Placeholder.module.css";
 
 const SkeletonPlaceholder: React.FC = () => (
   <>

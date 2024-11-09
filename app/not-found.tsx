@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import * as React from "react";
 
 const Custom404 = () => {
@@ -21,8 +22,10 @@ const Custom404 = () => {
           className=" mt-[50px] sm:max-w-[1000px] 
         text-4xl sm:text-9xl   text[#ffffff]  "
         >
-          Page NotFound
+          Page Not Found
         </h1>
+        <p>Sorry! The page you are looking for is either not available right now or has been removed.</p>
+        <p><Link href="/">Go to Home</Link></p>
       </div>
     </>
   );

@@ -7,11 +7,7 @@ const LoginPage = async () => {
   const session = await getServerSession();
   if (session) redirect("profile");
 
-  return (
-    <div>
-      <Login />
-    </div>
-  );
+  return <Login />;
 };
 
 export default LoginPage;
