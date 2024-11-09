@@ -189,7 +189,7 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
         </p>
         <div
           style={{ scrollbarWidth: "none" }}
-          className="transition font-psemibold    text-lg leading-[1.8]  text-justify px-3 whitespace-pre-wrap duration-150 ease-in-out text-[rgba(var(--color-typo-default), var(--tw-text-opacity))] box-bordermb-6  text-lg text-justify whitespace-pre-wrap max-h-[700px] overflow-x-scroll"
+          className="transition font-psemibold   !text-lg  leading-[1.8]  text-justify px-3 whitespace-pre-wrap duration-150 ease-in-out text-[rgba(var(--color-typo-default), var(--tw-text-opacity))] box-bordermb-6   whitespace-pre-wrap max-h-[700px] overflow-x-scroll"
           dangerouslySetInnerHTML={{
             __html: item.article,
           }}

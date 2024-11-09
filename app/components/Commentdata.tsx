@@ -127,8 +127,8 @@ const Commentsdata = ({
           </button>
         </span>
         <input
-          type="search"
-          className="w-full py-2 pl-4 pr-10 text-sm border appearance-none rounded-tg dark:bg-[#ffffff] focus:outline-none focus:shadow-outline-blue"
+          type="text"
+          className="w-full py-2 pl-4 pr-10 text-sm border  text-black appearance-none rounded-tg dark:bg-[#ffffff] focus:outline-none focus:shadow-outline-blue"
           style={{ borderRadius: 25 }}
           placeholder="Post a comment..."
           value={newComment}

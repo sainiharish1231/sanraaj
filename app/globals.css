@@ -43,6 +43,11 @@ body {
   --tg-cyan: #3a47f7ce;
   --tg-black: #080914dc;
 }
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
 .service-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease,
     background-color 0.3s ease;

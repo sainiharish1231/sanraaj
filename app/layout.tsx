@@ -19,8 +19,6 @@ export const metadata: Metadata = {
     "current events ,San, Raj, San Raj , Sanraaj, San Raj Software, San Raj Software Solutions, Software Solution",
   ],
   referrer: "origin",
-  themeColor: "#000000",
-  colorScheme: "dark",
 
   publisher: "San Raj Software Solutions",
   robots: {
