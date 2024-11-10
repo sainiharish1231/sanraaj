@@ -47,7 +47,6 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    card: "summary_large_image",
     site: "@sri_software",
     title: "San Raj Times News",
     description: "Breaking news and updates from around the globe.",

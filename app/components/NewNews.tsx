@@ -160,7 +160,7 @@ const NewNews = ({ news, topNews, breakingNews }: NewNewsProps) => {
           )}
         </div>
       </div>
-      <div className="flex flex-col lg:flex-row lg:items-start sm:items-center justify-center w-full h-full lg:max-h-[calc(100vh-110px)] overflow-y-auto px-4 md:px-6 lg:px-2">
+      <div className="flex flex-col lg:flex-row lg:items-start sm:items-center justify-center w-full h-full lg:max-h-[calc(100vh-110px)] overflow-y-auto px-4 md:px-6  no-scrollbar lg:px-2">
         <div
           style={{ scrollbarWidth: "none" }}
           className="order-2 lg:order-1 flex lg:w-[25%] lg:sticky top-0 lg:max-h-[calc(100vh-110px)] overflow-y-auto flex-col w-full no-scrollbar pt-4"
