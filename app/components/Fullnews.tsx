@@ -212,19 +212,18 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
         <h1 className="mb-2 text-xl capitalize pt-4">{item.title}</h1>
         <h2 className="hidden">{item.description}</h2>
         <p className="hidden">{item.description}</p>
-        <div className="w-full mb-4">
+        <div className="w-full mb-4 relative aspect-[1.67]">
           <Image
-            className="w-full h-[250px] sm:h-[300px] rounded-md"
+            className="rounded-md object-cover"
             src={item.image_url}
-            width={440}
-            height={100}
-            alt={"Blog post"}
+            fill
+            alt={"Times news image for " + item.title}
           />
         </div>
 
         <div
           style={{ scrollbarWidth: "none" }}
-          className="transition    sleading-[1.8]   duration-150 ease-in-out text-[rgba(var(--color-typo-default), var(--tw-text-opacity))]   max-h-[700px] overflow-x-scroll"
+          className="transition    sleading-[1.8]   duration-150 ease-in-out text-[rgba(var(--color-typo-default), var(--tw-text-opacity))] "
           dangerouslySetInnerHTML={{
             __html: item.article,
           }}
@@ -270,7 +269,7 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
               }}
               className="transition  ease-out duration-300 
                       h-8 w-8  flex   justify-center items-center text-center   rounded-full
-                    text-[#ffff] dark:text-[black] bg-black dark:bg-[#ffff]  "
+                    text-[#ffff] dark:text-[black] bg-black dark:bg-[#ffff]"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

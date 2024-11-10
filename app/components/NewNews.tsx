@@ -177,13 +177,14 @@ const NewNews = ({ news, topNews, breakingNews }: NewNewsProps) => {
             return (
               <div key={index} className="rounded-lg">
                 <div className="relative overflow-hidden">
-                  <Image
-                    height={400}
-                    width={400}
-                    className="object-cover rounded-lg w-full h-[250px] sm:h-[300px] transform transition-transform duration-300 "
-                    src={item.image_url}
-                    alt="Product"
-                  />
+                  <div className="w-full mb-4 relative aspect-[1.67]">
+                    <Image
+                      className="rounded-md object-cover"
+                      fill
+                      src={item.image_url}
+                      alt={"Times news image for " + item.title}
+                    />
+                  </div>
                   <div className="mt-2">
                     <Link
                       className="!no-underline mb-4"

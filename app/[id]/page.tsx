@@ -54,14 +54,6 @@ const NewsDetailsPage = async ({ params }: any) => {
 
   const like = await fetchLikeData(singleNews.id);
 
-  const jsonLd = {
-    "@context": "https://sanraj.vercel.app/",
-    "@type": "Times News",
-    name: singleNews.title,
-    image: singleNews.image_url,
-    description: singleNews.description,
-  };
-
   return (
     <>
       <div className="mt-[70px] mb-20  flex  flex-col lg:flex-row h-full w-full lg:items-start  sm:items-center justify-center px-4 md:px-6 lg:px-4">
