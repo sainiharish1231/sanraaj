@@ -51,6 +51,7 @@ export const metadata: Metadata = {
     site: "@sri_software",
     title: "San Raj Times News",
     description: "Breaking news and updates from around the globe.",
+    images: "https://sanraj.vercel.app/favicon.ico",
   },
   icons: {
     icon: "https://sanraj.vercel.app/favicon.ico",
