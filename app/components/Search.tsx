@@ -284,7 +284,7 @@ const SearchComponent: React.FC = () => {
             onClick={(e) => e.stopPropagation()} // Prevent closing on clicking inside
           >
             <div className="py-1">
-              {searchResults.map((result, index) => (
+              {searchResults.map(({ result, index }: any) => (
                 <Link
                   key={index}
                   href={`/${result.slug_key}`}
