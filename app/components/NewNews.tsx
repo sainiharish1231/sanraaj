@@ -135,13 +135,13 @@ const NewNews = ({ news, topNews, breakingNews }: NewNewsProps) => {
           </div>
           <div
             ref={scrollContainerRef}
-            className="flex justify-start items-center ml-3 w-full overflow-x-auto space-x-2"
+            className="flex justify-start items-center ml-3 mr-3 w-full overflow-x-auto space-x-2"
             style={{ scrollbarWidth: "none" }}
           >
             {categories.map((category) => (
               <button
                 key={category}
-                className={`flex py-1 px-3 rounded-xl ${
+                className={`flex py-1 px-3  whitespace-nowrap rounded-xl ${
                   selectedcategory === category
                     ? "bg-[#9333ea] text-white"
                     : "bg-black dark:bg-[#ffffff] text-white dark:text-black border-[#9333ea]"
