@@ -86,37 +86,6 @@ const NewsDetailsPage = async ({ params }: any) => {
           {/*  <Ads /> */}
         </div>
       </div>
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "NewsArticle",
-          mainEntityOfPage: {
-            "@type": "WebPage",
-            "@id": singleNews.id,
-          },
-          headline: singleNews.title,
-          image: singleNews.image_url,
-          author: {
-            "@type": "Organization",
-            name: "Times News",
-            url: "https://sanraj.vercel.app/",
-          },
-          publisher: {
-            "@type": "Organization",
-            name: "San Raj Software Solutions",
-            logo: {
-              "@type": "ImageObject",
-              url: "https://lh5.googleusercontent.com/p/AF1QipMP_m5WTcBaKo14c_5F4gCwFfb3Rojp-0W0wdcm=w159-h160-k-no",
-            },
-          },
-          datePublished: singleNews.createdAt,
-          dateModified: singleNews.updatedAt,
-        })}
-      </script>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </>
   );
 };
