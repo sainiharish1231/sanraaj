@@ -3,13 +3,18 @@ import NewsService from "@/services/NewsService";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect, useRef } from "react";
+interface SearchResult {
+  slug_key: string;
+  image_url: string;
+  title: string;
+}
 
 const SearchComponent: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
   const [searchbox, setSearchbox] = useState(false);
-  const [searchResults, setSearchResults] = useState<string[]>([]);
+  const [searchResults, setSearchResults] = useState<any[]>([]);
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
 
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -284,31 +289,33 @@ const SearchComponent: React.FC = () => {
             onClick={(e) => e.stopPropagation()} // Prevent closing on clicking inside
           >
             <div className="py-1">
-              {searchResults.map(({ result }: any, index) => (
-                <Link
-                  key={index}
-                  href={`/${result.slug_key}`}
-                  onClick={() => {
-                    setShowSuggestions(false);
-                    setSearchTerm("");
-                  }}
-                >
-                  <div className="flex p-4 gap-x-10">
-                    <Image
-                      className="h-20 object-cover w-20"
-                      height={800}
-                      width={800}
-                      src={result.image_url}
-                      alt=""
-                    />
-                    <p
-                      style={{ scrollbarWidth: "none" }}
-                      className="break-all h-20 overflow-y-auto justify-start cursor-pointer"
-                    >
-                      {result.title}
-                    </p>
-                  </div>
-                </Link>
+              {searchResults.map((result, index) => (
+                <>
+                  <Link
+                    key={index}
+                    href={`/${result.slug_key}`}
+                    onClick={() => {
+                      setShowSuggestions(false);
+                      setSearchTerm("");
+                    }}
+                  >
+                    <div className="flex p-4 gap-x-10">
+                      <Image
+                        className="h-20 object-cover w-20"
+                        height={800}
+                        width={800}
+                        src={result.image_url}
+                        alt=""
+                      />
+                      <p
+                        style={{ scrollbarWidth: "none" }}
+                        className="break-all h-20 overflow-y-auto justify-start cursor-pointer"
+                      >
+                        {result.title}
+                      </p>
+                    </div>
+                  </Link>
+                </>
               ))}
             </div>
             {searchHistory.length > 0 && (
