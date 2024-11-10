@@ -44,11 +44,11 @@ const SignUp: React.FC = () => {
         setError("Registration successful.");
         const form = e.target as HTMLFormElement;
         form.reset();
-        customToast("Registration successful",'success');
+        customToast("Registration successful", "success");
         router.push("/login");
       } else {
         setError("User registration failed.");
-        customToast("User registration failed.",'error');
+        customToast("User registration failed.", "error");
       }
     } catch (error) {
       setError("An error occurred during registration.");
@@ -247,7 +247,7 @@ const SignUp: React.FC = () => {
 
             <div className="my-4 flex items-center justify-end space-x-4">
               <div className="my-4 flex items-center justify-end space-x-4">
-                <div className="flex justify-center m-10">
+                <div className="flex justify-center ">
                   <button
                     type="submit"
                     className="flex items-center justify-center full-height btn relative overflow-hidden h-[50px] w-[300px] font-medium transition-all bg-indigo-100 dark:bg-[#ffffff] rounded-xl hover:bg-white group py-1.5 px-2.5"

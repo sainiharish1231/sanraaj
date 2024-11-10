@@ -30,7 +30,7 @@ const Profile = () => {
 
   return (
     <div className="w-full mt-10 flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row">
-      <main className="w-full flex justify-center min-h-screen">
+      <main className="w-full flex justify-center  min-h-screen">
         <div className="p-2 md:p-4">
           <div className="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg">
             <h2 className="sm:pl-6 flex justify-center text-2xl font-bold sm:text-xl">

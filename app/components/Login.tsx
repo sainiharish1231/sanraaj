@@ -25,11 +25,11 @@ const Login: any = () => {
 
       if (!response || response.error) {
         setError("Invalid Username or Password .");
-        customToast("Invalid Username or Password",'error')
+        customToast("Invalid Username or Password", "error");
         return;
       }
-      if(!response.error){
-        customToast("Login successful",'success')
+      if (!response.error) {
+        customToast("Login successful", "success");
       }
       router.replace("profile");
     } catch (error) {
@@ -145,7 +145,7 @@ const Login: any = () => {
               </div>
             )}
             <div className="my-4 flex items-center justify-end space-x-4">
-              <div className="flex justify-center m-10">
+              <div className="flex justify-center">
                 <button
                   type="submit"
                   className="flex items-center justify-center full-height btn relative overflow-hidden h-[50px] w-[300px] font-medium transition-all bg-indigo-100 dark:bg-[#ffffff] rounded-xl hover:bg-white group py-1.5 px-2.5"
