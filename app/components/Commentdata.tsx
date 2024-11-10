@@ -5,6 +5,7 @@ import { useState, useCallback } from "react";
 import Alert from "..//components/Alert/Alert";
 import { customToast } from "./CustomToast";
 import moment from "moment";
+import Link from "next/link";
 
 const Commentsdata = ({
   comments,
@@ -88,7 +89,10 @@ const Commentsdata = ({
         onSubmit={handleSubmitComment}
       >
         <div className="w-10 h-10 object-cover rounded-full shadow mr-2 cursor-pointer">
-          <div className="mr-5 flex items-center justify-center rounded-full h-[40px] w-[40px] bg-black dark:bg-[#ffff]">
+          <Link
+            href={"/profile"}
+            className="mr-5 flex items-center justify-center rounded-full h-[40px] w-[40px] bg-black dark:bg-[#ffff]"
+          >
             <div className="text-3xl dark:text-black text-[#ffff]">
               {(userImage || userName) && (
                 <div>
@@ -106,7 +110,7 @@ const Commentsdata = ({
                 </div>
               )}
             </div>
-          </div>
+          </Link>
         </div>
         <span className="absolute inset-y-0 right-0 flex s-center pr-6">
           <button

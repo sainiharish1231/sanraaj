@@ -29,7 +29,10 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
     generator: "Times News",
     keywords: [`${singleNews.keywords} | Times News`],
     openGraph: {
-      images: [singleNews.image],
+      images: [singleNews.image_url],
+    },
+    icons: {
+      icon: singleNews.image_url, // Setting the favicon as singleNews.image
     },
   };
 }

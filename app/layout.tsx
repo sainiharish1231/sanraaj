@@ -53,10 +53,6 @@ export const metadata: Metadata = {
     description: "Breaking news and updates from around the globe.",
     images: "https://sanraj.vercel.app/favicon.ico",
   },
-  icons: {
-    icon: "https://sanraj.vercel.app/favicon.ico",
-    apple: "https://sanraj.vercel.app/favicon.ico",
-  },
 };
 
 type LayoutProps = Readonly<{

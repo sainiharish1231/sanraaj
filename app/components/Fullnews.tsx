@@ -28,7 +28,7 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
   const [shareOption, setShareOption] = useState(false);
   const bgColors = ["bg-purple-500", "bg-red-500", "bg-blue-500"];
   const path = usePathname();
-  const currentUrl = `http://localhost:3000${path}`;
+  const currentUrl = ` ${process.env.NEXTAUTH_URL}/${path}`;
 
   const { data: session } = useSession();
   const { data: user }: any = useSession();
@@ -176,7 +176,8 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
     <>
       <div className="flex flex-col justify-between">
         <h1 className="mb-2 text-xl capitalize pt-4">{item.title}</h1>
-
+        <h2 className="hidden">{item.description}</h2>
+        <p className="hidden">{item.description}</p>
         <div className="w-full mb-4">
           <Image
             className="w-full h-[250px] sm:h-[300px] rounded-md"
@@ -189,7 +190,7 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
 
         <div
           style={{ scrollbarWidth: "none" }}
-          className="transition font-psemibold !text-lg leading-[1.8] text-justify whitespace-pre-wrap duration-150 ease-in-out text-[rgba(var(--color-typo-default), var(--tw-text-opacity))] box-bordermb-6   whitespace-pre-wrap max-h-[700px] overflow-x-scroll"
+          className="transition    sleading-[1.8]   duration-150 ease-in-out text-[rgba(var(--color-typo-default), var(--tw-text-opacity))]   max-h-[700px] overflow-x-scroll"
           dangerouslySetInnerHTML={{
             __html: item.article,
           }}
