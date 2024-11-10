@@ -73,6 +73,24 @@ const SearchComponent: React.FC = () => {
       setShowSuggestions(true);
     }
   };
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Close suggestions on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
+        setShowSuggestions(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <>
@@ -275,28 +293,32 @@ const SearchComponent: React.FC = () => {
       </form>
 
       {showSuggestions && (
-        <div className="fixed  hidden sm:flex h-full flex-col mt-[60px]  items-center top-0 left-0  right-0 w-full ">
-          <div className="max-w-[750px]  dark:bg-[#121212] p-4 text-[black] dark:text-[#ffffff] bg-[#ffffff] container   border border-[#9333ea]  sm:py-2 sm-px-2 py-4 px-4 rounded-2xl">
+        <div className="fixed hidden sm:flex h-full flex-col mt-[60px] items-center top-0 left-0 right-0 w-full">
+          <div
+            ref={containerRef}
+            className="max-w-[750px] dark:bg-[#121212] p-4 text-[black] dark:text-[#ffffff] bg-[#ffffff] container border border-[#9333ea] sm:py-2 sm-px-2 py-4 px-4 rounded-2xl"
+          >
             <div className="py-1">
               {searchResults.map((result: any, index) => (
                 <Link
+                  key={index}
                   href={`/${result.slug_key}`}
                   onClick={() => {
-                    setShowSuggestions(false), setSearchTerm("");
+                    setShowSuggestions(false);
+                    setSearchTerm("");
                   }}
                 >
-                  <div className=" flex p-4  gap-x-10 ">
+                  <div className="flex p-4 gap-x-10">
                     <Image
-                      className="h-20  object-cover w-20"
+                      className="h-20 object-cover w-20"
                       height={800}
                       width={800}
                       src={`${result.image_url}`}
-                      alt={""}
+                      alt=""
                     />
-
                     <p
                       style={{ scrollbarWidth: "none" }}
-                      className=" break-all  h-20  overflow-y-auto justify-start cursor-pointer"
+                      className="break-all h-20 overflow-y-auto justify-start cursor-pointer"
                     >
                       {result.title}
                     </p>
@@ -304,47 +326,7 @@ const SearchComponent: React.FC = () => {
                 </Link>
               ))}
             </div>
-            {searchHistory.length > 0 && (
-              <></>
-              /*  <div className="px-3 py-1 flex justify-between items-center text-sm text-gray-400">
-                Recent searches:
-                <button
-                  className="text-xs text-gray-500 hover:text-gray-300"
-                  onClick={handleClearHistory}
-                >
-                  Clear
-                </button>
-              </div> */
-            )}
-            {/*  <ul className="py-1">
-              {searchHistory.map((item, index) => (
-                <li
-                  key={index}
-                  className="px-3 py-2 cursor-pointer hover:bg-gray-600 flex justify-between items-center"
-                >
-                  <span
-                    onClick={() => {
-                      setSearchTerm(item);
-                      setShowSuggestions(true);
-                      updateSearchHistory(item); // Remove from history
-                    }}
-                    className="w-full h-full"
-                  >
-                    {item}
-                  </span>
-                  <button
-                    className="text-xs text-gray-500 hover:text-gray-300 ml-2"
-                    onClick={() => {
-                      setSearchHistory((prevHistory) =>
-                        prevHistory.filter((_, i) => i !== index)
-                      );
-                    }}
-                  >
-                    Remove
-                  </button>
-                </li>
-              ))}
-            </ul> */}
+            {/* Optional search history component */}
           </div>
         </div>
       )}

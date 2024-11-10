@@ -38,9 +38,9 @@ const SavedNews = () => {
             key={item.id}
             className="flex max-w-3xl lg:flex-col xl:flex-row items-start mb-6 border-b pb-4"
           >
-            <div className="w-32 h-32 lg:w-[230px] xl:w-32 xl:h-32  mr-3 rounded-md shadow-sm">
+            <div className="w-32 h-32 overflow-hidden lg:w-[230px] xl:w-32 xl:h-32  mr-3 rounded-md shadow-sm">
               <Image
-                className="w-full h-full"
+                className="w-full  h-full"
                 height={100}
                 width={100}
                 src={item.image_url}
@@ -51,16 +51,18 @@ const SavedNews = () => {
             <div className="w-2/3 lg:h-full lg:w-full xl:h-32 flex flex-col justify-between h-32">
               <Link
                 href={`/${item.slug_key}`}
-                className="text-lg font-semibold font-psemibold leading-snug hover:underline"
+                className="text-lg font-semibold font-psemibold leading-snug hover:underline overflow-hidden"
               >
-                {item.title}
-              </Link>{" "}
+                <h1 className="hover:underline mb-2 text-xl"> {item.title}</h1>
+              </Link>
               <Link
                 style={{ scrollbarWidth: "none" }}
                 href={`/${item.slug_key}`}
-                className=" overflow-y-scroll text-sm font-semibold font-psemibold leading-snug hover:underline"
+                className=" overflow-y-scroll text-sm hidden sm:flex font-semibold font-psemibold leading-snug hover:underline"
               >
-                {item.description}
+                <h3 className="font-psemibold text-sm  text-[rgba(var(--color-typo-default), transition var(--tw-text-opacity))]">
+                  {item.description}
+                </h3>
               </Link>
               <p className=" font-psemibold   text-sm mt-1">
                 #{item.keywords[0]}

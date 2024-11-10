@@ -53,6 +53,9 @@ export const metadata: Metadata = {
     description: "Breaking news and updates from around the globe.",
     images: "https://sanraj.vercel.app/favicon.ico",
   },
+  icons: {
+    icon: "/favicon.ico", // Setting the favicon as singleNews.image
+  },
 };
 
 type LayoutProps = Readonly<{
