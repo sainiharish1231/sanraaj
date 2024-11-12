@@ -180,21 +180,23 @@ const SearchComponent: React.FC = () => {
                           setSearchTerm("");
                       }}
                     >
-                      <div className=" flex p-4  gap-x-10 ">
-                        <Image
-                          className="h-20  object-cover w-20"
-                          height={800}
-                          width={800}
-                          src={`${result.image_url}`}
-                          alt={""}
-                        />
-
-                        <p
-                          style={{ scrollbarWidth: "none" }}
-                          className=" break-all  h-20  overflow-y-auto justify-start cursor-pointer"
-                        >
-                          {result.title}
-                        </p>
+                      <div className="flex flex-row gap-3">
+                        <div className="w-[30%]  h-auto mb-2 relative aspect-[1.67]">
+                          <Image
+                            className="rounded-md object-cover"
+                            fill
+                            src={result.image_url}
+                            alt={"Times news image for " + result.title}
+                          />
+                        </div>
+                        <div className="w-[70%]">
+                          <h2
+                            className="hover:underlin font-psemibold mb-2 text-[15px]"
+                            style={{ scrollbarWidth: "none" }}
+                          >
+                            {result.title}
+                          </h2>
+                        </div>
                       </div>
                     </Link>
                   </>
@@ -285,10 +287,11 @@ const SearchComponent: React.FC = () => {
           onClick={() => setShowSuggestions(false)} // Close on clicking outside
         >
           <div
-            className="max-w-[750px] dark:bg-[#121212] p-4 text-[black] dark:text-[#ffffff] bg-[#ffffff] container border border-[#9333ea] sm:py-2 sm:px-2 py-4 px-4 rounded-2xl"
+            style={{ scrollbarWidth: "none" }}
+            className="max-w-[750px] max-h-screen mb-40 overflow-y-scroll dark:bg-[#121212] p-4 text-[black] dark:text-[#ffffff] bg-[#ffffff] container border border-[#9333ea] sm:py-2 sm:px-2 py-4 px-4 rounded-2xl"
             onClick={(e) => e.stopPropagation()} // Prevent closing on clicking inside
           >
-            <div className="py-1">
+            <div className="py-1 ">
               {searchResults.map((result, index) => (
                 <>
                   <Link
@@ -299,20 +302,31 @@ const SearchComponent: React.FC = () => {
                       setSearchTerm("");
                     }}
                   >
-                    <div className="flex p-4 gap-x-10">
-                      <Image
-                        className="h-20 object-cover w-20"
-                        height={800}
-                        width={800}
-                        src={result.image_url}
-                        alt=""
-                      />
-                      <p
-                        style={{ scrollbarWidth: "none" }}
-                        className="break-all h-20 overflow-y-auto justify-start cursor-pointer"
-                      >
-                        {result.title}
-                      </p>
+                    <div className="flex flex-row gap-3">
+                      <div className="w-[30%]  h-auto mb-2 relative aspect-[1.67]">
+                        <Image
+                          className="rounded-md object-cover"
+                          fill
+                          src={result.image_url}
+                          alt={"Times news image for " + result.title}
+                        />
+                      </div>
+                      <div className="w-[70%] justify-between flex flex-col ">
+                        <div>
+                          <h2
+                            className="hover:underlin font-psemibold mb-2 text-[15px]"
+                            style={{ scrollbarWidth: "none" }}
+                          >
+                            {result.title}
+                          </h2>
+                        </div>
+                        <div>
+                          <h2
+                            className="hover:underlin  font-psemibold mb-2 text-[15px]"
+                            style={{ scrollbarWidth: "none" }}
+                          ></h2>
+                        </div>
+                      </div>
                     </div>
                   </Link>
                 </>
