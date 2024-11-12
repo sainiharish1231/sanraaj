@@ -245,7 +245,7 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
               onClick={() => {
                 setShareOption((prev) => !prev);
               }}
-              className="transition  ease-out duration-300 
+              className="transition   h ease-out duration-300 
                       h-8 w-8  flex   justify-center items-center text-center   rounded-full
                     text-[#ffff] dark:text-[black] bg-black dark:bg-[#ffff]  "
             >
