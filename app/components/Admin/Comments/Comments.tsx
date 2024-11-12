@@ -2,8 +2,8 @@
 import moment from "moment";
 import { Table } from "flowbite-react";
 import { useSession } from "next-auth/react";
-import Alert from "../../../components/Alert/Alert";
 import { useState } from "react";
+import { customToast } from "../../CustomToast";
 
 interface comments {
   content: string;
@@ -18,7 +18,6 @@ interface prope {
 
 const Comments: React.FC<prope> = ({ comments }) => {
   const [allComments, setAllComments] = useState(comments);
-  const [alertMessage, setAlertMessage] = useState<string | null>(null);
   const { data: user }: any = useSession();
   const handleDeleteComment = async (id: any) => {
     const response = await fetch(
@@ -34,13 +33,10 @@ const Comments: React.FC<prope> = ({ comments }) => {
     if (response.ok) {
       const comments = allComments.filter((c: any) => c.id !== id);
       setAllComments(comments);
-      setAlertMessage("Comment Delete SuccesFully");
+      customToast("Comment Delete SuccesFully", "success");
     }
   };
 
-  const handleCloseAlert = () => {
-    setAlertMessage(null);
-  };
   return (
     <>
       <div>
@@ -86,9 +82,6 @@ const Comments: React.FC<prope> = ({ comments }) => {
           </Table.Body>
         </Table>
       </div>
-      {alertMessage && (
-        <Alert message={alertMessage} onClose={handleCloseAlert} />
-      )}
     </>
   );
 };

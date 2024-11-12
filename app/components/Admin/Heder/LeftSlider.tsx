@@ -25,15 +25,6 @@ export const LeftSlider = () => {
       </div>
       <div>
         <Link
-          href="/admin/profile"
-          className="flex items-center py-2 px-4 rounded-lg hover:bg-blue-300 flex-col"
-        >
-          <FaRegCircleUser />
-          Profile
-        </Link>
-      </div>
-      <div>
-        <Link
           href="/admin/news"
           className="flex items-center py-2 px-4 rounded-lg hover:bg-blue-300 flex-col"
         >

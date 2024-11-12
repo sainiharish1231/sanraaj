@@ -1,8 +1,7 @@
 "use client";
 import { Button, Label, List, TextInput } from "flowbite-react";
-import { Result } from "postcss";
 import React, { useState } from "react";
-import Alert from "../../components/Alert/Alert";
+import { customToast } from "@/app/components/CustomToast";
 
 interface category {
   categoryName: string;
@@ -22,7 +21,6 @@ const Category: React.FC<prope> = (prope) => {
     categoryName: "",
     parentCategory: "",
   });
-  const [alertMessage, setAlertMessage] = useState<string | null>(null);
 
   const changeHandler = (e: any) => {
     setCategoryData({ ...categoryData, [e.target.name]: e.target.value });
@@ -43,19 +41,15 @@ const Category: React.FC<prope> = (prope) => {
     const result = await response.json();
 
     if (result.success) {
-      setAlertMessage(result.message);
+      customToast("Category added successfully", "success");
       setCategories([...categories, result.data]);
       setCategoryData({
         categoryName: "",
         parentCategory: "",
       });
     } else {
-      setAlertMessage(result.message);
+      customToast(result.message, "error");
     }
-  };
-
-  const handleCloseAlert = () => {
-    setAlertMessage(null);
   };
 
   return (
@@ -110,9 +104,6 @@ const Category: React.FC<prope> = (prope) => {
           );
         })}
       </div>
-      {alertMessage && (
-        <Alert message={alertMessage} onClose={handleCloseAlert} />
-      )}
     </>
   );
 };

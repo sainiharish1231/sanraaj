@@ -11,7 +11,6 @@ export default function AdminLayout({
   children: React.ReactNode;
 }>) {
   const router = useRouter();
-
   const { data: session, status }: any = useSession();
   const user = session?.user;
 
@@ -24,7 +23,6 @@ export default function AdminLayout({
   if (status === "loading") {
     return <div>Loading...</div>;
   }
-  console.log(user, "aaaaaaaaaaa");
 
   return (
     <AuthProvider>

@@ -29,6 +29,8 @@ interface prope {
   category: category[];
 }
 
+const slugKeyPattern = /^[a-zA-Z0-9-]+$/;
+
 const AddNews: React.FC<prope> = (props) => {
   const { data: session, status }: any = useSession();
   const user = session?.user;
@@ -46,8 +48,6 @@ const AddNews: React.FC<prope> = (props) => {
     article: "",
     keywords: [],
   });
-
-  const slugKeyPattern = /^[a-zA-Z0-9-]+$/;
 
   const CKEditorChangeHandler = (editor: any) => {
     const htmlData = editor.getData();
@@ -80,6 +80,25 @@ const AddNews: React.FC<prope> = (props) => {
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => {
+    if (e.target.name === "title") {
+      const title = e.target.value;
+
+      const slug_key = title
+        ? title
+            .substring(0, 90)
+            .replace(/\s+/g, "-")
+            .replace(/-+/g, "-")
+            .toLowerCase() +
+          "-" +
+          new Date().getTime()
+        : "";
+      setAddNewsData({
+        ...addNewsData,
+        title: title,
+        slug_key,
+      });
+      return;
+    }
     setAddNewsData({ ...addNewsData, [e.target.name]: e.target.value });
     if (e.target.name === "slug_key") {
       if (!slugKeyPattern.test(e.target.value)) {
@@ -118,7 +137,7 @@ const AddNews: React.FC<prope> = (props) => {
       const result = await response.json();
 
       if (result.success) {
-        customToast(result.message,"success")
+        customToast(result.message, "success");
         setAddNewsData({
           slug_key: "",
           title: "",
@@ -128,7 +147,8 @@ const AddNews: React.FC<prope> = (props) => {
           article: "",
           keywords: [],
         });
-      } else {customToast(result.message,"error")
+      } else {
+        customToast(result.message, "error");
       }
     }
   };
@@ -154,6 +174,21 @@ const AddNews: React.FC<prope> = (props) => {
 
           <form className="shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
             <div className="mb-4">
+              <label className="block text-sm font-bold mb-2" htmlFor="title">
+                Title
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-white dark:bg-[#121212] border-[#9333ea]"
+                id="title"
+                type="text"
+                placeholder="Enter title..."
+                name="title"
+                value={addNewsData.title}
+                onChange={handleChangeHandler}
+              />
+            </div>
+
+            <div className="mb-4">
               <label className="block text-sm font-bold mb-2" htmlFor="urlKey">
                 {error ? (
                   <h3 className="text-red-600 text-lg">Invalid sulg_key</h3>
@@ -168,22 +203,7 @@ const AddNews: React.FC<prope> = (props) => {
                 name="slug_key"
                 placeholder="Enter URL key..."
                 value={addNewsData.slug_key}
-                onChange={handleChangeHandler}
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-sm font-bold mb-2" htmlFor="title">
-                Title
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-white dark:bg-[#121212] border-[#9333ea]"
-                id="title"
-                type="text"
-                placeholder="Enter title..."
-                name="title"
-                value={addNewsData.title}
-                onChange={handleChangeHandler}
+                disabled
               />
             </div>
 
