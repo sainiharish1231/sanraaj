@@ -173,6 +173,40 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
     setAlertMessage(null);
   };
 
+  // const jsonLd = {
+  //   "@context": "https://sanraj.vercel.app/",
+  //   "@type": "Times News",
+  //   name: item.title,
+  //   image: item.image_url,
+  //   description: item.description,
+  // };
+
+  const siteData = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": item.id,
+    },
+    headline: item.title,
+    image: item.image_url,
+    author: {
+      "@type": "Organization",
+      name: "Times News",
+      url: "https://sanraj.vercel.app/",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "San Raj Software Solutions",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://lh5.googleusercontent.com/p/AF1QipMP_m5WTcBaKo14c_5F4gCwFfb3Rojp-0W0wdcm=w159-h160-k-no",
+      },
+    },
+    datePublished: item.createdAt,
+    dateModified: item.updatedAt,
+  };
+
   return (
     <>
       <div className="flex flex-col justify-between">
@@ -191,17 +225,16 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
         <Link className="hidden" href={`${process.env.NEXTAUTH_URL}`}></Link>
         <div className="w-full mb-4">
           <Image
-            className="w-full h-[250px] sm:h-[300px] rounded-md"
+            className="rounded-md object-cover"
             src={item.image_url}
-            width={440}
-            height={100}
-            alt={"Blog post"}
+            fill
+            alt={"Times news image for " + item.title}
           />
         </div>
 
         <div
           style={{ scrollbarWidth: "none" }}
-          className="transition    sleading-[1.8]   duration-150 ease-in-out text-[rgba(var(--color-typo-default), var(--tw-text-opacity))]   max-h-[700px] overflow-x-scroll"
+          className="transition    sleading-[1.8]   duration-150 ease-in-out text-[rgba(var(--color-typo-default), var(--tw-text-opacity))] "
           dangerouslySetInnerHTML={{
             __html: item.article,
           }}
@@ -245,9 +278,9 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
               onClick={() => {
                 setShareOption((prev) => !prev);
               }}
-              className="transition   h ease-out duration-300 
+              className="transition  ease-out duration-300 
                       h-8 w-8  flex   justify-center items-center text-center   rounded-full
-                    text-[#ffff] dark:text-[black] bg-black dark:bg-[#ffff]  "
+                    text-[#ffff] dark:text-[black] bg-black dark:bg-[#ffff]"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -322,6 +355,16 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
       {alertMessage && (
         <Alert message={alertMessage} onClose={handleCloseAlert} />
       )}
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(siteData) }}
+      />
+
+      {/* <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      /> */}
     </>
   );
 };

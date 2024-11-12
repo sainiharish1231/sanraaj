@@ -160,7 +160,7 @@ const NewNews = ({ news, topNews, breakingNews }: NewNewsProps) => {
           )}
         </div>
       </div>
-      <div className="flex flex-col lg:flex-row lg:items-start sm:items-center justify-center w-full h-full lg:max-h-[calc(100vh-110px)] overflow-y-auto px-4 md:px-6 lg:px-2">
+      <div className="flex flex-col lg:flex-row lg:items-start sm:items-center justify-center w-full h-full lg:max-h-[calc(100vh-110px)] overflow-y-auto px-4 md:px-6  no-scrollbar lg:px-2">
         <div
           style={{ scrollbarWidth: "none" }}
           className="order-2 lg:order-1 flex lg:w-[25%] lg:sticky top-0 lg:max-h-[calc(100vh-110px)] overflow-y-auto flex-col w-full no-scrollbar pt-4"
@@ -177,13 +177,14 @@ const NewNews = ({ news, topNews, breakingNews }: NewNewsProps) => {
             return (
               <div key={index} className="rounded-lg">
                 <div className="relative overflow-hidden">
-                  <Image
-                    height={400}
-                    width={400}
-                    className="object-cover rounded-lg w-full h-[250px] sm:h-[300px] transform transition-transform duration-300 "
-                    src={item.image_url}
-                    alt="Product"
-                  />
+                  <div className="w-full mb-4 relative aspect-[1.67]">
+                    <Image
+                      className="rounded-md object-cover"
+                      fill
+                      src={item.image_url}
+                      alt={"Times news image for " + item.title}
+                    />
+                  </div>
                   <div className="mt-2">
                     <Link
                       className="!no-underline mb-4"
