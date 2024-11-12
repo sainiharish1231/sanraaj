@@ -177,7 +177,7 @@ const NewNews = ({ news, topNews, breakingNews }: NewNewsProps) => {
             return (
               <div key={index} className="rounded-lg">
                 <div className="relative overflow-hidden">
-                  <div className="w-full mb-4 relative aspect-[1.67]">
+                  <div className="w-full mb-2 relative aspect-[1.67]">
                     <Image
                       className="rounded-md object-cover"
                       fill
