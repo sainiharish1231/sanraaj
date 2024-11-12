@@ -2,7 +2,8 @@
 import moment from "moment";
 import { Table } from "flowbite-react";
 import React, { useState } from "react";
-import Alert from "../../../components/Alert/Alert";
+import { customToast } from "../../CustomToast";
+
 interface users {
   name: String;
   email: string;
@@ -16,7 +17,6 @@ interface prope {
 }
 
 const User: React.FC<prope> = ({ users }) => {
-  const [alertMessage, setAlertMessage] = useState<string | null>(null);
   const [user, setUser] = useState(users);
   const handleDeleteUser = async (id: any) => {
     try {
@@ -33,16 +33,12 @@ const User: React.FC<prope> = ({ users }) => {
         if (result.message === "success") {
           const users = user.filter((u: any) => u.id !== id);
           setUser(users);
-          setAlertMessage("user delete successfull");
+          customToast("user delete successfull", "success");
         }
       }
     } catch (error: any) {
       console.log("error ", error.message);
     }
-  };
-
-  const handleCloseAlert = () => {
-    setAlertMessage(null);
   };
 
   return (
@@ -77,9 +73,6 @@ const User: React.FC<prope> = ({ users }) => {
             })}
           </Table.Body>
         </Table>
-        {alertMessage && (
-          <Alert message={alertMessage} onClose={handleCloseAlert} />
-        )}
       </div>
     </>
   );

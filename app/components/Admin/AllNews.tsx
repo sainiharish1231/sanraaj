@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Table } from "flowbite-react";
 import moment from "moment";
 import Link from "next/link";
+import { customToast } from "../CustomToast";
 
 interface NewsItem {
   id: string;
@@ -14,6 +15,8 @@ interface NewsItem {
   keywords: string[];
   category: string;
   isPublishNews: boolean; // boolean type use kiya hai
+  isBreakingNews: boolean;
+  isTopNews: boolean;
   createdAt: string;
 }
 
@@ -50,13 +53,77 @@ const AllNews: React.FC<Props> = ({ news }) => {
               : item
           )
         );
-        alert(result.message);
+
+        customToast(result.message, "success");
       }
     } catch (error: any) {
       console.log("error.message", error.message);
     }
   };
+  const handleBreakingNews = async (id: any) => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_HOST_URL}/news/breaking-news/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const result = await response.json();
 
+      if (!response.ok) {
+        customToast("Something went wrong!", "error");
+        return;
+      }
+      if (result.success) {
+        setNewsData((prevNews) =>
+          prevNews.map((item) =>
+            item.id === id
+              ? { ...item, isBreakingNews: !item.isBreakingNews }
+              : item
+          )
+        );
+
+        customToast(result.message, "success");
+      }
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  };
+
+  const handleTopNews = async (id: any) => {
+    try {
+      const response = await fetch(
+        `
+        ${process.env.NEXT_PUBLIC_HOST_URL}/news/top-news/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const result = await response.json();
+
+      if (!response.ok) {
+        customToast("Something went wrong!", "error");
+        return;
+      }
+      if (result.success) {
+        setNewsData((prevNews) =>
+          prevNews.map((item) =>
+            item.id === id ? { ...item, isTopNews: !item.isTopNews } : item
+          )
+        );
+
+        customToast(result.message, "success");
+      }
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  };
   return (
     <>
       <Table hoverable>
@@ -65,6 +132,8 @@ const AllNews: React.FC<Props> = ({ news }) => {
           <Table.HeadCell className="text-center">Image</Table.HeadCell>
           <Table.HeadCell className="text-center">Title</Table.HeadCell>
           <Table.HeadCell className="text-center">Category</Table.HeadCell>
+          <Table.HeadCell className="text-center">Topnews</Table.HeadCell>
+          <Table.HeadCell className="text-center">BreakingNews</Table.HeadCell>
           <Table.HeadCell className="text-center">Publish</Table.HeadCell>
         </Table.Head>
         <Table.Body>
@@ -103,6 +172,22 @@ const AllNews: React.FC<Props> = ({ news }) => {
               </Table.Cell>
               <Table.Cell className="text-center align-middle">
                 {newsItem.category}
+              </Table.Cell>
+              <Table.Cell className="text-center align-middle">
+                <button
+                  className="border border-teal-600 rounded-lg p-2 hover:bg-gray-300 font-bold"
+                  onClick={() => handleTopNews(newsItem.id)}
+                >
+                  {newsItem.isTopNews ? "UnTopNews" : "TopNews"}
+                </button>
+              </Table.Cell>
+              <Table.Cell className="text-center align-middle">
+                <button
+                  className="border border-teal-600 rounded-lg p-2 hover:bg-gray-300 font-bold"
+                  onClick={() => handleBreakingNews(newsItem.id)}
+                >
+                  {newsItem.isBreakingNews ? "UnBreakinNews" : "BreakingNews"}
+                </button>
               </Table.Cell>
               <Table.Cell className="text-center align-middle">
                 <button

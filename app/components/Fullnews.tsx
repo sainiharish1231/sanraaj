@@ -16,6 +16,7 @@ import {
   LinkedinIcon,
 } from "react-share";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
   const [comments, setComments] = useState(commentsServer);
@@ -212,7 +213,17 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
         <h1 className="mb-2 text-xl capitalize pt-4">{item.title}</h1>
         <h2 className="hidden">{item.description}</h2>
         <p className="hidden">{item.description}</p>
-        <div className="w-full mb-4 relative aspect-[1.67]">
+        <Link className="hidden" href={"https://www.sanraaj.com/"}></Link>
+        <Link
+          className="hidden"
+          href={`https://www.facebook.com/sanrajsoftware`}
+        ></Link>
+        <Link
+          className="hidden"
+          href={"https://www.linkedin.com/in/raj-kumar-57712a118/"}
+        ></Link>
+        <Link className="hidden" href={`${process.env.NEXTAUTH_URL}`}></Link>
+        <div className="w-full mb-4">
           <Image
             className="rounded-md object-cover"
             src={item.image_url}
