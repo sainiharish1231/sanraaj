@@ -10,19 +10,87 @@ import { GrNext, GrPrevious } from "react-icons/gr";
 import { NewsItem } from "../../types/news";
 import { useSession } from "next-auth/react";
 import { customToast } from "./CustomToast";
+import NewsService from "@/services/NewsService";
 
 interface NewNewsProps {
   news: NewsItem[];
   topNews: NewsItem[];
   breakingNews: NewsItem[];
+  category: any;
 }
 
-const NewNews = ({ news, topNews, breakingNews }: NewNewsProps) => {
+const useIsMobile = (thresold: number = 768) => {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= thresold);
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  return isMobile;
+};
+
+const NewNews = ({ news, topNews, breakingNews, category }: NewNewsProps) => {
+  const [newsData, setNewsData] = useState(news);
   const [selectedcategory, setSelectedcategory] = useState<string | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [savedNews, setSavedNews] = useState<any>([]);
-
+  const [page, setPage] = useState(2);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
   const { data: user }: any = useSession();
+  const mainContent = useRef<HTMLDivElement | null>(null);
+  const isMobile = useIsMobile();
+  const categorys = category.data;
+  const getNewsByCategory = async (categoryId: any) => {
+    try {
+      const fetchNewsByCategory = await NewsService.getNewsByCategory(
+        categoryId
+      );
+      console.log(fetchNewsByCategory, "ddddddddd");
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  };
+  const loadMoreNews = async () => {
+    if (loading || !hasMore) return;
+
+    setLoading(true);
+
+    try {
+      const nextPageNews = await NewsService.getNews(page);
+      if (nextPageNews.data.length > 0) {
+        setNewsData((prevNews) => [...prevNews, ...nextPageNews.data]);
+        setPage((prevPage) => prevPage + 1);
+      } else {
+        setHasMore(false);
+      }
+    } catch (error) {
+      console.error("Error loading more news:", error);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    const container = (isMobile ? window : mainContent.current) as HTMLElement;
+    let isScrolling = false;
+    const handleScroll = async () => {
+      if (isScrolling) return;
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.scrollHeight - 100
+      ) {
+        isScrolling = true;
+        loadMoreNews();
+      }
+    };
+
+    container?.addEventListener("scroll", handleScroll);
+    return () => container?.removeEventListener("scroll", handleScroll);
+  }, [mainContent.current, isMobile]);
+
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollBy({ left: -200, behavior: "smooth" });
@@ -39,7 +107,7 @@ const NewNews = ({ news, topNews, breakingNews }: NewNewsProps) => {
     if (user?.token) {
       const fetchSavedNews = async () => {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_HOST_URL}/saved-news`,
+          ` ${process.env.NEXT_PUBLIC_HOST_URL}/saved-news`,
           {
             method: "GET",
             headers: {
@@ -55,6 +123,7 @@ const NewNews = ({ news, topNews, breakingNews }: NewNewsProps) => {
       fetchSavedNews();
     }
   }, [user]);
+
   const handleSavedNews = async (newsId: any, isSaved: any) => {
     if (!user?.token) {
       console.error("User token is not available.");
@@ -63,7 +132,7 @@ const NewNews = ({ news, topNews, breakingNews }: NewNewsProps) => {
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_HOST_URL}/saved-news`,
+        ` ${process.env.NEXT_PUBLIC_HOST_URL}/saved-news`,
         {
           method: "POST",
           headers: {
@@ -89,17 +158,13 @@ const NewNews = ({ news, topNews, breakingNews }: NewNewsProps) => {
     }
   };
 
-  const categories = Array.from(
-    new Set(Object.values(news).map((item: any) => item.category))
-  );
-
   const filteredItems = selectedcategory
     ? Object.values(news).filter(
         (item: any) => item.category === selectedcategory
       )
     : Object.values(news);
 
-  if (!news)
+  if (!newsData)
     return (
       <>
         {/* <div className=" flex justify-center items-center">
@@ -114,8 +179,8 @@ const NewNews = ({ news, topNews, breakingNews }: NewNewsProps) => {
   return (
     <>
       <div className="bg-white dark:bg-[#121212] pl-4 sm:pl-0 w-full">
-        <div className="flex touch-auto w-[100%] sm:mt-0 mt-1 h-[50px]">
-          {categories.length >= 14 && (
+        <div className="flex px-2 items-center justify-center  touch-auto w-[100%] sm:mt-0 mt-1 h-[50px]">
+          {categorys.length >= 14 && (
             <GrPrevious
               className="text-2xl cursor-pointer hidden sm:flex"
               onClick={scrollLeft}
@@ -124,7 +189,7 @@ const NewNews = ({ news, topNews, breakingNews }: NewNewsProps) => {
           <div className="flex touch-auto  justify-center items-center sm:ml-6 ">
             <button
               className={`py-1 px-3 rounded-xl  ${
-                selectedcategory === null
+                categorys === "h"
                   ? "bg-[#9333ea] text-white"
                   : "bg-black dark:bg-[#ffffff] text-white dark:text-black border-[#9333ea] "
               }`}
@@ -138,21 +203,24 @@ const NewNews = ({ news, topNews, breakingNews }: NewNewsProps) => {
             className="flex justify-start items-center ml-3 mr-3 w-full overflow-x-auto space-x-2"
             style={{ scrollbarWidth: "none" }}
           >
-            {categories.map((category) => (
+            {categorys.map((category: any) => (
               <button
-                key={category}
+                key={category.id}
                 className={`flex py-1 px-3  whitespace-nowrap rounded-xl ${
-                  selectedcategory === category
-                    ? "bg-[#9333ea] text-white"
-                    : "bg-black dark:bg-[#ffffff] text-white dark:text-black border-[#9333ea]"
+                  selectedcategory === category.categoryName
+                    ? "bg-[#9333ea] capitalize text-white"
+                    : "bg-black dark:bg-[#ffffff] capitalize text-white dark:text-black border-[#9333ea]"
                 }`}
-                onClick={() => setSelectedcategory(category)}
+                onClick={() => {
+                  setSelectedcategory(category.categoryName);
+                  getNewsByCategory(category.id);
+                }}
               >
-                {category}
+                {category.categoryName}
               </button>
             ))}
           </div>
-          {categories.length >= 14 && (
+          {categorys.length >= 14 && (
             <GrNext
               className="text-2xl cursor-pointer hidden sm:flex"
               onClick={scrollRight}
@@ -160,9 +228,13 @@ const NewNews = ({ news, topNews, breakingNews }: NewNewsProps) => {
           )}
         </div>
       </div>
-      <div className="flex flex-col lg:flex-row lg:items-start sm:items-center justify-center w-full h-full lg:max-h-[calc(100vh-110px)] overflow-y-auto px-4 md:px-6  no-scrollbar lg:px-2">
+      <div
+        style={{ scrollbarWidth: "none" }}
+        className="flex flex-col lg:flex-row lg:items-start sm:items-center justify-center w-full h-full lg:max-h-[calc(100vh-110px)] overflow-y-auto px-4 md:px-6 lg:px-2"
+        ref={mainContent}
+      >
         <div
-          style={{ scrollbarWidth: "none" }}
+          // style={{ scrollbarWidth: "none" }}
           className="order-2 lg:order-1 flex lg:w-[25%] lg:sticky top-0 lg:max-h-[calc(100vh-110px)] overflow-y-auto flex-col w-full no-scrollbar pt-4"
         >
           {/*  <Ads /> */}
@@ -170,21 +242,20 @@ const NewNews = ({ news, topNews, breakingNews }: NewNewsProps) => {
           <Breakingnews news={breakingNews} />
         </div>
 
-        <div className="order-1 lg:order-2 flex sm:w-full lg:w-[50%] flex-col">
+        <div className="order-1 lg:order-2 flex sm:w-full lg:w-[50%] flex-col mb-20">
           <h2 className="text-sm pt-4 mb-4">Recent News</h2>
           {filteredItems.map((item: any, index: any) => {
             const isSaved = savedNews.includes(item.id);
             return (
               <div key={index} className="rounded-lg">
                 <div className="relative overflow-hidden">
-                  <div className="w-full mb-2 relative aspect-[1.67]">
-                    <Image
-                      className="rounded-md object-cover"
-                      fill
-                      src={item.image_url}
-                      alt={"Times news image for " + item.title}
-                    />
-                  </div>
+                  <Image
+                    height={400}
+                    width={400}
+                    className="object-cover rounded-lg w-full h-[250px] sm:h-[300px] transform transition-transform duration-300 "
+                    src={item.image_url}
+                    alt="Product"
+                  />
                   <div className="mt-2">
                     <Link
                       className="!no-underline mb-4"
@@ -197,7 +268,7 @@ const NewNews = ({ news, topNews, breakingNews }: NewNewsProps) => {
                         </h2>
                       </div>
                     </Link>
-                    <div className="font-psemibold text-[rgba(var(--color-typo-default), transition var(--tw-text-opacity))]">
+                    <div className="font-psemibold text-[rgba(var(--color-typo-default), transition var(--tw-text-opacity))] text-gray-600 dark:text-gray-300">
                       {item.description}
                     </div>
                     <div className="flex justify-between  items-center ">
@@ -252,6 +323,13 @@ const NewNews = ({ news, topNews, breakingNews }: NewNewsProps) => {
               </div>
             );
           })}
+          <div className="">
+            {loading && (
+              <div className=" flex justify-center items-center">
+                <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-purple-500"></div>
+              </div>
+            )}
+          </div>
         </div>
 
         <div

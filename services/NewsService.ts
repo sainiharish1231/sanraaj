@@ -14,6 +14,12 @@ class NewsService extends ApiService {
   search(query: string) {
     return this.getData(`/search?query=${query}`);
   }
+  getNews(pageNo: Number) {
+    return this.getData(`?pageNo=${pageNo}`);
+  }
+  getNewsByCategory(categoryId: string) {
+    return this.getData(`?categoryId=${categoryId}`);
+  }
 }
 
 export default new NewsService();
