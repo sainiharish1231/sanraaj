@@ -200,7 +200,7 @@ const NewNews = ({ news, topNews, breakingNews }: NewNewsProps) => {
                     <div className="font-psemibold text-[rgba(var(--color-typo-default), transition var(--tw-text-opacity))]">
                       {item.description}
                     </div>
-                    <div className="flex justify-between  items-center ">
+                    <div className="flex justify-between  gg items-center ">
                       <div>
                         <ul className="flex flex-wrap text-xs font-medium mt-4">
                           <li className="mb-2">
