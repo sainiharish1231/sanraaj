@@ -82,7 +82,7 @@ const Profile = () => {
           >
             <span className="flex justify-center w-[301px] h-48 rounded bg-red-400 absolute bottom-0 left-0 translate-y-full ease-out duration-[1300ms] transition-all group-hover:mb-0 group-hover:translate-y-0"></span>
             <section id="Logout">
-              <div className="relative justify-center text-left text-white duration-[1300ms] w-10 ease-out text-xl group-hover:text-white">
+              <div className=" justify-center flex  relative items-center text-white duration-[1300ms] w-10 ease-out text-xl group-hover:text-white">
                 Logout
               </div>
             </section>

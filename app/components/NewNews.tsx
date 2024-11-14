@@ -41,6 +41,8 @@ const NewNews = ({ news, topNews, breakingNews, category }: NewNewsProps) => {
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const { data: user }: any = useSession();
+  const [byDefaultSelectedCategory, setByDefaultSelectedCategory] =
+    useState("All");
   const mainContent = useRef<HTMLDivElement | null>(null);
   const isMobile = useIsMobile();
   const categorys = category.data;
@@ -50,6 +52,7 @@ const NewNews = ({ news, topNews, breakingNews, category }: NewNewsProps) => {
         categoryId
       );
       console.log(fetchNewsByCategory, "ddddddddd");
+      setNewsData(fetchNewsByCategory.data);
     } catch (error: any) {
       console.log(error.message);
     }
@@ -158,12 +161,6 @@ const NewNews = ({ news, topNews, breakingNews, category }: NewNewsProps) => {
     }
   };
 
-  const filteredItems = selectedcategory
-    ? Object.values(news).filter(
-        (item: any) => item.category === selectedcategory
-      )
-    : Object.values(news);
-
   if (!newsData)
     return (
       <>
@@ -189,11 +186,15 @@ const NewNews = ({ news, topNews, breakingNews, category }: NewNewsProps) => {
           <div className="flex touch-auto  justify-center items-center sm:ml-6 ">
             <button
               className={`py-1 px-3 rounded-xl  ${
-                categorys === "h"
+                byDefaultSelectedCategory === "All"
                   ? "bg-[#9333ea] text-white"
                   : "bg-black dark:bg-[#ffffff] text-white dark:text-black border-[#9333ea] "
               }`}
-              onClick={() => setSelectedcategory(null)}
+              onClick={() => {
+                setSelectedcategory(null);
+                getNewsByCategory("All");
+                setByDefaultSelectedCategory("All");
+              }}
             >
               All
             </button>
@@ -214,6 +215,7 @@ const NewNews = ({ news, topNews, breakingNews, category }: NewNewsProps) => {
                 onClick={() => {
                   setSelectedcategory(category.categoryName);
                   getNewsByCategory(category.id);
+                  setByDefaultSelectedCategory("");
                 }}
               >
                 {category.categoryName}
@@ -244,7 +246,7 @@ const NewNews = ({ news, topNews, breakingNews, category }: NewNewsProps) => {
 
         <div className="order-1 lg:order-2 flex sm:w-full lg:w-[50%] flex-col mb-20">
           <h2 className="text-sm pt-4 mb-4">Recent News</h2>
-          {filteredItems.map((item: any, index: any) => {
+          {newsData.map((item: any, index: any) => {
             const isSaved = savedNews.includes(item.id);
             return (
               <div key={index} className="rounded-lg">

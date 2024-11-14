@@ -292,45 +292,49 @@ const SearchComponent: React.FC = () => {
             onClick={(e) => e.stopPropagation()} // Prevent closing on clicking inside
           >
             <div className="py-1 ">
-              {searchResults.map((result, index) => (
-                <>
-                  <Link
-                    key={index}
-                    href={`/${result.slug_key}`}
-                    onClick={() => {
-                      setShowSuggestions(false);
-                      setSearchTerm("");
-                    }}
-                  >
-                    <div className="flex flex-row gap-3">
-                      <div className="w-[30%]  h-auto mb-2 relative aspect-[1.67]">
-                        <Image
-                          className="rounded-md object-cover"
-                          fill
-                          src={result.image_url}
-                          alt={"Times news image for " + result.title}
-                        />
-                      </div>
-                      <div className="w-[70%] justify-between flex flex-col ">
-                        <div>
-                          <h2
-                            className="hover:underlin font-psemibold mb-2 text-[15px]"
-                            style={{ scrollbarWidth: "none" }}
-                          >
-                            {result.title}
-                          </h2>
+              {searchResults.length > 0 ? (
+                searchResults.map((result, index) => (
+                  <>
+                    <Link
+                      key={index}
+                      href={`/${result.slug_key}`}
+                      onClick={() => {
+                        setShowSuggestions(false);
+                        setSearchTerm("");
+                      }}
+                    >
+                      <div className="flex flex-row gap-3">
+                        <div className="w-[30%]  h-auto mb-2 relative aspect-[1.67]">
+                          <Image
+                            className="rounded-md object-cover"
+                            fill
+                            src={result.image_url}
+                            alt={"Times news image for " + result.title}
+                          />
                         </div>
-                        <div>
-                          <h2
-                            className="hover:underlin  font-psemibold mb-2 text-[15px]"
-                            style={{ scrollbarWidth: "none" }}
-                          ></h2>
+                        <div className="w-[70%] justify-between flex flex-col ">
+                          <div>
+                            <h2
+                              className="hover:underlin font-psemibold mb-2 text-[15px]"
+                              style={{ scrollbarWidth: "none" }}
+                            >
+                              {result.title}
+                            </h2>
+                          </div>
+                          <div>
+                            <h2
+                              className="hover:underlin  font-psemibold mb-2 text-[15px]"
+                              style={{ scrollbarWidth: "none" }}
+                            ></h2>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </Link>
-                </>
-              ))}
+                    </Link>
+                  </>
+                ))
+              ) : (
+                <div className="text-center text-gray-500">No news found</div>
+              )}
             </div>
             {searchHistory.length > 0 && (
               <></>

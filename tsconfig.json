@@ -34,7 +34,8 @@
     "app/Providers.js",
     "app/components/SignUp.tsx",
     "app/api/auth/[...nextauth]/authOptions.ts",
-    "database/db.js"
+    "database/db.js",
+    "app/components/NewNews.jsx"
   ],
   "exclude": ["node_modules"]
 }
