@@ -84,7 +84,7 @@ const Category: React.FC<prope> = (prope) => {
           />
         </div>
 
-        <div className="flex justify-center mt-[20px]">
+        <div className="flex  ff justify-center mt-[20px]">
           <Button className="w-[200px] text-center" onClick={addCategory}>
             Add
           </Button>
