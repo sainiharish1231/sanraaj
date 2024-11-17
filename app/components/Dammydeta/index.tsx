@@ -3,7 +3,7 @@ import React from "react";
 const SkeletonPlaceholder: React.FC = () => (
   <>
     <div className=" flex flex-col  justify-center items-center">
-      <div className="container mt-10">
+      <div className="container ">
         <div className="h-[260px] animate-pulse rounded-xl  sm:h-[300px] w-full  bg-slate-200 "></div>
         <div className="animate-pulse space-x-9">
           <div className="mt-8 w-full     space-y-7">

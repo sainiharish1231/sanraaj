@@ -10,9 +10,14 @@ const Login: any = () => {
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [error, setError] = useState("");
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
+  const handleGoogleSignIn = async () => {
+    setIsSubmitting(true);
+    await signIn("google", { redirect: true });
 
+    setIsSubmitting(false);
+  };
   const handleSubmit = async (event: any) => {
     event.preventDefault();
 
@@ -38,22 +43,11 @@ const Login: any = () => {
   };
 
   return (
-    <div className="w-full min-h-screen flex mt-20 justify-center">
-      <div className="lg:flex">
-        <div className="mx-auto py-8 rounded-lg">
-          <div className="">
-            <h2 className="text-2xl font-bold tracking-wide">{`Log In`}</h2>
-            <div className="text-sm mt-2">
-              {`   Don't have an account?`}
-              <Link
-                href="/signUp"
-                className="text-[#9333ea] hover:text-[#9333ea] hover:underline"
-                title="Sign Up"
-              >
-                {`  Sign up here`}
-              </Link>
-            </div>
-          </div>
+    <div className="w-full  flex mt-20 sm:mt-40 justify-center items-center">
+      <div className="">
+        <div className="mx-auto mt-3 rounded-lg">
+          <h2 className="text-2xl font-bold tracking-wide">{`Log In`}</h2>
+
           <form className="my-8 text-sm" onSubmit={handleSubmit}>
             <div className="flex flex-col my-4">
               <label htmlFor="email" className="">
@@ -128,17 +122,6 @@ const Login: any = () => {
               </div>
             </div>
 
-            <div className="flex items-center">
-              <input
-                type="checkbox"
-                name="remember_me"
-                id="remember_me"
-                className="mr-2 focus:bg-[#9333ea]"
-              />
-              <label htmlFor="remember_me" className="">
-                {` Remember Me`}
-              </label>
-            </div>
             {error && (
               <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
                 {error}
@@ -159,6 +142,27 @@ const Login: any = () => {
             </div>
           </form>
         </div>
+
+        <div className="text-sm mt-2">
+          {`   Don't have an account?`}
+          <Link
+            href="/signUp"
+            className="text-[#9333ea] hover:text-[#9333ea] hover:underline"
+            title="Sign Up"
+          >
+            {`  Sign up here`}
+          </Link>
+        </div>
+
+        {/* <button
+          onClick={handleGoogleSignIn}
+          className={`rounded-2xl mt-10 w-full text-white p-3 font-medium ${
+            isSubmitting ? "bg-[#8e1afc]" : "bg-[#911cff77]"
+          }`}
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Logging in..." : "Sign in with Google"}
+        </button> */}
       </div>
     </div>
   );

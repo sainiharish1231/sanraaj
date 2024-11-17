@@ -7,6 +7,9 @@ import Custom404 from "@/app/not-found";
 import NewsService from "@/services/NewsService";
 import { Metadata } from "next";
 import { fetchCommentData, fetchLikeData } from "./helpers";
+const truncateText = (text: string, maxLength: number): string => {
+  return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
+};
 
 export async function generateMetadata({ params }: any): Promise<Metadata> {
   const singleNews = (
@@ -15,17 +18,23 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
 
   if (!singleNews) return {};
 
+  // Apply character limits
+  const title = truncateText(singleNews.title || "Untitled", 70);
+  const description = truncateText(
+    singleNews.description || "No description available.",
+    160
+  );
   return {
-    title: `${singleNews.title} | Times News`,
-    description: `${singleNews.description} | Times News`,
-    applicationName: "timesnews.sanraj",
+    title: `${title} | Times News`,
+    description: `${description} | Times News`,
+    applicationName: "times-news",
     authors: [
       {
-        name: "Times News | San Raj Software Solutions",
-        url: "https://sanraj.vercel.app/",
+        name: "Times News | San Raj ",
+        url: "https://times-news.in/",
       },
     ],
-    generator: "Times News",
+    generator: "times-news",
     keywords: [`${singleNews.keywords} | Times News`],
     openGraph: {
       images: [singleNews.image_url],
@@ -35,7 +44,6 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
     },
   };
 }
-
 // Main news page component
 const NewsDetailsPage = async ({ params }: any) => {
   const breakingNews =
@@ -50,9 +58,9 @@ const NewsDetailsPage = async ({ params }: any) => {
     return <Custom404 />;
   }
 
-  const comment = await fetchCommentData(singleNews.id);
+  const comment = await fetchCommentData(singleNews.id || "1234");
 
-  const like = await fetchLikeData(singleNews.id);
+  const like = await fetchLikeData(singleNews.id || "1234");
 
   return (
     <>

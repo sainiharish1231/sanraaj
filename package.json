@@ -1,7 +1,7 @@
 {
   "name": "times-news",
   "version": "1.0.0",
-  "description": "Times news is a news publishing platform which automatically gathers information from various sources and then use AI to enhances the information an automatically creates the content.",
+  "description": "Stay informed with Time News! Get the latest breaking news, trending headlines, and comprehensive updates on politics, technology, business, sports, and global affairs. Trusted news at your fingertips.",
   "main": "index.js",
   "directories": {
     "lib": "lib"
@@ -59,6 +59,7 @@
     "react-awesome-reveal": "^4.2.12",
     "react-dom": "^18.3.1",
     "react-icons": "^5.2.1",
+    "react-infinite-scroll-component": "^6.1.0",
     "react-quill": "^0.0.2",
     "react-share": "^5.1.0",
     "react-slick": "^0.30.2",

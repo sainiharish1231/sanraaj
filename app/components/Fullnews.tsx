@@ -173,14 +173,6 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
     setAlertMessage(null);
   };
 
-  // const jsonLd = {
-  //   "@context": "https://sanraj.vercel.app/",
-  //   "@type": "Times News",
-  //   name: item.title,
-  //   image: item.image_url,
-  //   description: item.description,
-  // };
-
   const siteData = {
     "@context": "https://schema.org",
     "@type": "NewsArticle",
@@ -193,11 +185,11 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
     author: {
       "@type": "Organization",
       name: "Times News",
-      url: "https://sanraj.vercel.app/",
+      url: "https://times-news.in/",
     },
     publisher: {
       "@type": "Organization",
-      name: "San Raj Software Solutions",
+      name: "Times News",
       logo: {
         "@type": "ImageObject",
         url: "https://lh5.googleusercontent.com/p/AF1QipMP_m5WTcBaKo14c_5F4gCwFfb3Rojp-0W0wdcm=w159-h160-k-no",
@@ -212,9 +204,10 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
       <div className="flex flex-col justify-between">
         <div>
           <h1 className="mb-2 text-xl capitalize pt-4">{item.title}</h1>
-          <h2 className="hidden">{item.description}</h2>
+          <h2 className="hidden">{item.description}</h2>https://times-news.in/
           <p className="hidden">{item.description}</p>
           <Link className="hidden" href={"https://www.sanraaj.com/"}></Link>
+          <Link className="hidden" href={"https://times-news.in/"}></Link>
           <Link
             className="hidden"
             href={`https://www.facebook.com/sanrajsoftware`}

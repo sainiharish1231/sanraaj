@@ -51,7 +51,7 @@ const NewNews = ({ news, topNews, breakingNews, category }: NewNewsProps) => {
       const fetchNewsByCategory = await NewsService.getNewsByCategory(
         categoryId
       );
-      console.log(fetchNewsByCategory, "ddddddddd");
+
       setNewsData(fetchNewsByCategory.data);
     } catch (error: any) {
       console.log(error.message);

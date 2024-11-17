@@ -38,13 +38,6 @@ const SearchComponent: React.FC = () => {
     setSearchTerm(event.target.value);
   };
 
-  const handleSuggestionClick = (suggestion: string) => {
-    setSearchTerm(suggestion);
-    updateSearchHistory(suggestion);
-    setShowSuggestions(true);
-    setSearchResults([suggestion]); // Show only the selected suggestion as result
-  };
-
   const updateSearchHistory = (term: string) => {
     setSearchHistory((prevHistory) => {
       const updatedHistory = [
@@ -63,10 +56,6 @@ const SearchComponent: React.FC = () => {
       }
     }
     setShowSuggestions(true);
-  };
-
-  const handleClearHistory = () => {
-    setSearchHistory([]);
   };
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -129,78 +118,54 @@ const SearchComponent: React.FC = () => {
           {showSuggestions && (
             <div className="fixed   h-full   mt-[50px]  items-center top-0 left-0  right-0 w-full">
               <div className="max-w-[750px]   dark:bg-[#121212] p-2 bg-[#ffffff] container h-full">
-                {/*  {searchHistory.length > 0 && (
-                  <div className="px-3 py-1 flex justify-between items-center text-sm text-gray-400">
-                    Recent searches:
-                    <button
-                      className="text-xs text-gray-500 hover:text-gray-300"
-                      onClick={handleClearHistory}
-                    >
-                      Clear
-                    </button>
+                {searchResults.length > 0 ? (
+                  searchResults.map((result, index) => (
+                    <>
+                      <Link
+                        key={index}
+                        href={`/${result.slug_key}`}
+                        onClick={() => {
+                          setShowSuggestions(false);
+                          setSearchTerm("");
+                        }}
+                      >
+                        <div className="flex flex-row gap-3">
+                          <div className="w-[30%]  h-auto mb-2 relative aspect-[1.67]">
+                            <Image
+                              className="rounded-md object-cover"
+                              fill
+                              src={result.image_url}
+                              alt={"Times news image for " + result.title}
+                            />
+                          </div>
+                          <div className="w-[70%] justify-between flex flex-col ">
+                            <div>
+                              <h2
+                                className="hover:underlin font-psemibold mb-2 text-[15px]"
+                                style={{ scrollbarWidth: "none" }}
+                              >
+                                {result.title}
+                              </h2>
+                            </div>
+                            <div>
+                              <h2
+                                className="hover:underlin  font-psemibold mb-2 text-[15px]"
+                                style={{ scrollbarWidth: "none" }}
+                              ></h2>
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
+                    </>
+                  ))
+                ) : (
+                  <div
+                    className="text-center h-full flex text-lg justify-center 
+                   items-center text-gray-300"
+                  >
+                    No news found
                   </div>
                 )}
-                <ul className="py-1">
-                  {searchHistory.map((item, index) => (
-                    <li
-                      key={index}
-                      className="px-3 py-2 cursor-pointer hover:bg-gray-600 flex justify-between items-center"
-                    >
-                      <span
-                        onClick={() => {
-                          setSearchTerm(item);
-                          setShowSuggestions(true);
-                          updateSearchHistory(item); // Remove from history
-                        }}
-                        className="w-full h-full"
-                      >
-                        {item}
-                      </span>
-                      <button
-                        className="text-xs text-gray-500 hover:text-gray-300 ml-2"
-                        onClick={() => {
-                          setSearchHistory((prevHistory) =>
-                            prevHistory.filter((_, i) => i !== index)
-                          );
-                        }}
-                      >
-                        Remove
-                      </button>
-                    </li>
-                  ))}
-                </ul> */}
-
-                {searchResults.map((result: any, index) => (
-                  <>
-                    <Link
-                      href={`/${result.slug_key}`}
-                      onClick={() => {
-                        setShowSuggestions(false),
-                          setSearchbox(false),
-                          setSearchTerm("");
-                      }}
-                    >
-                      <div className="flex flex-row gap-3">
-                        <div className="w-[30%]  h-auto mb-2 relative aspect-[1.67]">
-                          <Image
-                            className="rounded-md object-cover"
-                            fill
-                            src={result.image_url}
-                            alt={"Times news image for " + result.title}
-                          />
-                        </div>
-                        <div className="w-[70%]">
-                          <h2
-                            className="hover:underlin font-psemibold mb-2 text-[15px]"
-                            style={{ scrollbarWidth: "none" }}
-                          >
-                            {result.title}
-                          </h2>
-                        </div>
-                      </div>
-                    </Link>
-                  </>
-                ))}
               </div>
             </div>
           )}
@@ -336,48 +301,6 @@ const SearchComponent: React.FC = () => {
                 <div className="text-center text-gray-500">No news found</div>
               )}
             </div>
-            {searchHistory.length > 0 && (
-              <></>
-              /*  <div className="px-3 py-1 flex justify-between items-center text-sm text-gray-400">
-          Recent searches:
-          <button
-            className="text-xs text-gray-500 hover:text-gray-300"
-            onClick={handleClearHistory}
-          >
-            Clear
-          </button>
-        </div> */
-            )}
-            {/* 
-      <ul className="py-1">
-        {searchHistory.map((item, index) => (
-          <li
-            key={index}
-            className="px-3 py-2 cursor-pointer hover:bg-gray-600 flex justify-between items-center"
-          >
-            <span
-              onClick={() => {
-                setSearchTerm(item);
-                setShowSuggestions(true);
-                updateSearchHistory(item);
-              }}
-              className="w-full h-full"
-            >
-              {item}
-            </span>
-            <button
-              className="text-xs text-gray-500 hover:text-gray-300 ml-2"
-              onClick={() => {
-                setSearchHistory((prevHistory) =>
-                  prevHistory.filter((_, i) => i !== index)
-                );
-              }}
-            >
-              Remove
-            </button>
-          </li>
-        ))}
-      </ul> */}
           </div>
         </div>
       )}
