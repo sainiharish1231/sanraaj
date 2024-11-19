@@ -16,7 +16,7 @@ export default function MainLayout({
 }>) {
   const path = usePathname();
   const isAdmin = path.startsWith("/admin");
-  const gtmId = "G-72C7F3Y4G7";
+  const gtmId = "G-CDG5HRNSY7";
 
   useEffect(() => {
     // Trigger pageview tracking on path change

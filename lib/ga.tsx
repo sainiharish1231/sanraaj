@@ -1,5 +1,5 @@
 // lib/ga.tsx
-export const GA_TRACKING_ID = "G-72C7F3Y4G7";
+export const GA_TRACKING_ID = "G-CDG5HRNSY7";
 
 // Log pageviews
 export const pageview = (url: string) => {

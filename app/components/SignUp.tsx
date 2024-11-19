@@ -226,7 +226,6 @@ const SignUp: React.FC = () => {
                 name="remember_me"
                 id="remember_me"
                 className="mr-2 focus:bg-[#9333ea]"
-                required
               />
               <label htmlFor="remember_me" className="">
                 I accept the terms and{" "}
