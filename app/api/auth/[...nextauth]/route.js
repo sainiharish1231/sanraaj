@@ -27,7 +27,7 @@ const handler = NextAuth({
           return {
             ...data.user,
             image: data.user.image,
-            email: `${data.user.email}:::::${data.token}:::::${data.user.id}:::::${data.user.isAdmin} `,
+            email: `${data.user.email}:::::${data.token}:::::${data.user.id}:::::${data.user.isAdmin}`,
             abc: data.token,
           };
         }

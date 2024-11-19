@@ -1,12 +1,11 @@
 "use client";
-import Preview from "./Preview";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
 import Alert from "../../components/Alert/Alert";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { MdClose } from "react-icons/md";
+import CustomCkEditor from "../CustomCkEditor";
+import { customToast } from "../CustomToast";
 
 function EditNews({ editModalNews, categories }: any) {
   const [news, setNews] = useState(editModalNews);
@@ -56,7 +55,7 @@ function EditNews({ editModalNews, categories }: any) {
 
   const onSubmit = async (id: any) => {
     if (error) {
-      setAlertMessage("Invalid slug key");
+      customToast("Invalid slug key", "error");
       return;
     } else {
       const body = new FormData();
@@ -85,7 +84,7 @@ function EditNews({ editModalNews, categories }: any) {
 
       const result = await response.json();
       if (result.success) {
-        setAlertMessage(result.message);
+        customToast("News update successfully", "success");
         router.push(`/admin/news`);
         setNews({
           slug_key: "",
@@ -97,7 +96,7 @@ function EditNews({ editModalNews, categories }: any) {
           keywords: [],
         });
       } else {
-        setAlertMessage(result.message);
+        customToast(result.message, "error");
       }
     }
   };
@@ -222,12 +221,12 @@ function EditNews({ editModalNews, categories }: any) {
                 Article
               </label>
               <div className="bg-white dark:bg-[#121212]  appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none  resize-none border-[#9333ea] ">
-                <CKEditor
-                  editor={ClassicEditor}
+                <CustomCkEditor
+                  className="news-article w-full max-w-[calc(100vw-380px)]"
                   data={news.article}
-                  onChange={(e, editor) => {
-                    CKEditorChangeHandler(editor);
-                  }}
+                  onChange={(_e: any, editor: any) =>
+                    CKEditorChangeHandler(editor)
+                  }
                 />
               </div>
             </div>

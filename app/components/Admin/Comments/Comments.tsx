@@ -33,7 +33,7 @@ const Comments: React.FC<prope> = ({ comments }) => {
     if (response.ok) {
       const comments = allComments.filter((c: any) => c.id !== id);
       setAllComments(comments);
-      customToast("Comment Delete SuccesFully", "success");
+      customToast("Comment Delete Successfully", "success");
     }
   };
 

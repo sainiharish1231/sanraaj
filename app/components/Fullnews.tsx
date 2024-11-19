@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import Alert from "../components/Alert/Alert";
 import Commentsdata from "./Commentdata";
 import { customToast } from "./CustomToast";
+
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -24,13 +25,17 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
   const [likebtnclour, setLikebtnClour] = useState("currentColor");
   const [likeCounter, setLikeCounter] = useState(item.noOfLikes); // Correctly typed as number
   const [isLiked, setIsLiked] = useState(true);
-  const [isopen, setIsOpen] = useState(true);
   const [userLike, setUserLike] = useState(false);
   const [shareOption, setShareOption] = useState(false);
   const bgColors = ["bg-purple-500", "bg-red-500", "bg-blue-500"];
   const path = usePathname();
-  const currentUrl = ` ${process.env.NEXTAUTH_URL}/${path}`;
+  const currentUrl = `https://www.times-news.in/${path}`;
+  const [isopen, setIsopen] = useState(true);
 
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(currentUrl);
+    customToast("Link copied to clipboard!", "success");
+  };
   const { data: session } = useSession();
   const { data: user }: any = useSession();
   const userId = user?.id;
@@ -89,7 +94,7 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
   };
 
   const Isopen = () => {
-    setIsOpen((prev) => !prev);
+    setIsopen((prev) => !prev);
   };
   const handleSubmit = useCallback(
     async (itemId: string, newCommentData: any, userToken: string) => {
@@ -185,7 +190,7 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
     author: {
       "@type": "Organization",
       name: "Times News",
-      url: "https://times-news.in/",
+      url: "https://www.times-news.in/",
     },
     publisher: {
       "@type": "Organization",
@@ -201,13 +206,35 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
 
   return (
     <>
-      <div className="flex flex-col justify-between">
+      <div
+        style={{ boxShadow: "0px 0px 4px 0px #9d8b8b45" }}
+        className="flex flex-col justify-between mt-4 leading-relaxed tracking-wide text-justify 
+    text-gray-800 dark:text-gray-300 
+    p-5 rounded-md shadow-lg 
+    border border-gray-200 dark:border-none 
+    overflow-auto no-scrollbar 
+    transition-all duration-100"
+      >
         <div>
-          <h1 className="mb-2 text-xl capitalize pt-4">{item.title}</h1>
-          <h2 className="hidden">{item.description}</h2>https://times-news.in/
-          <p className="hidden">{item.description}</p>
+          <p className="mb-2 text-xl font-bold lg:text-2xl capitalize">
+            {item.title}
+          </p>
+          <hr />
+          <p className=" text-gray-800 font-semibold dark:text-gray-300  py-4">
+            {new Date(item.createdAt).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+              hour: "numeric",
+              minute: "numeric",
+            })}
+          </p>
+          <h2 className="hidden">{item.description}</h2>
+
+          <p className="text-lg mb-2 text-gray-800  dark:text-gray-300  break-words md:text-xl">
+            {item.description}
+          </p>
           <Link className="hidden" href={"https://www.sanraaj.com/"}></Link>
-          <Link className="hidden" href={"https://times-news.in/"}></Link>
           <Link
             className="hidden"
             href={`https://www.facebook.com/sanrajsoftware`}
@@ -227,16 +254,16 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
           />
         </div>
 
-        <div
+        <article
           style={{ scrollbarWidth: "none" }}
-          className="transition    sleading-[1.8]   duration-150 ease-in-out text-[rgba(var(--color-typo-default), var(--tw-text-opacity))] "
+          className="news-article transition sleading-[1.8] duration-150 ease-in-out mt-[20px] "
           dangerouslySetInnerHTML={{
             __html: item.article,
           }}
-        ></div>
+        ></article>
 
         <div className="flex justify-start mb-4 border-t">
-          <div onClick={Isopen} className="flex mt-1 pt-2 pl-5length">
+          <div onClick={Isopen} className="flex mt-1 pt-2">
             <div className="flex pr-2 text-xl">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -265,17 +292,17 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
               </div>
             ))}
 
-            <div className="pt-1 text-xl pl-2 ">{comments.length}+</div>
+            <div className="pt-1 text-xl pl-2">
+              {comments.length > 0 && `${comments.length}+`}
+            </div>
           </div>
 
-          <div className=" relative flex justify-end w-full mt-1 pt-2 pr-5 ">
+          <div className="relative flex justify-end w-full mt-1 pt-2 pr-1">
             <div
               onClick={() => {
                 setShareOption((prev) => !prev);
               }}
-              className="transition  ease-out duration-300 
-                      h-8 w-8  flex   justify-center items-center text-center   rounded-full
-                    text-[#ffff] dark:text-[black] bg-black dark:bg-[#ffff]"
+              className="transition  ease-out duration-300 h-8 w-8  flex justify-center items-center text-center rounded-full text-[#ffff] dark:text-[black] bg-black dark:bg-[#ffff]"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -294,30 +321,85 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
               </svg>
             </div>
             {shareOption && (
-              <div className="bg-white py-2 px-1 flex items-center rounded-lg gap-2  absolute   md:-mt-14  -mt-3 md:-mr-12  mr-10">
-                <FacebookShareButton url={currentUrl}>
-                  <FacebookIcon size={32} round />
-                </FacebookShareButton>
-                <TwitterShareButton url={currentUrl}>
-                  <TwitterIcon size={32} round />
-                </TwitterShareButton>
-                <WhatsappShareButton url={currentUrl}>
-                  <WhatsappIcon size={32} round />
-                </WhatsappShareButton>
-                <LinkedinShareButton url={currentUrl} title="hello">
-                  <LinkedinIcon size={32} round />
-                </LinkedinShareButton>
-              </div>
+              <>
+                <div className="fixed inset-0 p-4 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                  <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-6 relative">
+                    <div className="flex items-center justify-between border-b pb-3 border-gray-300">
+                      <h3 className="text-xl font-bold text-gray-800">
+                        Share News
+                      </h3>
+                      <button
+                        onClick={() => {
+                          setShareOption((prev) => !prev);
+                        }}
+                        className="text-gray-400 hover:text-red-500"
+                        aria-label="Close"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="w-6 h-6"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+
+                    <div className="my-6">
+                      <h6 className="text-base text-gray-800">
+                        Share this News link via
+                      </h6>
+                      <div className="flex gap-4 mt-4">
+                        <FacebookShareButton url={currentUrl}>
+                          <FacebookIcon size={32} round />
+                        </FacebookShareButton>
+                        <TwitterShareButton url={currentUrl}>
+                          <TwitterIcon size={32} round />
+                        </TwitterShareButton>
+                        <WhatsappShareButton url={currentUrl}>
+                          <WhatsappIcon size={32} round />
+                        </WhatsappShareButton>
+                        <LinkedinShareButton url={currentUrl} title="hello">
+                          <LinkedinIcon size={32} round />
+                        </LinkedinShareButton>
+                      </div>
+                    </div>
+                    <div>
+                      <h6 className="text-base text-gray-800">Or copy link</h6>
+                      <div className="flex items-center mt-4 border rounded-lg overflow-hidden">
+                        <p className="flex text-[#317cde] p-3">{currentUrl}</p>
+                        <button
+                          onClick={handleCopyLink}
+                          className="bg-blue-600 hover:bg-blue-700 text-white px-4  mr-3 py-2"
+                        >
+                          Copy
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
             )}
           </div>
         </div>
 
-        <div className="flex justify-between items-center border-b  pr-2">
+        <div className="flex justify-between items-center border-b pr-[0.5rem]">
           <div className="mt-3 mx-5 flex-col flex">
-            <span className="text-sm">Views:{item.Views}</span>
+            {/* <span className="text-sm">Views:{item.Views}</span> */}
           </div>
-          <div onClick={UpdateLike} className="mt-3 mr-6">
-            <div className="flex flex-col justify-center items-center">
+          <div onClick={UpdateLike} className="mt-3">
+            <div
+              className={`flex flex-col justify-center items-center ${
+                !likeCounter && "mb-5"
+              }`}
+            >
               <svg
                 className="h-6 w-6"
                 viewBox="0 0 24 24"
@@ -329,7 +411,7 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
               >
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
               </svg>
-              <div className="text-xl">{likeCounter}</div>
+              <div className="text-xl">{likeCounter > 0 && likeCounter}</div>
             </div>
           </div>
         </div>
@@ -355,11 +437,6 @@ const FullNews = ({ item, comments: commentsServer, userLikedeta }: any) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(siteData) }}
       />
-
-      {/* <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      /> */}
     </>
   );
 };

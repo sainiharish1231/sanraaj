@@ -1,14 +1,10 @@
 "use client";
-
 import Alert from "@/app/components/Alert/Alert";
 import { customToast } from "@/app/components/CustomToast";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
-
 import { MdClose } from "react-icons/md";
-
+import CustomCkEditor from "@/app/components/CustomCkEditor";
 interface addNewsDataTypes {
   slug_key: string;
   title: string;
@@ -25,13 +21,13 @@ interface category {
   parentId: string;
 }
 
-interface prope {
+interface props {
   category: category[];
 }
 
 const slugKeyPattern = /^[a-zA-Z0-9-]+$/;
 
-const AddNews: React.FC<prope> = (props) => {
+const AddNews: React.FC<props> = (props) => {
   const { data: session, status }: any = useSession();
   const user = session?.user;
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
@@ -224,7 +220,7 @@ const AddNews: React.FC<prope> = (props) => {
               >
                 <option value="">Choose a category...</option>
 
-                {category.map((item: any) => (
+                {category?.map((item: any) => (
                   <option key={item.id} value={item.id}>
                     {item.categoryName}
                   </option>
@@ -265,11 +261,13 @@ const AddNews: React.FC<prope> = (props) => {
               <label className="block text-sm font-bold mb-2" htmlFor="article">
                 Article
               </label>
-              <div className="bg-white dark:bg-[#121212] appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none resize-none border-[#9333ea] break-all overflow-wrap word-break max-w-full  ">
-                <CKEditor
-                  editor={ClassicEditor}
+              <div className="bg-white dark:bg-[#121212] appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none resize-none border-[#9333ea] break-all overflow-wrap word-break max-w-full">
+                <CustomCkEditor
+                  className="news-article w-full max-w-[calc(100vw-380px)]"
                   data={addNewsData.article}
-                  onChange={(e, editor) => CKEditorChangeHandler(editor)}
+                  onChange={(_e: any, editor: any) =>
+                    CKEditorChangeHandler(editor)
+                  }
                 />
               </div>
             </div>

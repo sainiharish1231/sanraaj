@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const flowbite = require("flowbite-react/tailwind");
+
 const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -26,10 +27,14 @@ const config: Config = {
         pextrabold: ["Poppins-ExtraBold", "sans-serif"],
         pblack: ["Poppins-Black", "sans-serif"],
       },
+      screens: {
+        xs: "400px",
+      },
     },
   },
 
   plugins: [flowbite.plugin()],
   darkMode: "selector",
 };
+
 export default config;

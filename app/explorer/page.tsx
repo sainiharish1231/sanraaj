@@ -31,16 +31,16 @@ const ExplorerPage = async () => {
   // const feedback = await getfeedback();
 
   return (
-    <div className="sm:mt-[60px] mt-[30px] mb-20  flex  flex-col lg:flex-row h-full w-full lg:items-start  sm:items-center justify-center   ">
-      <div className="order-1 lg:order-2 sm:w-full flex lg:w-[50%] container h-auto w-auto bg-[100%] flex-col">
+    <div className="sm:mt-[60px] mt-[30px] mb-20  flex  flex-col lg:flex-row h-full w-full items-center lg:items-start  sm:items-center justify-center   ">
+      <div className="order-1 lg:order-2 sm:w-full flex lg:w-[50%] lg:container h-auto w-auto bg-[100%] flex-col">
         <Explorer />
       </div>
-      <div className="order-3 lg:order-1 flex lg:w-[25%] lg:sticky top-[100px] container h-auto w-auto lg:h-[80vh] bg-[100%]  flex-col overflow-y-auto no-scrollbar">
+      <div className="order-3 lg:order-1 flex lg:w-[25%] lg:sticky top-[100px] lg:container h-auto w-auto lg:h-[80vh] bg-[100%]  flex-col overflow-y-auto no-scrollbar">
         {/*  <Topnews />
         <Ads /> */}
       </div>
 
-      <div className="order-2 lg:order-3 flex lg:w-[25%] lg:sticky top-[100px] container h-auto w-auto lg:h-[80vh] bg-[100%]  flex-col overflow-y-auto no-scrollbar">
+      <div className="order-2 lg:order-3 flex lg:w-[25%] lg:sticky top-[100px] lg:container h-auto w-auto lg:h-[80vh] bg-[100%]  flex-col overflow-y-auto no-scrollbar">
         {/*   <Ads />
         <Breakingnews /> */}
       </div>

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Alert from "../components/Alert/Alert";
 import { customToast } from "./CustomToast";
+import Link from "next/link";
 
 const SignUp: React.FC = () => {
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
@@ -65,16 +66,6 @@ const SignUp: React.FC = () => {
         <div className="mx-auto py-8 rounded-lg">
           <div className="">
             <h2 className="text-2xl font-bold tracking-wide">Sign Up</h2>
-            <div className="text-sm mt-2">
-              Already have an account?{" "}
-              <a
-                href="/login"
-                className="text-[#9333ea] hover:text-[#9333ea] hover:underline"
-                title="Sign In"
-              >
-                Sign in here
-              </a>
-            </div>
           </div>
           <form className="my-8 text-sm" onSubmit={handleSubmit}>
             <div className="flex flex-col my-4">
@@ -227,24 +218,36 @@ const SignUp: React.FC = () => {
                 {error}
               </div>
             )}
+
             <div className="flex items-center">
               <input
+                required
                 type="checkbox"
                 name="remember_me"
                 id="remember_me"
                 className="mr-2 focus:bg-[#9333ea]"
+                required
               />
               <label htmlFor="remember_me" className="">
                 I accept the terms and{" "}
-                <a
-                  href="#"
+                <Link
+                  href="/privacy-policy"
                   className="text-[#9333ea] hover:text-[#9333ea] hover:underline"
                 >
                   privacy policy
-                </a>
+                </Link>
               </label>
             </div>
-
+            <div className="text-lg mt-4">
+              Already have an account?
+              <Link
+                href="/login"
+                className="text-[#9333ea] hover:text-[#9333ea] hover:underline"
+                title="Sign In"
+              >
+                Sign in here
+              </Link>
+            </div>
             <div className="my-4 flex items-center justify-end space-x-4">
               <div className="my-4 flex items-center justify-end space-x-4">
                 <div className="flex justify-center ">

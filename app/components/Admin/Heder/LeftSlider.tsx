@@ -7,10 +7,7 @@ import Link from "next/link";
 
 export const LeftSlider = () => {
   return (
-    <div
-      style={{ boxShadow: "0px 2px 20px 0px #fbfbfb4f" }}
-      className="flex flex-col justify-between p-2 h-full  shadow-2xl  left-0 top-0 pb-[140px] items-center"
-    >
+    <div className="flex flex-col justify-between p-2 h-full border  rounded-tr-lg dark:border-gray-900   left-0 top-0 pb-[140px] items-center">
       <div className=" font-bold items-center">
         <h2 className="text-2xl">Admin</h2>
       </div>

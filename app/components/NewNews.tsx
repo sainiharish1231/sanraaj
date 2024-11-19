@@ -4,13 +4,13 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import Breakingnews from "./Breakingnews";
 import TopNews from "./TopNews";
-import Ads from "./Ads/Ads";
-import SkeletonPlaceholder from "./Dammydeta";
+import SkeletonPlaceholder from "./SkeletonPlaceholder";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import { NewsItem } from "../../types/news";
 import { useSession } from "next-auth/react";
 import { customToast } from "./CustomToast";
 import NewsService from "@/services/NewsService";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface NewNewsProps {
   news: NewsItem[];
@@ -18,19 +18,6 @@ interface NewNewsProps {
   breakingNews: NewsItem[];
   category: any;
 }
-
-const useIsMobile = (thresold: number = 768) => {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= thresold);
-    };
-    window.addEventListener("resize", handleResize);
-    handleResize();
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-  return isMobile;
-};
 
 const NewNews = ({ news, topNews, breakingNews, category }: NewNewsProps) => {
   const [newsData, setNewsData] = useState(news);
@@ -45,7 +32,8 @@ const NewNews = ({ news, topNews, breakingNews, category }: NewNewsProps) => {
     useState("All");
   const mainContent = useRef<HTMLDivElement | null>(null);
   const isMobile = useIsMobile();
-  const categorys = category.data;
+  const categories = category.data;
+
   const getNewsByCategory = async (categoryId: any) => {
     try {
       const fetchNewsByCategory = await NewsService.getNewsByCategory(
@@ -110,7 +98,7 @@ const NewNews = ({ news, topNews, breakingNews, category }: NewNewsProps) => {
     if (user?.token) {
       const fetchSavedNews = async () => {
         const res = await fetch(
-          ` ${process.env.NEXT_PUBLIC_HOST_URL}/saved-news`,
+          `${process.env.NEXT_PUBLIC_HOST_URL}/saved-news`,
           {
             method: "GET",
             headers: {
@@ -120,7 +108,7 @@ const NewNews = ({ news, topNews, breakingNews, category }: NewNewsProps) => {
           }
         );
         const result = await res.json();
-        const ids = result.data.map((item: any) => item.id);
+        const ids = result?.data?.map((item: any) => item.id);
         setSavedNews(ids);
       };
       fetchSavedNews();
@@ -135,7 +123,7 @@ const NewNews = ({ news, topNews, breakingNews, category }: NewNewsProps) => {
 
     try {
       const res = await fetch(
-        ` ${process.env.NEXT_PUBLIC_HOST_URL}/saved-news`,
+        `${process.env.NEXT_PUBLIC_HOST_URL}/saved-news`,
         {
           method: "POST",
           headers: {
@@ -176,14 +164,14 @@ const NewNews = ({ news, topNews, breakingNews, category }: NewNewsProps) => {
   return (
     <>
       <div className="bg-white dark:bg-[#121212] pl-4 sm:pl-0 w-full">
-        <div className="flex px-2 items-center justify-center  touch-auto w-[100%] sm:mt-0 mt-1 h-[50px]">
-          {categorys.length >= 14 && (
+        <div className="flex px-2 items-center justify-center  touch-auto    w-full sm:mt-0 mt-1 h-[50px]">
+          {categories && categories.length >= 8 && (
             <GrPrevious
               className="text-2xl cursor-pointer hidden sm:flex"
               onClick={scrollLeft}
             />
           )}
-          <div className="flex touch-auto  justify-center items-center sm:ml-6 ">
+          <div className="flex touch-auto  justify-center items-center sm:ml-6">
             <button
               className={`py-1 px-3 rounded-xl  ${
                 byDefaultSelectedCategory === "All"
@@ -204,7 +192,7 @@ const NewNews = ({ news, topNews, breakingNews, category }: NewNewsProps) => {
             className="flex justify-start items-center ml-3 mr-3 w-full overflow-x-auto space-x-2"
             style={{ scrollbarWidth: "none" }}
           >
-            {categorys.map((category: any) => (
+            {categories?.map((category: any) => (
               <button
                 key={category.id}
                 className={`flex py-1 px-3  whitespace-nowrap rounded-xl ${
@@ -222,7 +210,7 @@ const NewNews = ({ news, topNews, breakingNews, category }: NewNewsProps) => {
               </button>
             ))}
           </div>
-          {categorys.length >= 14 && (
+          {categories && categories?.length >= 8 && (
             <GrNext
               className="text-2xl cursor-pointer hidden sm:flex"
               onClick={scrollRight}
@@ -235,10 +223,7 @@ const NewNews = ({ news, topNews, breakingNews, category }: NewNewsProps) => {
         className="flex flex-col lg:flex-row lg:items-start sm:items-center justify-center w-full h-full lg:max-h-[calc(100vh-110px)] overflow-y-auto px-4 md:px-6 lg:px-2"
         ref={mainContent}
       >
-        <div
-          // style={{ scrollbarWidth: "none" }}
-          className="order-2 lg:order-1 flex lg:w-[25%] lg:sticky top-0 lg:max-h-[calc(100vh-110px)] overflow-y-auto flex-col w-full no-scrollbar pt-4"
-        >
+        <div className="order-2 lg:order-1 flex lg:w-[20%] lg:sticky top-0 lg:max-h-[calc(100vh-110px)] overflow-y-auto flex-col w-full no-scrollbar pt-4">
           {/*  <Ads /> */}
           <h2 className="text-sm lg:px-4">Breaking News</h2>
           <Breakingnews news={breakingNews} />
@@ -265,15 +250,25 @@ const NewNews = ({ news, topNews, breakingNews, category }: NewNewsProps) => {
                     >
                       <div className="transition duration-150 w-full text-inherit ease-in-out">
                         <h2 className="hover:underline mb-2 text-xl">
-                          {item.title.slice(0, 1).toUpperCase()}
-                          {item.title.slice(1, item.length)}
+                          {item.title.slice(0, 1).toUpperCase() +
+                            item.title.slice(1, item.length)}
                         </h2>
                       </div>
                     </Link>
-                    <div className="font-psemibold text-[rgba(var(--color-typo-default), transition var(--tw-text-opacity))] text-gray-600 dark:text-gray-300">
+                    <div className="font-psemibold text-[rgba(var(--color-typo-default), transition var(--tw-text-opacity))] text-gray-600 dark:text-gray-300 bg-slate-200 dark:bg-[#fff2] py-4 px-3  rounded-md ">
                       {item.description}
                     </div>
-                    <div className="flex justify-between  gg items-center ">
+                    <p className="text-gray-500 dark:text-gray-400 py-2">
+                      <span>Updated: </span>
+                      {new Date(item.createdAt).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                        hour: "numeric",
+                        minute: "numeric",
+                      })}
+                    </p>
+                    <div className="flex justify-between  items-center ">
                       <div>
                         <ul className="flex flex-wrap text-xs font-medium mt-4">
                           <li className="mb-2">
@@ -285,7 +280,7 @@ const NewNews = ({ news, topNews, breakingNews, category }: NewNewsProps) => {
                       </div>
                       <div
                         onClick={() => handleSavedNews(item.id, isSaved)}
-                        className="  cursor-pointer"
+                        className="cursor-pointer"
                       >
                         {isSaved ? (
                           <svg
@@ -327,16 +322,17 @@ const NewNews = ({ news, topNews, breakingNews, category }: NewNewsProps) => {
           })}
           <div className="">
             {loading && (
-              <div className=" flex justify-center items-center">
-                <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-purple-500"></div>
-              </div>
+              <SkeletonPlaceholder />
+              /*  <div className="flex justify-center items-center">
+                <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-purple-500" />
+              </div> */
             )}
           </div>
         </div>
 
         <div
           style={{ scrollbarWidth: "none" }}
-          className="order-3 lg:order-3 dc flex lg:w-[25%] lg:sticky top-0 lg:max-h-[calc(100vh-110px)] overflow-y-auto flex-col w-full no-scrollbar pt-4"
+          className="order-3 lg:order-3 dc flex lg:w-[30%] lg:sticky top-0 lg:max-h-[calc(100vh-110px)] overflow-y-auto flex-col w-full no-scrollbar pt-4"
         >
           <h2 className="text-sm lg:px-4">Top News</h2>
           <TopNews news={topNews} />

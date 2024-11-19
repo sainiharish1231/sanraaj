@@ -12,12 +12,12 @@ const Login: any = () => {
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
-  const handleGoogleSignIn = async () => {
+  /*  const handleGoogleSignIn = async () => {
     setIsSubmitting(true);
     await signIn("google", { redirect: true });
 
     setIsSubmitting(false);
-  };
+  }; */
   const handleSubmit = async (event: any) => {
     event.preventDefault();
 
@@ -43,7 +43,7 @@ const Login: any = () => {
   };
 
   return (
-    <div className="w-full  flex mt-20 sm:mt-40 justify-center items-center">
+    <div className="w-full flex mt-20 sm:mt-40 justify-center items-center">
       <div className="">
         <div className="mx-auto mt-3 rounded-lg">
           <h2 className="text-2xl font-bold tracking-wide">{`Log In`}</h2>
@@ -143,15 +143,18 @@ const Login: any = () => {
           </form>
         </div>
 
-        <div className="text-sm mt-2">
-          {`   Don't have an account?`}
-          <Link
-            href="/signUp"
-            className="text-[#9333ea] hover:text-[#9333ea] hover:underline"
-            title="Sign Up"
-          >
-            {`  Sign up here`}
-          </Link>
+        <div className="text-md mt-2 flex flex-row gap-x-2 ">
+          {`Don't have an account?`}
+
+          <div>
+            <Link
+              href="/signUp"
+              className="text-[#9333ea]  hover:text-[#9333ea] hover:underline"
+              title="Sign Up"
+            >
+              {`Sign up here`}
+            </Link>
+          </div>
         </div>
 
         {/* <button

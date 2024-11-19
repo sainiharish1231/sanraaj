@@ -2,18 +2,20 @@
 import { Button, Label, List, TextInput } from "flowbite-react";
 import React, { useState } from "react";
 import { customToast } from "@/app/components/CustomToast";
+import { useSession } from "next-auth/react";
 
 interface category {
   categoryName: string;
   parentCategory: string;
 }
 
-interface prope {
+interface props {
   category: category[];
 }
 
-const Category: React.FC<prope> = (prope) => {
-  const { category } = prope;
+const Category: React.FC<props> = (props) => {
+  const { data: session }: any = useSession();
+  const { category } = props;
 
   const [categories, setCategories] = useState(category);
 
@@ -27,28 +29,42 @@ const Category: React.FC<prope> = (prope) => {
   };
 
   const addCategory = async () => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_HOST_URL}/category`,
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(categoryData),
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_HOST_URL}/category`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            authorization: `${session.user.token}`,
+          },
+          body: JSON.stringify(categoryData),
+        }
+      );
+
+      if (response.status === 429) {
+        // Handle rate limiting error
+        const result = await response.json();
+        console.log("result.message", result.message);
+        customToast(result.message, "error");
+        return;
       }
-    );
 
-    const result = await response.json();
+      const result = await response.json();
 
-    if (result.success) {
-      customToast("Category added successfully", "success");
-      setCategories([...categories, result.data]);
-      setCategoryData({
-        categoryName: "",
-        parentCategory: "",
-      });
-    } else {
-      customToast(result.message, "error");
+      if (result.success) {
+        customToast("Category added successfully", "success");
+        setCategories([...categories, result.data]);
+        setCategoryData({
+          categoryName: "",
+          parentCategory: "",
+        });
+      } else {
+        customToast(result.message, "error");
+      }
+    } catch (error) {
+      customToast("An error occurred. Please try again later.", "error");
+      console.error("Error adding category:", error);
     }
   };
 
@@ -64,7 +80,7 @@ const Category: React.FC<prope> = (prope) => {
             type="text"
             name="categoryName"
             value={categoryData.categoryName}
-            placeholder="Enter your coustom category"
+            placeholder="Enter your custom category"
             shadow
             onChange={changeHandler}
           />
@@ -84,7 +100,7 @@ const Category: React.FC<prope> = (prope) => {
           />
         </div>
 
-        <div className="flex  ff justify-center mt-[20px]">
+        <div className="flex justify-center mt-[20px]">
           <Button className="w-[200px] text-center" onClick={addCategory}>
             Add
           </Button>
@@ -92,15 +108,15 @@ const Category: React.FC<prope> = (prope) => {
       </form>
       <div className="mb-20">
         <h1 className="text-center flex justify-center text-2xl">
-          All Category
+          All Categories
         </h1>
-        {categories.map((item) => {
+        {categories?.map((item: any) => {
           return (
-            <>
-              <List className="mt-[20px]  ">
+            <div key={item.id}>
+              <List className="mt-[20px]">
                 <List.Item>{item.categoryName}</List.Item>
               </List>
-            </>
+            </div>
           );
         })}
       </div>

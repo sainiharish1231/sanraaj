@@ -73,10 +73,7 @@ const SearchComponent: React.FC = () => {
       {searchbox ? (
         <>
           <form onSubmit={handleFormSubmit}>
-            <div
-              className="flex w-[97%]  top-0 sm:justify-between    absolute m-2 left-0 bg-white dark:bg-[#121212] 
-             sm:top-0 text-black dark:text-[#ffffff]  border border-[#9333ea]  sm:py-2 sm-px-2 py-2 px-2 rounded-2xl"
-            >
+            <div className="flex w-[97%]  top-0 sm:justify-between    absolute m-2 left-0 bg-white dark:bg-[#121212]  sm:top-0 text-black dark:text-[#ffffff]  border border-[#9333ea]  sm:py-2 sm-px-2 py-2 px-2 rounded-2xl">
               <input
                 ref={searchInputRef}
                 placeholder="Search"
@@ -95,7 +92,7 @@ const SearchComponent: React.FC = () => {
                       {setShowSuggestions(true)}
                     </>
                   )}
-                  className="flex flex-col  relative  h-full w-full mr-7  items-center transition ease-in duration-200 hover:text-[#9333ea] "
+                  className="flex flex-col  relative  h-full w-full mr-7  items-center transition ease-in duration-200 hover:text-[#9333ea]"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -116,8 +113,11 @@ const SearchComponent: React.FC = () => {
             </div>
           </form>
           {showSuggestions && (
-            <div className="fixed   h-full   mt-[50px]  items-center top-0 left-0  right-0 w-full">
-              <div className="max-w-[750px]   dark:bg-[#121212] p-2 bg-[#ffffff] container h-full">
+            <div
+              onClick={() => setShowSuggestions(false)}
+              className="fixed h-full mt-[50px]  items-center top-0 left-0  right-0 w-full"
+            >
+              <div className="max-w-[750px] dark:bg-[#121212] p-2 bg-[#ffff] container h-screen">
                 {searchResults.length > 0 ? (
                   searchResults.map((result, index) => (
                     <>
@@ -127,6 +127,7 @@ const SearchComponent: React.FC = () => {
                         onClick={() => {
                           setShowSuggestions(false);
                           setSearchTerm("");
+                          setSearchbox(false);
                         }}
                       >
                         <div className="flex flex-row gap-3">
@@ -159,10 +160,7 @@ const SearchComponent: React.FC = () => {
                     </>
                   ))
                 ) : (
-                  <div
-                    className="text-center h-full flex text-lg justify-center 
-                   items-center text-gray-300"
-                  >
+                  <div className="text-center h-full flex text-lg justify-center items-center text-gray-300">
                     No news found
                   </div>
                 )}
@@ -181,7 +179,7 @@ const SearchComponent: React.FC = () => {
                   {setShowSuggestions(true)},{setSearchTerm("")}
                 </>
               )}
-              className="flex flex-col h-10 w-10  justify-center float-right relative  items-center transition ease-in duration-200 hover:text-[#9333ea] "
+              className="flex flex-col h-10 w-10  justify-center float-right relative  items-center transition ease-in duration-200 hover:text-[#9333ea]"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -203,10 +201,7 @@ const SearchComponent: React.FC = () => {
       )}
 
       <form onSubmit={handleFormSubmit}>
-        <div
-          className="sm:flex hidden sm:w-[93%] lg:w-full my-5 mr-40 top-0 sm:relative absolute left-0 bg-white dark:bg-[#121212] 
-             sm:top-0 text-[black] dark:text-[#ffffff] border border-[#9333ea] sm:py-2 sm-px-2 py-4 px-4 rounded-2xl"
-        >
+        <div className="sm:flex hidden sm:w-[93%] lg:w-full my-5 mr-40 top-0 sm:relative absolute left-0 bg-white dark:bg-[#121212] sm:top-0 text-[black] dark:text-[#ffffff] border border-[#9333ea] sm:py-2 sm-px-2 py-4 px-4 rounded-2xl">
           <input
             ref={searchInputRef}
             placeholder="Search"
@@ -225,7 +220,7 @@ const SearchComponent: React.FC = () => {
                   {setShowSuggestions(false)},{},{setSearchTerm("")}
                 </>
               )}
-              className="flex flex-col  relative  h-full w-full  mr-7  items-center transition ease-in duration-200 hover:text-[#9333ea] "
+              className="flex flex-col  relative  h-full w-full  mr-7  items-center transition ease-in duration-200 hover:text-[#9333ea]"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

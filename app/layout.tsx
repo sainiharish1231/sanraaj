@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     "Stay informed with Time News! Get the latest breaking news, trending headlines, and comprehensive updates on politics, technology, business, sports, and global affairs. Trusted news at your fingertips.",
   applicationName: "times-news",
-  authors: [{ name: "Times News", url: "https://times-news.in/" }],
+  authors: [{ name: "Times News", url: "https://www.times-news.in/" }],
   generator: "times news",
   keywords: [
     "times-news",
@@ -60,11 +60,11 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: "https://times-news.in/",
+    canonical: "https://www.times-news.in/",
   },
   openGraph: {
     type: "website",
-    url: "https://times-news.in/",
+    url: "https://www.times-news.in/",
     title: "Time News",
     description:
       "Get the latest headlines and in-depth news coverage from around the world.",

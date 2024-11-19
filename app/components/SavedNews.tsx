@@ -24,7 +24,6 @@ const SavedNews = () => {
         );
         const result = await res.json();
         setNews(result.data);
-        console.log(result, "Fetched data");
       };
       fetchSavedNews();
     }
@@ -34,11 +33,25 @@ const SavedNews = () => {
     <>
       {/* Check if there are no news items */}
       {news.length === 0 ? (
-        <div className="text-center p-6 mt-32 rounded-lg shadow-lg max-w-md mx-auto">
-          <h2 className="text-xl font-semibold ">No News Found</h2>
-          <p className=" mt-2">
-            Sorry, there are no saved news available at the moment. Please check
-            back later.
+        <div className="text-center p-6 mt-10 rounded-lg max-w-md mx-auto shadow-lg">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/4076/4076549.png"
+            alt="No saved news"
+            className="mx-auto w-28 h-28 mb-6 animate-bounce"
+          />
+          <h2 className="text-lg font-semibold">No Saved News Yet</h2>
+          <p className="mt-4">
+            You haven’t saved any news yet. Start exploring
+            <div></div>
+            <a
+              href="https://times-news.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 underline ml-1"
+            >
+              Times News
+            </a>{" "}
+            and save articles that interest you. Access them anytime here!
           </p>
         </div>
       ) : (
@@ -66,15 +79,15 @@ const SavedNews = () => {
                 >
                   <h1 className="hover:underline mb-2 text-xl">{item.title}</h1>
                 </Link>
-                {/* <Link
+                <Link
                   style={{ scrollbarWidth: "none" }}
                   href={`/${item.slug_key}`}
-                  className="overflow-y-scroll text-sm hidden lg:flex font-semibold font-psemibold leading-snug hover:underline"
+                  className="overflow-y-scroll text-sm hidden xl:flex font-semibold font-psemibold leading-snug hover:underline"
                 >
                   <h3 className="font-psemibold text-sm text-[rgba(var(--color-typo-default), transition var(--tw-text-opacity))]">
                     {item.description}
                   </h3>
-                </Link> */}
+                </Link>
                 <p className="font-psemibold text-sm mt-1">
                   #{item.keywords[0]}
                 </p>

@@ -52,7 +52,12 @@ const DashboardContant: React.FC<prope> = (prop) => {
                 Total News
               </h2>
               <span className="text-4xl font-bold text-white">
-                <i className="fas fa-blog mr-2"></i> {newsLength}
+                <i className="fas fa-blog mr-2"></i>{" "}
+                {!newsLength ? (
+                  <span className="text-2xl">loading...</span>
+                ) : (
+                  `${newsLength}`
+                )}
               </span>
             </div>
           </Link>
@@ -62,7 +67,12 @@ const DashboardContant: React.FC<prope> = (prop) => {
                 Total User
               </h2>
               <span className="text-4xl font-bold text-white">
-                <i className="fas fa-comment mr-2"></i> {userLength}
+                <i className="fas fa-comment mr-2"></i>{" "}
+                {!userLength ? (
+                  <span className="text-2xl">loading...</span>
+                ) : (
+                  `${userLength}`
+                )}
               </span>
             </div>
           </Link>
@@ -72,7 +82,12 @@ const DashboardContant: React.FC<prope> = (prop) => {
                 Total Comments
               </h2>
               <span className="text-4xl font-bold text-white">
-                <i className="fas fa-edit mr-2"></i> {commentLength}
+                <i className="fas fa-edit mr-2"></i>{" "}
+                {!commentLength ? (
+                  <span className="text-2xl">loading...</span>
+                ) : (
+                  `${commentLength}`
+                )}
               </span>
             </div>
           </Link>

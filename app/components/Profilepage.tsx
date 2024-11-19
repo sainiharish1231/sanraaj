@@ -1,12 +1,25 @@
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 
 const Profile = () => {
   const { data: session, status } = useSession();
+
+  const user: any = session?.user;
+
+  const [Adminbtn, setAdminbtn] = useState(false);
+  useEffect(() => {
+    if (user?.isAdmin === "true") {
+      setAdminbtn(true);
+    } else {
+      setAdminbtn(false);
+    }
+  }, [status, user]);
+  const userName = user?.name || "";
+  const userImage = user?.image;
   const router = useRouter();
 
   useEffect(() => {
@@ -19,19 +32,10 @@ const Profile = () => {
     return <div>Loading...</div>;
   }
 
-  const user = session?.user;
-
-  const userName = user?.name || "";
-  const userImage = user?.image;
-
-  // const user = "f;ldg";
-  // const userName = "dnfj";
-  // const userImage = "mlfd";
-
   return (
     <div className="flex flex-col items-center p-4  mt-20 justify-center">
       <h2 className=" flex justify-center mb-10 text-2xl font-bold sm:text-xl">
-        Public Profile
+        {Adminbtn ? "Admin" : "Public"} Profile
       </h2>
       {(userImage || userName) && (
         <div className="object-cover text-8xl flex justify-center items-center p-1 rounded-full ring-2 ring-[#9333ea] dark:ring-[#9333ea] h-[150px] w-[150px]">
@@ -49,11 +53,11 @@ const Profile = () => {
         </div>
       )}
       <div>
-        <h2 className=" mt-10 flex justify-center text-2xl font-bold sm:text-xl">
+        <h2 className="mt-10 flex justify-center text-2xl font-bold sm:text-xl">
           {userName.slice(0, 1).toUpperCase()}
           {userName.slice(1, userName.length)}
         </h2>
-        <h2 className=" flex justify-center text-xl font-bold sm:text-xl">
+        <h2 className="flex justify-center text-xl font-bold sm:text-xl">
           {user?.email}
         </h2>
       </div>

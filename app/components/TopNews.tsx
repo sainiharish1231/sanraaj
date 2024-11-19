@@ -9,34 +9,11 @@ interface Props {
 
 const TopNews = ({ news: topNews }: Props) => {
   return (
-    <div className="lg:px-4 max-h-[600px] lg:mb-20">
+    <div className="lg:px-4 max-h-[600px] lg:mb-[300px]">
       {topNews.map((item: any, i: any) => (
-        /*  <div
-          key={i}
-          className="flex lg:flex-col xl:flex-row items-start mb-9    "
-        >
-          <div className="inline-block mr-4 ">
-            <div className="w-32  h-auto lg:w-[230px]  xl:w-32 xl:h-auto bg-cover bg-center">
-              <Image src={item.image_url} alt={""} height={1200} width={1200} />
-            </div>
-          </div>
-          <div className=" w-2/3   lg:h-full lg:w-full   xl:h-auto  flex  flex-col justify-between h-32 ">
-            <a
-              style={{ scrollbarWidth: "none" }}
-              href="#"
-              className=" font-bold mb-2 break-all whitespace-pre-wrap hover:underline overflow-x-auto word-break  h-[80%]"
-            >
-              {item.title}
-            </a>
-            <div className="flex  justify-between mt-2">
-              <span className="text-sm">#TopNews</span>
-              <span className="text-sm">{item?.createdAt?.slice(0, 10)}</span>
-            </div>
-          </div>
-        </div> */
         <div
           key={i}
-          className="flex 2xl:flex-row my-2  bg-[rgb(229,237,255)] dark:bg-slate-800   rounded-lg p-1  lg:flex-col"
+          className="flex 2xl:flex-row my-2   bg-[rgb(229,237,255)] dark:bg-slate-800   rounded-lg p-1  lg:flex-col"
         >
           <div
             className="flex p-1  
@@ -69,7 +46,13 @@ const TopNews = ({ news: topNews }: Props) => {
             </Link>
             <div className="flex  justify-between mt-2">
               <span className="text-sm">#TopNews</span>
-              <span className="text-sm">{item?.createdAt?.slice(0, 10)}</span>
+              <p className="dark:text-gray-400 text-gray-500 text-sm ">
+                {new Date(item.createdAt).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </p>
             </div>
           </div>
         </div>

@@ -6,6 +6,8 @@ import Image from "next/image";
 import EditNews from "../EditNews";
 import { useRouter } from "next/navigation";
 import Alert from "../../../components/Alert/Alert";
+import { customToast } from "../../CustomToast";
+import Commentsdata from "../../Commentdata";
 
 interface newsItem {
   id: string;
@@ -41,10 +43,10 @@ const FullNews = ({ newsSlug_key, categories, category }: any) => {
     );
     const result = await response.json();
     if (response.ok) {
-      setAlertMessage(result.message);
+      customToast("News delete successfully", "success");
       router.push("/admin/news");
     } else {
-      setAlertMessage("somthing went wrong");
+      customToast("somthing went wrong", "error");
     }
   };
 
@@ -96,9 +98,16 @@ const FullNews = ({ newsSlug_key, categories, category }: any) => {
       {editModal ? (
         <EditNews editModalNews={editModalNews} categories={categories} />
       ) : (
-        <div className="text-center">
+        <div className=" flex flex-col  justify-center items-center text-center">
           <h1 className="text-3xl mb-8 font-bold">Full News</h1>
-          <div className="grid grid-cols-1 gap-6 justify-center">
+          {/*  <div className="grid-cols-1 gap-1 justify-center">
+            <p className="text-gray-300 ">
+              {new Date(newsItem.createdAt).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
+            </p>
             <div className=" mb-[300px] relative border rounded-lg overflow-hidden shadow-lg transition-transform transform hover:scale-102 pb-16 break-words w-full max-w-screen-lg mx-auto">
               <div className="relative w-full h-96">
                 <Image
@@ -144,6 +153,70 @@ const FullNews = ({ newsSlug_key, categories, category }: any) => {
                   Update News
                 </button>
               </div>
+            </div>
+          </div> */}
+
+          <div
+            style={{ boxShadow: "0px 0px 4px 0px #9d8b8b45" }}
+            className="flex flex-col justify-center mt-4 leading-relaxed tracking-wide text-justify 
+    text-gray-800 dark:text-gray-300 
+    p-5 rounded-md shadow-lg 
+    border border-gray-200 dark:border-none 
+    overflow-auto no-scrollbar 
+    transition-all duration-100 max-w-xl"
+          >
+            <div>
+              <p className="mb-2 text-xl font-bold lg:text-2xl capitalize">
+                {newsItem.title}
+              </p>
+              <hr />
+              <p className=" text-gray-800 font-semibold dark:text-gray-300  py-4">
+                {new Date(newsItem.createdAt).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                  hour: "numeric",
+                  minute: "numeric",
+                })}
+              </p>
+              <h2 className="hidden">{newsItem.description}</h2>
+
+              <p className="text-lg mb-2 text-gray-800  dark:text-gray-300  break-words md:text-xl">
+                {newsItem.description}
+              </p>
+            </div>
+            <div className="w-full mb-2 relative aspect-[1.67]">
+              <Image
+                className="rounded-md object-cover"
+                src={newsItem.image_url}
+                fill
+                alt={"Times news image for " + newsItem.title}
+              />
+            </div>
+
+            <article
+              style={{ scrollbarWidth: "none" }}
+              className="news-article transition sleading-[1.8] duration-150 ease-in-out mt-[20px] "
+              dangerouslySetInnerHTML={{
+                __html: newsItem.article,
+              }}
+            ></article>
+            <div className=" my-20  bottom-4 left-0 right-0 flex justify-between px-8">
+              <button
+                onClick={() => handleDelete(newsItem.id)}
+                className="px-4 py-2 bg-red-700 text-white rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600 transition-colors duration-300 text-base sm:text-sm"
+              >
+                Delete News
+              </button>
+              <button
+                onClick={() => {
+                  setEditModal(!editModal);
+                  setEditModalNews(newsItem);
+                }}
+                className="px-4 py-2 bg-blue-700 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition-colors duration-300 text-base sm:text-sm pl-2"
+              >
+                Update News
+              </button>
             </div>
           </div>
         </div>

@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react";
 import { LeftSlider } from "../components/Admin/Heder/LeftSlider";
 import { AuthProvider } from "../providers";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function AdminLayout({
   children,
@@ -12,28 +12,34 @@ export default function AdminLayout({
 }>) {
   const router = useRouter();
   const { data: session, status }: any = useSession();
+
   const user = session?.user;
 
   useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/not-found");
+    if (
+      status === "unauthenticated" ||
+      (status === "authenticated" && user.isAdmin === "false")
+    ) {
+      router.push("/");
     }
   }, [status, user]);
 
-  if (status === "loading") {
+  if (
+    status === "loading" ||
+    user?.isAdmin === "false" ||
+    status === "unauthenticated"
+  ) {
     return <div>Loading...</div>;
   }
 
   return (
     <AuthProvider>
-      <>
-        <div className="flex w-full h-screen mt-[70px]">
-          <div className="fixed left-0  h-full">
-            <LeftSlider />
-          </div>
-          <div className="w-full ml-[200px] ">{children}</div>
+      <div className="flex w-full h-screen mt-[70px]">
+        <div className="fixed left-0  h-full">
+          <LeftSlider />
         </div>
-      </>
+        <div className="w-full ml-[200px] ">{children}</div>
+      </div>
     </AuthProvider>
   );
 }

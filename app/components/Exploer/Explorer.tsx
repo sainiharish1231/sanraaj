@@ -1,7 +1,6 @@
 "use client";
-
-import Slider from "react-slick";
-import React, { useEffect, useState } from "react";
+import Slider, { Settings } from "react-slick";
+import React, { useEffect, useRef, useState } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./custom-slider.css"; // Import the custom CSS file
@@ -11,14 +10,34 @@ import { useSession } from "next-auth/react";
 import Alert from "../../components/Alert/Alert";
 import FeedbackService from "@/services/FeedbackService";
 
-const settings = {
-  dots: true,
+const settings: Settings = {
+  dots: false,
+  autoplay: true,
   infinite: true,
+  arrows: false,
+  speed: 500,
   slidesToShow: 1,
   slidesToScroll: 1,
-  autoplay: true,
-  autoplaySpeed: 3000,
-  arrows: false,
+  responsive: [
+    {
+      breakpoint: 1440,
+      settings: {
+        slidesToShow: 1,
+      },
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 1,
+      },
+    },
+    {
+      breakpoint: 300,
+      settings: {
+        slidesToShow: 1,
+      },
+    },
+  ],
 };
 
 interface Review {
@@ -29,7 +48,7 @@ const Explorer = () => {
   const [reviews, setReviews] = useState([]);
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
   const { data: session, status }: any = useSession();
-
+  const sliderRef = useRef<Slider>(null);
   const user = session?.user;
 
   const [userReview, setUserReview] = useState<Review | null>(null);
@@ -102,9 +121,9 @@ const Explorer = () => {
   };
 
   return (
-    <div className="sm:mt-[80px] mt-[60px]  px-6 lg:px-8">
+    <div className="sm:mt-[80px] mt-[60px]   m-6 lg:px-8">
       {/* <........................................................> */}
-      <div className="mx-auto max-w-2xl lg:max-w-none">
+      <div className="mx-auto max-w-6xl">
         <div className="text-center space-y-4">
           <h2 className="text-3xl font-psemibold tracking-tight sm:text-4xl">
             Join Our Growing Community!
@@ -142,7 +161,7 @@ const Explorer = () => {
       </div>
       {/* <........................................................> */}
 
-      <div className="relative  mt-10">
+      <div className="  mt-10">
         <div
           aria-hidden="true"
           className="absolute inset-0 h-max w-full m-auto grid grid-cols-2 -space-x-52 opacity-40 dark:opacity-20"
@@ -429,99 +448,106 @@ const Explorer = () => {
         </>
       ) : null}
       {/* <........................................................> */}
-      <div className="m-4">
-        <div className="flex items-center mb-10">
-          <p className="bg-[rgb(229,237,255)] dark:bg-slate-800  text-sm font-semibold inline-flex items-center p-1.5 rounded ">
-            4.7
-          </p>
-          <p className="ms-2 font-medium text-gray-900 dark:text-white">
-            Rating
-          </p>
-          <span className="w-1 h-1 mx-2 bg-gray-900 rounded-full dark:bg-gray-500"></span>
-          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
-            {reviews.length}
-          </p>
-          <Link
-            href={"/reviews"}
-            className="ms-auto text-sm font-medium text-[#9333ea] hover:underline "
-          >
-            Read all reviews
-          </Link>
+
+      <div className="flex flex-col justify-center items-center">
+        <div className="flex w-full p-4  flex-row justify-between items-center  mb-10">
+          <div className="flex flex-row   justify-between items-center">
+            <p className="bg-[rgb(229,237,255)] dark:bg-slate-800  text-sm font-semibold inline-flex items-center p-1.5 rounded ">
+              4.7
+            </p>
+            <p className="ms-2 font-medium text-gray-900 dark:text-white">
+              Rating
+            </p>
+            <p className="w-1 h-1 mx-2 bg-gray-900 rounded-full dark:bg-gray-500"></p>
+            <p className="text-sm font-medium   text-gray-500 dark:text-gray-400">
+              {reviews.length}
+            </p>
+          </div>
+          <div className="">
+            <Link
+              href={"/reviews"}
+              className="ms-auto gap-x-6 text-sm font-medium text-[#9333ea] hover:underline "
+            >
+              Read all reviews
+            </Link>
+          </div>
         </div>
-        <Slider className="mb-20 border-2xl" {...settings}>
-          {reviews?.map((review: any) => {
-            if (!review) return null;
-            const { id, name, createdAt, rating, content } = review;
-            return (
-              <article key={id}>
-                <div className="flex items-center mb-4">
-                  <div className="flex items-center justify-center rounded-full h-[50px] w-[50px] mr-5 bg-black dark:bg-[#ffff]">
-                    <h1 className="text-[40px] dark:text-black text-[#ffff]">
-                      {(review.image || name) && (
-                        <>
-                          {" "}
-                          <div>
-                            {review.image ? (
-                              <Image
-                                className="object-cover rounded-full"
-                                src={review.image}
-                                alt={name}
-                                width={150}
-                                height={150}
-                              />
-                            ) : (
-                              name.slice(0, 1).toUpperCase()
-                            )}
-                          </div>
-                        </>
-                      )}
-                    </h1>
-                  </div>
-                  <div className="font-medium">
-                    <p>{name}</p>
-                    <span>{new Date(createdAt).toLocaleDateString()}</span>
-                  </div>
-                </div>
-                <div className="flex items-center mb-1 space-x-1 rtl:space-x-reverse">
-                  {[...Array(5)].map((_, index) => (
-                    <svg
-                      key={index}
-                      className={`w-4 h-4 ${
-                        index < rating ? "text-[#9333ea]" : "text-gray-300"
-                      }`}
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="currentColor"
-                      viewBox="0 0 22 20"
-                    >
-                      <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                    </svg>
-                  ))}
-                </div>
-                <div className="mb-2">
-                  {readMoreId === id ? (
-                    <>{content}</>
-                  ) : (
-                    <>
-                      <div className=" text-lg font-psemibold">
-                        {content.slice(0, 400)}
-                        {content.length > 400 && (
-                          <button
-                            onClick={() => setReadMoreId(id)}
-                            className="block mb-5 text-sm font-medium text-[#9333ea] hover:underline"
-                          >
-                            Read more
-                          </button>
+        <div className="  xs:w-[400px] w-[300px]  sm:w-full">
+          <Slider ref={sliderRef} {...settings} className="">
+            {reviews?.map((review: any) => {
+              if (!review) return null;
+              const { id, name, createdAt, rating, content } = review;
+              return (
+                <article key={id}>
+                  <div className="flex items-center mb-4">
+                    <div className="flex items-center justify-center rounded-full h-[50px] w-[50px] mr-5 bg-black dark:bg-[#ffff]">
+                      <h1 className="text-[40px] dark:text-black text-[#ffff]">
+                        {(review.image || name) && (
+                          <>
+                            <div>
+                              {review.image ? (
+                                <Image
+                                  className="object-cover rounded-full"
+                                  src={review.image}
+                                  alt={name}
+                                  width={150}
+                                  height={150}
+                                />
+                              ) : (
+                                name.slice(0, 1).toUpperCase()
+                              )}
+                            </div>
+                          </>
                         )}
-                      </div>
-                    </>
-                  )}
-                </div>
-              </article>
-            );
-          })}
-        </Slider>
+                      </h1>
+                    </div>
+                    <div className="font-medium">
+                      <p>{name}</p>
+                      <span>{new Date(createdAt).toLocaleDateString()}</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center mb-1 space-x-1 rtl:space-x-reverse">
+                    {[...Array(5)].map((_, index) => (
+                      <svg
+                        key={index}
+                        className={`w-4 h-4 ${
+                          index < rating ? "text-[#9333ea]" : "text-gray-300"
+                        }`}
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        viewBox="0 0 22 20"
+                      >
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                      </svg>
+                    ))}
+                  </div>
+                  <div className="mb-2">
+                    {readMoreId === id ? (
+                      <>{content}</>
+                    ) : (
+                      <>
+                        <div className=" text-lg font-psemibold">
+                          {content.slice(0, 400)}
+                          {content.length > 400 && (
+                            <button
+                              onClick={() => setReadMoreId(id)}
+                              className="block mb-5 text-sm font-medium text-[#9333ea] hover:underline"
+                            >
+                              Read more
+                            </button>
+                          )}
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </article>
+              );
+            })}
+          </Slider>
+        </div>
       </div>
+
       {alertMessage && (
         <Alert message={alertMessage} onClose={handleCloseAlert} />
       )}
